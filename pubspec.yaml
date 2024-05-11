@@ -8,14 +8,19 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  dio: ^5.4.3+1
+  either_dart: ^1.0.0
   flutter:
     sdk: flutter
   flutter_modular: ^6.3.3
+  freezed_annotation: ^2.4.1
   logging: ^1.2.0
 
 dev_dependencies:
-  flutter_lints: ^3.0.0
+  build_runner: ^2.4.9
+  flutter_lints: ^4.0.0
   flutter_test:
     sdk: flutter
+  freezed: ^2.5.2
 
 flutter: null

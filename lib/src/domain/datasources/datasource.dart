@@ -10,5 +10,5 @@ abstract class Datasource extends ILoggable {
   Level get level => Level.FINE;
 
   @override
-  String get namespace => "Datasource.$name";
+  String get namespace => "Datasources.$name";
 }

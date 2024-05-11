@@ -2,6 +2,7 @@ import 'package:logging/logging.dart';
 
 export 'services/services.dart';
 export 'datasources/datasources.dart';
+export 'models/models.dart';
 
 /// A class that provides logging functionality.
 ///

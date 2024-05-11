@@ -7,5 +7,5 @@ mixin Repository implements ILoggable {
   Level get level => Level.FINEST;
 
   @override
-  String get namespace => "Repository.$runtimeType";
+  String get namespace => "Repositories.$runtimeType";
 }

@@ -10,5 +10,5 @@ abstract class Service extends ILoggable {
   Level get level => Level.FINER;
 
   @override
-  String get namespace => "Service.$name";
+  String get namespace => "Services.$name";
 }
