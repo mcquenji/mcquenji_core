@@ -1,0 +1,21 @@
+name: mcquenji_core
+description: "A new Flutter package project."
+version: 0.0.1
+homepage: "Core module for all my flutter apps."
+
+environment:
+  sdk: ">=3.3.4 <4.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_modular: ^6.3.3
+  logging: ^1.2.0
+
+dev_dependencies:
+  flutter_lints: ^3.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter: null

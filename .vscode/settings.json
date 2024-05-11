@@ -1,0 +1,5 @@
+{
+    "conventionalCommits.autoCommit": false,
+    "conventionalCommits.promptFooter": false,
+    "conventionalCommits.gitmoji": false,
+}
