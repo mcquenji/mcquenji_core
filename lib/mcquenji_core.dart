@@ -15,10 +15,10 @@ import 'package:mcquenji_core/src/impl/impl.dart';
 /// ```dart
 /// class AppModule extends Module {
 ///  @override
-///  List<Module> get imports => [McQuenjiCore()];
+///  List<Module> get imports => [CoreModule()];
 /// }
 /// ````
-class McQuenjiCore extends Module {
+class CoreModule extends Module {
   @override
   void exportedBinds(i) {
     i.add(Dio.new);
