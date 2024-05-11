@@ -10,7 +10,7 @@ To use this module in your project, add the following to your `pubspec.yaml` fil
 dependencies:
   mcquenji_core:
     git:
-      url: git://github.com/mcquenji/mcquenji_core.git
+      url: https://github.com/mcquenji/mcquenji_core.git
 ```
 
 Then run `flutter pub get` to install the package.
@@ -22,7 +22,7 @@ import 'package:mcquenji_core/mcquenji_core.dart';
 
 class AppModule extends Module {
     @override
-    List<Module> get imports => [McQuenjiCore()];
+    List<Module> get imports => [CoreModule()];
 }
 ```
 
