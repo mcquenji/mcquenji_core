@@ -1,6 +1,6 @@
 name: mcquenji_core
 description: "A new Flutter package project."
-version: 0.0.1
+version: 1.1.0
 homepage: "Core module for all my flutter apps."
 
 environment:
