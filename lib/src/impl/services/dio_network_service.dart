@@ -147,4 +147,9 @@ class DioNetworkService extends NetworkService {
       Map<String, String>? headers, Map<String, String>? queryParameters) {
     log("Sending $method request to $url with body: $body, headers: $headers, queryParameters: $queryParameters");
   }
+
+  @override
+  void dispose() {
+    dio.close();
+  }
 }
