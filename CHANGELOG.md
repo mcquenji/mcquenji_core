@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.1](https://github.com/mcquenji/core/compare/v1.1.0...v1.1.1) (2024-05-11)
+
+
+### Bug Fixes
+
+* **repositories:** Change Repository from mixin to cubit ([8158164](https://github.com/mcquenji/core/commit/8158164b138aa4b3ca97f7d59045e2f4f62c44e9))
+
 ## 1.1.0 (2024-05-11)
 
 
