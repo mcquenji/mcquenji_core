@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.3](https://github.com/mcquenji/mcquenji_core/compare/v1.1.2...v1.1.3) (2024-05-13)
+
+
+### Bug Fixes
+
+* make data sources and repositories disposable ([40bd388](https://github.com/mcquenji/mcquenji_core/commit/40bd388cbb391a7f32ae7643980e6f5a144db4ba))
+
 ### [1.1.2](https://github.com/mcquenji/core/compare/v1.1.1...v1.1.2) (2024-05-11)
 
 ### [1.1.1](https://github.com/mcquenji/core/compare/v1.1.0...v1.1.1) (2024-05-11)
