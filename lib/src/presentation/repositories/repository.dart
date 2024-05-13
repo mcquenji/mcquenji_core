@@ -1,11 +1,12 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:logging/logging.dart';
 import 'package:mcquenji_core/src/domain/domain.dart';
 
 /// Base class for all repositories.
 ///
 /// As repositories are responsible for managing the state of the application, they extend [Cubit].
-abstract class Repository<T> extends Cubit<T> implements ILoggable {
+abstract class Repository<T> extends Cubit<T> implements ILoggable, Disposable {
   /// Base class for all repositories.
   ///
   /// As repositories are responsible for managing the state of the application, they extend [Cubit].
