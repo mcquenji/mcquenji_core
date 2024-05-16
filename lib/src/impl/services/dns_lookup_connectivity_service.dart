@@ -37,6 +37,10 @@ class DnsLookupConnectivityService extends ConnectivityService {
   Future<void> _init() async {
     _isConnected = await _checkConnection();
     _controller.add(_isConnected);
+
+    log("initialized");
+    log("The device is ${_isConnected ? "online" : "offline"}");
+    log("Checking connectivity every ${updateInterval.inSeconds} seconds on $lookupAddress...");
   }
 
   Future<void> _update(Timer timer) async {
