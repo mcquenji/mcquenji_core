@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
 /// Provides a set of utility methods to work with spacing in a more expressive way.
-/// e.g. `10.spacing` instead of `SizedBox(width: 10, height: 10)`
+/// e.g. `10.5.spacing` instead of `SizedBox(width: 10.5, height: 10.5)`
 extension SpacingDoubleExt on double {
   /// Returns a [SizedBox] with the width and height set to this value.
   SizedBox get spacing => SizedBox(width: this, height: this);
@@ -11,6 +11,19 @@ extension SpacingDoubleExt on double {
 
   /// Returns a [SizedBox] with the height set to this value.
   SizedBox get vSpacing => SizedBox(height: this);
+}
+
+/// Provides a set of utility methods to work with spacing in a more expressive way.
+/// e.g. `10.spacing` instead of `SizedBox(width: 10, height: 10)`
+extension SpacingIntExt on int {
+  /// Returns a [SizedBox] with the width and height set to this value.
+  SizedBox get spacing => SizedBox(width: toDouble(), height: toDouble());
+
+  /// Returns a [SizedBox] with the width set to this value.
+  SizedBox get hSpacing => SizedBox(width: toDouble());
+
+  /// Returns a [SizedBox] with the height set to this value.
+  SizedBox get vSpacing => SizedBox(height: toDouble());
 }
 
 /// Provides a set of utility methods to work with text in a more expressive way.
