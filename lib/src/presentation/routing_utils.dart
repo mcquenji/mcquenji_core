@@ -7,11 +7,30 @@ class InitialRouterOutlet extends StatelessWidget {
   const InitialRouterOutlet({super.key, required this.initialRoute});
 
   /// The path of the child route to activate on default.
+  ///
+  /// ```dart
+  /// r.child(
+  ///    "/",
+  ///    child: (_) => const InitialRouterOutlet(
+  ///        initialRoute: "/login",
+  ///    ),
+  ///    children: [
+  ///      ParallelRoute(
+  ///        name: "/login",
+  ///        child: (_) => const LoginScreen(),
+  ///      ),
+  ///      ParallelRoute(
+  ///        name: "/register",
+  ///        child: (_) => const RegisterScreen(),
+  ///      ),
+  ///    ],
+  /// );
+  /// ```
   final String initialRoute;
 
   @override
   Widget build(BuildContext context) {
-    Modular.to.pushReplacementNamed("${Modular.to.path}/$initialRoute");
+    Modular.to.pushReplacementNamed("${Modular.to.path}$initialRoute");
 
     return const RouterOutlet();
   }
