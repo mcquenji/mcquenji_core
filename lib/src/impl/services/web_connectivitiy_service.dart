@@ -1,27 +1,29 @@
 import 'dart:async';
-import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:mcquenji_core/mcquenji_core.dart';
+import 'package:mcquenji_core/src/impl/impl.dart';
 
-/// Implementation of [ConnectivityService] that uses DNS lookups to check connectivity.
+/// Implementation of [ConnectivityService] that pings a server to check connectivity.
 ///
-/// Conneciivity is determined by checking if the DNS lookup of [lookupAddress] returns any results.
-/// The connection status is re-evaluated at [updateInterval].
-class DnsLookupConnectivityService extends ConnectivityService {
+/// This implementation should only be used on web platforms. Use [DnsLookupConnectivityService] for other platforms.
+class WebConnectivitiyService extends ConnectivityService {
   late final Timer _updateLoop;
   late final StreamController<bool> _controller;
 
+  final Dio _dio;
+
   /// The address to lookup to check connectivity.
-  static const String lookupAddress = "google.com";
+  static const String pingAddress = "google.com";
 
   /// The interval at which to check connectivity.
   static const Duration updateInterval = Duration(seconds: 1);
 
   /// Implementation of [ConnectivityService] that uses DNS lookups to check connectivity.
   ///
-  /// Conneciivity is determined by checking if the DNS lookup of [lookupAddress] returns any results.
+  /// Conneciivity is determined by checking if the DNS lookup of [pingAddress] returns any results.
   /// The connection status is re-evaluated at [updateInterval].
-  DnsLookupConnectivityService() {
+  WebConnectivitiyService(this._dio) {
     _controller = StreamController<bool>.broadcast();
     _updateLoop = Timer.periodic(updateInterval, _update);
 
@@ -29,9 +31,15 @@ class DnsLookupConnectivityService extends ConnectivityService {
   }
 
   Future<bool> _checkConnection() async {
-    final result = await InternetAddress.lookup(lookupAddress);
+    try {
+      final response = await _dio.get(pingAddress);
 
-    return result.isNotEmpty && result[0].rawAddress.isNotEmpty;
+      if (response.statusCode == null) return false;
+
+      return response.statusCode! >= 200 && response.statusCode! < 300;
+    } catch (e) {
+      return false;
+    }
   }
 
   Future<void> _init() async {
