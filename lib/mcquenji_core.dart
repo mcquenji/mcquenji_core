@@ -23,8 +23,7 @@ import 'package:mcquenji_core/src/impl/impl.dart';
 class CoreModule extends Module {
   @override
   void exportedBinds(i) {
-    i.add<BaseOptions>(() => BaseOptions());
-    i.add(Dio.new);
+    i.add(() => Dio());
 
     i.addLazySingleton<ConnectivityService>(
       kIsWeb ? WebConnectivitiyService.new : DnsLookupConnectivityService.new,
