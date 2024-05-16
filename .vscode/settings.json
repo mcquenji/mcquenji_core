@@ -4,6 +4,7 @@
   "dart.flutterSdkPath": ".fvm/versions/3.19.6",
   "conventionalCommits.scopes": [
     "services",
-    "repositories"
+    "repositories",
+    "presentation"
   ]
 }
