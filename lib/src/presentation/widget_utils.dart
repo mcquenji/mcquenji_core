@@ -91,3 +91,26 @@ extension TextExt on Text {
   /// Applies the provided [data] to this [Text].
   Text color(Color color) => styled(TextStyle(color: color), true);
 }
+
+/// Provides generic widget utilities.
+extension WidgetExt on Widget {
+  /// Stretches this widget to fill the available horizontal space.
+  ///
+  /// This is equivalent to wrapping this widget with a [SizedBox] with [double.infinity] as the width.
+  Widget stretch() => SizedBox(width: double.infinity, child: this);
+
+  /// Aligns this widget to the left.
+  ///
+  /// This is equivalent to wrapping this widget with an [Align] widget with [Alignment.centerLeft].
+  Widget left() => Align(alignment: Alignment.centerLeft, child: this);
+
+  /// Aligns this widget to the right.
+  ///
+  /// This is equivalent to wrapping this widget with an [Align] widget with [Alignment.centerRight].
+  Widget right() => Align(alignment: Alignment.centerRight, child: this);
+
+  /// Aligns this widget to the top.
+  ///
+  /// This is equivalent to wrapping this widget with an [Align] widget with [Alignment.topCenter].
+  Widget center() => Align(alignment: Alignment.center, child: this);
+}

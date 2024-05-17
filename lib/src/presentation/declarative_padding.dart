@@ -1,12 +1,17 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 
 /// Base class for declarative padding.
 class DeclarativeEdgeInsets extends EdgeInsets {
   /// Default padding value.
-  static const double defaultPadding = 30.0;
+  /// This value is used when no padding is provided.
+  ///
+  /// It is safe to change this value to suit your needs, but it is recommended to only do so once when initializing your app.
+  static double defaultPadding = 30.0;
 
   /// Base class for declarative padding.
-  const DeclarativeEdgeInsets(
+  DeclarativeEdgeInsets(
       {double? left, double? top, double? right, double? bottom})
       : super.only(
           left: left ?? defaultPadding,
@@ -26,35 +31,35 @@ class DeclarativeEdgeInsets extends EdgeInsets {
   /// Adds padding to the left of the child.
   ///
   /// If [padding] is not provided, it defaults to the value of the side with the largest padding. If all sides are 0, it defaults to [defaultPadding].
-  // ignore: non_constant_identifier_names
+  // ignore: non_ant_identifier_names
   DeclarativeEdgeInsets Left([double? padding]) =>
       copyWith(left: padding ?? _findMax());
 
   /// Adds padding to the top of the child.
   ///
   /// If [padding] is not provided, it defaults to the value of the side with the largest padding. If all sides are 0, it defaults to [defaultPadding].
-  // ignore: non_constant_identifier_names
+  // ignore: non_ant_identifier_names
   DeclarativeEdgeInsets Top([double? padding]) =>
       copyWith(top: padding ?? _findMax());
 
   /// Adds padding to the right of the child.
   ///
   /// If [padding] is not provided, it defaults to the value of the side with the largest padding. If all sides are 0, it defaults to [defaultPadding].
-  // ignore: non_constant_identifier_names
+  // ignore: non_ant_identifier_names
   DeclarativeEdgeInsets Right([double? padding]) =>
       copyWith(right: padding ?? _findMax());
 
   /// Adds padding to the bottom of the child.
   ///
   /// If [padding] is not provided, it defaults to the value of the side with the largest padding. If all sides are 0, it defaults to [defaultPadding].
-  // ignore: non_constant_identifier_names
+  // ignore: non_ant_identifier_names
   DeclarativeEdgeInsets Bottom([double? padding]) =>
       copyWith(bottom: padding ?? _findMax());
 
   /// Adds padding to all sides of the child.
   ///
   /// If [padding] is not provided, it defaults to the value of the side with the largest padding. If all sides are 0, it defaults to [defaultPadding].
-  // ignore: non_constant_identifier_names
+  // ignore: non_ant_identifier_names
   DeclarativeEdgeInsets All([double? padding]) => copyWith(
         left: padding ?? _findMax(),
         top: padding ?? _findMax(),
@@ -65,7 +70,7 @@ class DeclarativeEdgeInsets extends EdgeInsets {
   /// Adds padding to the horizontal sides of the child.
   ///
   /// If [padding] is not provided, it defaults to the value of the side with the largest padding. If all sides are 0, it defaults to [defaultPadding].
-  // ignore: non_constant_identifier_names
+  // ignore: non_ant_identifier_names
   DeclarativeEdgeInsets Horizontal([double? padding]) => copyWith(
         left: padding ?? _findMax(),
         right: padding ?? _findMax(),
@@ -74,7 +79,7 @@ class DeclarativeEdgeInsets extends EdgeInsets {
   /// Adds padding to the vertical sides of the child.
   ///
   /// If [padding] is not provided, it defaults to the value of the side with the largest padding. If all sides are 0, it defaults to [defaultPadding].
-  // ignore: non_constant_identifier_names
+  // ignore: non_ant_identifier_names
   DeclarativeEdgeInsets Vertical([double? padding]) => copyWith(
         top: padding ?? _findMax(),
         bottom: padding ?? _findMax(),
@@ -101,7 +106,7 @@ class PaddingLeft extends DeclarativeEdgeInsets {
   /// Adds padding to the left of the child.
   ///
   /// If [padding] is not provided, it defaults to [DeclarativeEdgeInsets.defaultPadding].
-  const PaddingLeft([double? padding])
+  PaddingLeft([double? padding])
       : super(left: padding, top: 0, right: 0, bottom: 0);
 }
 
@@ -110,7 +115,7 @@ class PaddingTop extends DeclarativeEdgeInsets {
   /// Adds padding to the top of the child.
   ///
   /// If [padding] is not provided, it defaults to [DeclarativeEdgeInsets.defaultPadding].
-  const PaddingTop([double? padding])
+  PaddingTop([double? padding])
       : super(top: padding, left: 0, right: 0, bottom: 0);
 }
 
@@ -119,7 +124,7 @@ class PaddingRight extends DeclarativeEdgeInsets {
   /// Adds padding to the right of the child.
   ///
   /// If [padding] is not provided, it defaults to [DeclarativeEdgeInsets.defaultPadding].
-  const PaddingRight([double? padding])
+  PaddingRight([double? padding])
       : super(right: padding, top: 0, left: 0, bottom: 0);
 }
 
@@ -128,7 +133,7 @@ class PaddingBottom extends DeclarativeEdgeInsets {
   /// Adds padding to the bottom of the child.
   ///
   /// If [padding] is not provided, it defaults to [DeclarativeEdgeInsets.defaultPadding].
-  const PaddingBottom([double? padding])
+  PaddingBottom([double? padding])
       : super(bottom: padding, left: 0, top: 0, right: 0);
 }
 
@@ -137,7 +142,7 @@ class PaddingAll extends DeclarativeEdgeInsets {
   /// Adds padding to all sides of the child.
   ///
   /// If [padding] is not provided, it defaults to [DeclarativeEdgeInsets.defaultPadding].
-  const PaddingAll([double? padding])
+  PaddingAll([double? padding])
       : super(left: padding, top: padding, right: padding, bottom: padding);
 }
 
@@ -146,7 +151,7 @@ class PaddingHorizontal extends DeclarativeEdgeInsets {
   /// Adds padding to the horizontal sides of the child.
   ///
   /// If [padding] is not provided, it defaults to [DeclarativeEdgeInsets.defaultPadding].
-  const PaddingHorizontal([double? padding])
+  PaddingHorizontal([double? padding])
       : super(left: padding, right: padding, top: 0, bottom: 0);
 }
 
@@ -155,6 +160,6 @@ class PaddingVertical extends DeclarativeEdgeInsets {
   /// Adds padding to the vertical sides of the child.
   ///
   /// If [padding] is not provided, it defaults to [DeclarativeEdgeInsets.defaultPadding].
-  const PaddingVertical([double? padding])
+  PaddingVertical([double? padding])
       : super(top: padding, bottom: padding, left: 0, right: 0);
 }
