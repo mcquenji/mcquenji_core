@@ -95,9 +95,14 @@ extension TextExt on Text {
 /// Provides generic widget utilities.
 extension WidgetExt on Widget {
   /// Stretches this widget to fill the available horizontal space.
+  /// Optionally, you can provide [padding] to the stretched widget.
   ///
-  /// This is equivalent to wrapping this widget with a [SizedBox] with [double.infinity] as the width.
-  Widget stretch() => SizedBox(width: double.infinity, child: this);
+  /// This is equivalent to wrapping this widget with a [Container] with [double.infinity] as the width.
+  Widget stretch([EdgeInsets? padding]) => Container(
+        width: double.infinity,
+        padding: padding,
+        child: this,
+      );
 
   /// Aligns this widget to the left.
   ///
@@ -113,4 +118,14 @@ extension WidgetExt on Widget {
   ///
   /// This is equivalent to wrapping this widget with an [Align] widget with [Alignment.topCenter].
   Widget center() => Align(alignment: Alignment.center, child: this);
+
+  /// Aligns this widget to the top.
+  ///
+  /// This is equivalent to wrapping this widget with an [Align] widget with [Alignment.topCenter].
+  Widget top() => Align(alignment: Alignment.topCenter, child: this);
+
+  /// Aligns this widget to the bottom.
+  ///
+  /// This is equivalent to wrapping this widget with an [Align] widget with [Alignment.bottomCenter].
+  Widget bottom() => Align(alignment: Alignment.bottomCenter, child: this);
 }
