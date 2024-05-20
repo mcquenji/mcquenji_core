@@ -13,7 +13,7 @@ abstract class Repository<T> extends Cubit<T> implements ILoggable, Disposable {
   Repository(super.initialState);
 
   @override
-  Level get level => Level.FINEST;
+  Level get level => Level.FINER;
 
   @override
   String get namespace => "Repositories";

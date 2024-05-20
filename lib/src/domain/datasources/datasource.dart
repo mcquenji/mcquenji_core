@@ -8,7 +8,7 @@ abstract class Datasource extends ILoggable implements Disposable {
   String get name;
 
   @override
-  Level get level => Level.FINE;
+  Level get level => Level.FINER;
 
   @override
   String get namespace => "Datasources.$name";
