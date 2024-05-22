@@ -8,7 +8,7 @@ abstract class Service extends ILoggable implements Disposable {
   String get name;
 
   @override
-  Level get level => Level.FINEST;
+  Level get level => Level.FINER;
 
   @override
   String get namespace => "Services.$name";
