@@ -56,6 +56,11 @@ class AsyncValue<T> with _$AsyncValue<T> {
   /// `true` if an error occurred. `false` otherwise.
   bool get hasError => error != null;
 
+  /// The data that was loaded.
+  ///
+  /// Throws an [AssertionError] if [hasData] is `false`.
+  T get requireData => data!;
+
   /// Reuturns a result [R] based on the current state.
   ///
   /// - [data] is called if [hasData] is `true`.
