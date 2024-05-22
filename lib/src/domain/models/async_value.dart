@@ -59,7 +59,11 @@ class AsyncValue<T> with _$AsyncValue<T> {
   /// The data that was loaded.
   ///
   /// Throws an [AssertionError] if [hasData] is `false`.
-  T get requireData => data!;
+  T get requireData {
+    assert(hasData, 'AsyncValue does not have data');
+
+    return data as T;
+  }
 
   /// Reuturns a result [R] based on the current state.
   ///
@@ -78,6 +82,27 @@ class AsyncValue<T> with _$AsyncValue<T> {
     } else {
       return error(this.error!, stackTrace);
     }
+  }
+
+  /// Joins this [AsyncValue] with another [value].
+  ///
+  /// If both this and [value] are loading, the result will be loading.
+  /// If either this or [value] has an error, the result will have that error (this error takes precedence over [value]'s error).
+  /// Otherwise, the result will be a record of both [T] and [O].
+  AsyncValue<(T, O)> join<O>(AsyncValue<O> value) {
+    if (isLoading || value.isLoading) {
+      return AsyncValue.loading();
+    }
+
+    if (hasError) {
+      return AsyncValue.error(error!, stackTrace);
+    }
+
+    if (value.hasError) {
+      return AsyncValue.error(value.error!, value.stackTrace);
+    }
+
+    return AsyncValue.data((requireData, value.requireData));
   }
 
   /// A utility method to handle asynchronous operations safely, capturing any
