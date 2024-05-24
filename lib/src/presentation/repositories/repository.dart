@@ -20,4 +20,14 @@ abstract class Repository<T> extends Cubit<T> implements ILoggable, Disposable {
 
   @override
   Level get errorLevel => Level.SEVERE;
+
+  @override
+  void log(Object message, [Object? error, StackTrace? stackTrace]) {
+    Logger("$namespace.$runtimeType").log(
+      error != null ? errorLevel : level,
+      message,
+      error,
+      stackTrace,
+    );
+  }
 }
