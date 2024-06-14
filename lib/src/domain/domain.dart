@@ -52,10 +52,10 @@ abstract class ILoggable {
 /// - Restoring stored data back into model objects (deserialization).
 abstract class IGenericSerializer<Deserialized, Serialized> {
   /// Serializes the given [data] into a [Serialized] object.
-  Deserialized serialize(Serialized data);
+  Serialized serialize(Deserialized data);
 
   /// Deserializes the given [data] into a [Deserialized] object.
-  Serialized deserialize(Deserialized data);
+  Deserialized deserialize(Serialized data);
 }
 
 /// Type alias for JSON objects used to make the code more readable.
