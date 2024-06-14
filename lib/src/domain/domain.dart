@@ -1,4 +1,5 @@
 import 'package:logging/logging.dart';
+import 'package:mcquenji_core/mcquenji_core.dart';
 
 export 'services/services.dart';
 export 'datasources/datasources.dart';
@@ -34,3 +35,28 @@ abstract class ILoggable {
     );
   }
 }
+
+/// A versatile serializer interface for converting objects between different formats.
+///
+/// Primarily used in [Datasource]s to transform objects from one representation to another,
+/// such as converting Dart objects to JSON and vice versa.
+///
+/// - [Deserialized]: The original type of the object before serialization (e.g., a Dart object).
+/// - [Serialized]: The transformed type of the object after serialization (e.g., a JSON object).
+///
+/// ---
+///
+/// Consider a scenario where you need to save and retrieve data from a data store, such as a database or a cloud service.
+/// The serializer facilitates:
+/// - Converting model objects into a format suitable for storage (serialization).
+/// - Restoring stored data back into model objects (deserialization).
+abstract class IGenericSerializer<Deserialized, Serialized> {
+  /// Serializes the given [data] into a [Serialized] object.
+  Deserialized serialize(Serialized data);
+
+  /// Deserializes the given [data] into a [Deserialized] object.
+  Serialized deserialize(Deserialized data);
+}
+
+/// Type alias for JSON objects used to make the code more readable.
+typedef JSON = Map<String, dynamic>;
