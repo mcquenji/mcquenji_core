@@ -55,3 +55,6 @@ BindConfig<T> cubitConfig<T extends Cubit>() {
     onDispose: (cubit) => cubit.close(),
   );
 }
+
+/// Type alias for a JSON object.
+typedef JSON = Map<String, dynamic>;
