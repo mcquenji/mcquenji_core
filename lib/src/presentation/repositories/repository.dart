@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:logging/logging.dart';
@@ -29,5 +30,11 @@ abstract class Repository<T> extends Cubit<T> implements ILoggable, Disposable {
       error,
       stackTrace,
     );
+  }
+
+  @override
+  @mustCallSuper
+  void dispose() {
+    close();
   }
 }
