@@ -68,9 +68,9 @@ extension RepositoryInjectorExt on Injector {
   ///
   /// This is a shorthand for `addLazySingleton(create, config: repoConfig())`.
   void addRepository<T extends Repository>(
-    T Function() constructor, {
+    Function constructor, {
     BindConfig<T>? config,
   }) {
-    addLazySingleton(constructor, config: config ?? repositoryConfig());
+    addLazySingleton(constructor, config: config ?? repositoryConfig<T>());
   }
 }
