@@ -1,9 +1,9 @@
 export 'src/domain/domain.dart';
 export 'src/presentation/presentation.dart';
+export 'src/utils/utils.dart';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mcquenji_core/mcquenji_core.dart';
 import 'package:mcquenji_core/src/impl/impl.dart';
@@ -37,23 +37,6 @@ class CoreModule extends Module {
       return DioNetworkService(i.get<Dio>());
     });
   }
-}
-
-/// This function is to be used when binding a [Cubit] to a [Module].
-///
-/// ```dart
-/// class AppModule extends Module {
-///   @override
-///   void binds(i){
-///     i.bindLazySingleton(MyCubit.new, config: cubitConfig());
-///   }
-/// }
-/// ```
-BindConfig<T> cubitConfig<T extends Cubit>() {
-  return BindConfig(
-    notifier: (cubit) => cubit.stream,
-    onDispose: (cubit) => cubit.close(),
-  );
 }
 
 /// Type alias for a JSON object.
