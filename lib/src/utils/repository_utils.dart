@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
+
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -75,5 +77,23 @@ extension RepositoryInjectorExt on Injector {
       constructor,
       config: config ?? repositoryConfig<T, State>(),
     );
+  }
+}
+
+/// Utility extension on repositories with an asynchronous state.
+extension AsyncRepoExt<State> on Repository<AsyncValue<State>> {
+  /// Emits [AsyncValue.error] with the given [error] and [stackTrace].
+  void error(Object error, [StackTrace? stackTrace]) {
+    emit(AsyncValue.error(error, stackTrace));
+  }
+
+  /// Emits [AsyncValue.loading].
+  void loading() {
+    emit(AsyncValue.loading());
+  }
+
+  /// Emits [AsyncValue.data] with the given [data].
+  void data(State data) {
+    emit(AsyncValue.data(data));
   }
 }
