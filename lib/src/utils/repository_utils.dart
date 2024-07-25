@@ -96,4 +96,11 @@ extension AsyncRepoExt<State> on Repository<AsyncValue<State>> {
   void data(State data) {
     emit(AsyncValue.data(data));
   }
+
+  /// Guards the given [future] and emits the result.
+  ///
+  /// See [AsyncValue.guard] for more information.
+  Future<void> guard(Future<State> Function() future) async {
+    emit(await AsyncValue.guard(future));
+  }
 }
