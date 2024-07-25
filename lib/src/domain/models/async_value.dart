@@ -109,12 +109,22 @@ class AsyncValue<T> with _$AsyncValue<T> {
   /// errors that might occur during the execution of the provided [future].
   ///
   /// If the given [future] fails an [AsyncValue.error] will be returned. [AsyncValue.data] otherwhise.
-  static Future<AsyncValue<T>> guard<T>(FutureOr<T> Function() future) async {
+  ///
+  /// Optionally, [onData] and [onError] can be provided (e.g. for logging). These functions will affect the returned [AsyncValue].
+  static Future<AsyncValue<T>> guard<T>(
+    FutureOr<T> Function() future, {
+    void Function(T)? onData,
+    void Function(Object, StackTrace?)? onError,
+  }) async {
     try {
       final result = await future();
 
+      onData?.call(result);
+
       return AsyncValue.data(result);
     } catch (e, stackTrace) {
+      onError?.call(e, stackTrace);
+
       return AsyncValue.error(e, stackTrace);
     }
   }
