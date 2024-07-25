@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:mcquenji_core/mcquenji_core.dart';
-import 'package:mcquenji_core/src/impl/impl.dart';
+import 'package:mcquenji_core/src/infra/infra.dart';
 
 /// Implementation of [ConnectivityService] that pings a server to check connectivity.
 ///
