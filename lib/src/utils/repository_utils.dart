@@ -73,7 +73,7 @@ extension RepositoryInjectorExt on Injector {
     Function constructor, {
     BindConfig<T>? config,
   }) {
-    addLazySingleton(
+    addLazySingleton<T>(
       constructor,
       config: config ?? repositoryConfig<T, State>(),
     );
