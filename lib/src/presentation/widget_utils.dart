@@ -82,14 +82,14 @@ extension TextExt on Text {
   /// Applies the provided [style] to this [Text].
   ///
   /// If [merge] is set to `true`, the provided [style] will be merged with the existing style.
-  Text styled(TextStyle style, [bool merge = false]) =>
+  Text styled(TextStyle style, {bool merge = false}) =>
       copyWith(style: merge ? style.merge(this.style) : style);
 
   /// Applies the provided [key] to this [Text].
   Text key(Key key) => copyWith(key: key);
 
   /// Applies the provided [data] to this [Text].
-  Text color(Color color) => styled(TextStyle(color: color), true);
+  Text color(Color color) => styled(TextStyle(color: color), merge: true);
 }
 
 /// Provides generic widget utilities.
@@ -117,7 +117,7 @@ extension WidgetExt on Widget {
   /// Aligns this widget to the top.
   ///
   /// This is equivalent to wrapping this widget with an [Align] widget with [Alignment.topCenter].
-  Widget center() => Align(alignment: Alignment.center, child: this);
+  Widget center() => Align(child: this);
 
   /// Aligns this widget to the top.
   ///

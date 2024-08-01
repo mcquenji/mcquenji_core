@@ -32,13 +32,13 @@ class InitialRouterOutlet extends StatelessWidget {
   Widget build(BuildContext context) {
     var currentPath = Modular.to.path;
 
-    if (currentPath.endsWith("/")) {
+    if (currentPath.endsWith('/')) {
       currentPath = currentPath.substring(0, currentPath.length - 1);
     }
 
-    var initialRoute = this.initialRoute.replaceFirst("/", "");
+    final initialRoute = this.initialRoute.replaceFirst('/', '');
 
-    Modular.to.pushReplacementNamed("$currentPath/$initialRoute");
+    Modular.to.pushReplacementNamed('$currentPath/$initialRoute');
 
     return const RouterOutlet();
   }

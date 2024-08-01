@@ -1,9 +1,9 @@
 import 'package:logging/logging.dart';
 import 'package:mcquenji_core/mcquenji_core.dart';
 
-export 'services/services.dart';
 export 'datasources/datasources.dart';
 export 'models/models.dart';
+export 'services/services.dart';
 
 /// A class that provides logging functionality.
 ///
@@ -27,7 +27,7 @@ abstract class ILoggable {
   ///
   /// If [error] is provided, the message is logged at [errorLevel].
   void log(Object message, [Object? error, StackTrace? stackTrace]) {
-    Logger("$namespace.$runtimeType").log(
+    Logger('$namespace.$runtimeType').log(
       error != null ? errorLevel : level,
       message,
       error,

@@ -8,8 +8,6 @@ part 'http_response.freezed.dart';
 /// A response received from an HTTP request made by a [NetworkService].
 @freezed
 class HttpResponse<T> with _$HttpResponse<T> {
-  const HttpResponse._();
-
   /// A response received from an HTTP request.
   factory HttpResponse({
     /// The status code of the response.
@@ -24,6 +22,8 @@ class HttpResponse<T> with _$HttpResponse<T> {
     /// The request URI of the response.
     required Uri requestUri,
   }) = _HttpResponse;
+
+  const HttpResponse._();
 
   /// `true` if the status code indicates success.
   bool get isOk =>

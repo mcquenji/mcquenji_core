@@ -8,11 +8,11 @@ class DeclarativeEdgeInsets extends EdgeInsets {
   /// This value is used when no padding is provided.
   ///
   /// It is safe to change this value to suit your needs, but it is recommended to only do so once when initializing your app.
-  static double defaultPadding = 30.0;
+  static double defaultPadding = 30;
 
   /// Base class for declarative padding.
   DeclarativeEdgeInsets(
-      {double? left, double? top, double? right, double? bottom})
+      {double? left, double? top, double? right, double? bottom,})
       : super.only(
           left: left ?? defaultPadding,
           top: top ?? defaultPadding,
@@ -21,7 +21,7 @@ class DeclarativeEdgeInsets extends EdgeInsets {
         );
 
   double _findMax() {
-    var max = [left, top, right, bottom].reduce(
+    final max = [left, top, right, bottom].reduce(
       (value, element) => value > element ? value : element,
     );
 

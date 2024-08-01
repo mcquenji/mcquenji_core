@@ -7,5 +7,5 @@ class OfflineException implements Exception {
   OfflineException(this.url);
 
   @override
-  String toString() => "Device is offline. Cannot make request to $url.";
+  String toString() => 'Device is offline. Cannot make request to $url.';
 }

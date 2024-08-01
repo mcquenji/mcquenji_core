@@ -16,7 +16,7 @@ import 'package:mcquenji_core/mcquenji_core.dart';
 ///   }
 /// }
 /// ```
-@Deprecated("Use `repoConfig` instead.")
+@Deprecated('Use `repoConfig` instead.')
 BindConfig<T> cubitConfig<T extends Cubit>() {
   return BindConfig(
     notifier: (cubit) {},
@@ -35,47 +35,25 @@ BindConfig<T> cubitConfig<T extends Cubit>() {
 ///   }
 /// }
 /// ```
-BindConfig<T> repositoryConfig<T extends Repository<State>, State>() {
-  return BindConfig(
+BindConfig<R> repositoryConfig<T, R extends Repository<T>>() {
+  return BindConfig<R>(
     notifier: (repo) => repo.stream,
     onDispose: (repo) => repo.dispose(),
   );
-}
-
-/// Utility extension on [Repository].
-extension RepositoryStreamExt<State> on Repository<State> {
-  /// Listens to changes emitted by the [Repository].
-  ///
-  /// The current [State] will be emitted immediately after subscribing and subsequent changes will be forwareded.
-  StreamSubscription<State> listen(
-    void Function(State)? onData, {
-    Function? onError,
-    void Function()? onDone,
-    bool? cancelOnError,
-  }) {
-    onData?.call(state);
-
-    return stream.listen(
-      onData,
-      onError: onError,
-      onDone: onDone,
-      cancelOnError: cancelOnError,
-    );
-  }
 }
 
 /// Utility extension on [Injector].
 extension RepositoryInjectorExt on Injector {
   /// Registers a [Repository] with the [Injector].
   ///
-  /// This is a shorthand for `addLazySingleton(create, config: repoConfig())`.
-  void addRepository<T extends Repository<State>, State>(
+  /// This is a shorthand for `addLazySingleton(MyRepo.new, config: repoConfig())`.
+  void addRepository<T, R extends Repository<T>>(
     Function constructor, {
-    BindConfig<T>? config,
+    BindConfig<R>? config,
   }) {
-    addLazySingleton<T>(
+    addLazySingleton<R>(
       constructor,
-      config: config ?? repositoryConfig<T, State>(),
+      config: config ?? repositoryConfig<T, R>(),
     );
   }
 }

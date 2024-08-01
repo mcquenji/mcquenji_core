@@ -14,7 +14,7 @@ class WebConnectivitiyService extends ConnectivityService {
   final Dio _dio;
 
   /// The address to lookup to check connectivity.
-  static const String pingAddress = "google.com";
+  static const String pingAddress = 'google.com';
 
   /// The interval at which to check connectivity.
   static const Duration updateInterval = Duration(seconds: 1);
@@ -46,9 +46,9 @@ class WebConnectivitiyService extends ConnectivityService {
     _isConnected = await _checkConnection();
     _controller.add(_isConnected);
 
-    log("initialized");
+    log('initialized');
     log("The device is ${_isConnected ? "online" : "offline"}");
-    log("Checking connectivity every ${updateInterval.inSeconds} seconds on $pingAddress...");
+    log('Checking connectivity every ${updateInterval.inSeconds} seconds on $pingAddress...');
   }
 
   Future<void> _update(Timer timer) async {
@@ -56,7 +56,7 @@ class WebConnectivitiyService extends ConnectivityService {
 
     if (isConnected == _isConnected) return;
 
-    log("Connectivity changed: $isConnected");
+    log('Connectivity changed: $isConnected');
 
     _isConnected = _isConnected;
     _controller.add(_isConnected);
@@ -71,7 +71,7 @@ class WebConnectivitiyService extends ConnectivityService {
   Stream<bool> get onConnectivityChanged => _controller.stream;
 
   @override
-  void dispose() async {
+  Future<void> dispose() async {
     _updateLoop.cancel();
     await _controller.close();
   }

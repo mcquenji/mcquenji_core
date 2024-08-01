@@ -3,7 +3,7 @@ import 'package:mcquenji_core/mcquenji_core.dart';
 /// Base class for all network services.
 abstract class NetworkService extends Service {
   @override
-  String get name => "Network";
+  String get name => 'Network';
 
   /// Sends a GET request to the specified [url] and optional [headers] and [queryParameters].
   Future<HttpResponse> get(

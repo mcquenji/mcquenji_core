@@ -1,5 +1,5 @@
-import 'package:mcquenji_core/mcquenji_core.dart';
 import 'package:dio/dio.dart';
+import 'package:mcquenji_core/mcquenji_core.dart';
 
 /// Implementation of [NetworkService] using [Dio].
 class DioNetworkService extends NetworkService {
@@ -15,7 +15,7 @@ class DioNetworkService extends NetworkService {
     Map<String, String>? headers,
     Map<String, String>? queryParameters,
   }) async {
-    _logRequest("DELETE", url, null, headers, queryParameters);
+    _logRequest('DELETE', url, null, headers, queryParameters);
 
     final response = await dio.delete(
       url,
@@ -26,7 +26,7 @@ class DioNetworkService extends NetworkService {
     _logResponse(response);
 
     return HttpResponse(
-      statusCode: response.statusCode!,
+      statusCode: response.statusCode,
       body: response.data,
       headers: response.headers.map,
       requestUri: response.requestOptions.uri,
@@ -39,7 +39,7 @@ class DioNetworkService extends NetworkService {
     Map<String, String>? headers,
     Map<String, String>? queryParameters,
   }) async {
-    _logRequest("GET", url, null, headers, queryParameters);
+    _logRequest('GET', url, null, headers, queryParameters);
 
     final response = await dio.get(
       url,
@@ -50,7 +50,7 @@ class DioNetworkService extends NetworkService {
     _logResponse(response);
 
     return HttpResponse(
-      statusCode: response.statusCode!,
+      statusCode: response.statusCode,
       body: response.data,
       headers: response.headers.map,
       requestUri: response.requestOptions.uri,
@@ -60,11 +60,11 @@ class DioNetworkService extends NetworkService {
   @override
   Future<HttpResponse> patch(
     String url,
-    body, {
+    Object body, {
     Map<String, String>? headers,
     Map<String, String>? queryParameters,
   }) async {
-    _logRequest("PATCH", url, body, headers, queryParameters);
+    _logRequest('PATCH', url, body, headers, queryParameters);
 
     final response = await dio.patch(
       url,
@@ -76,7 +76,7 @@ class DioNetworkService extends NetworkService {
     _logResponse(response);
 
     return HttpResponse(
-      statusCode: response.statusCode!,
+      statusCode: response.statusCode,
       body: response.data,
       headers: response.headers.map,
       requestUri: response.requestOptions.uri,
@@ -86,11 +86,11 @@ class DioNetworkService extends NetworkService {
   @override
   Future<HttpResponse> post(
     String url,
-    body, {
+    Object body, {
     Map<String, String>? headers,
     Map<String, String>? queryParameters,
   }) async {
-    _logRequest("POST", url, body, headers, queryParameters);
+    _logRequest('POST', url, body, headers, queryParameters);
 
     final response = await dio.post(
       url,
@@ -102,7 +102,7 @@ class DioNetworkService extends NetworkService {
     _logResponse(response);
 
     return HttpResponse(
-      statusCode: response.statusCode!,
+      statusCode: response.statusCode,
       body: response.data,
       headers: response.headers.map,
       requestUri: response.requestOptions.uri,
@@ -112,11 +112,11 @@ class DioNetworkService extends NetworkService {
   @override
   Future<HttpResponse> put(
     String url,
-    body, {
+    Object body, {
     Map<String, String>? headers,
     Map<String, String>? queryParameters,
   }) async {
-    _logRequest("PUT", url, body, headers, queryParameters);
+    _logRequest('PUT', url, body, headers, queryParameters);
 
     final response = await dio.put(
       url,
@@ -128,7 +128,7 @@ class DioNetworkService extends NetworkService {
     _logResponse(response);
 
     return HttpResponse(
-      statusCode: response.statusCode!,
+      statusCode: response.statusCode,
       body: response.data,
       headers: response.headers.map,
       requestUri: response.requestOptions.uri,
@@ -136,16 +136,23 @@ class DioNetworkService extends NetworkService {
   }
 
   void _logResponse(Response response) {
-    log("""${response.requestOptions.method} request received response
+    log('''
+${response.requestOptions.method} request received response
     Response: ${response.data}
     Status code: ${response.statusCode}
     Headers: ${response.headers}
-    Request URI: ${response.requestOptions.uri}""");
+    Request URI: ${response.requestOptions.uri}
+    ''');
   }
 
-  void _logRequest(String method, String url, Object? body,
-      Map<String, String>? headers, Map<String, String>? queryParameters) {
-    log("Sending $method request to $url with body: $body, headers: $headers, queryParameters: $queryParameters");
+  void _logRequest(
+    String method,
+    String url,
+    Object? body,
+    Map<String, String>? headers,
+    Map<String, String>? queryParameters,
+  ) {
+    log('Sending $method request to $url with body: $body, headers: $headers, queryParameters: $queryParameters');
   }
 
   @override
