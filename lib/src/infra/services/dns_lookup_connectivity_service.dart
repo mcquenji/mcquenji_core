@@ -54,7 +54,7 @@ class DnsLookupConnectivityService extends ConnectivityService {
     _controller.add(_isConnected);
   }
 
-  bool _isConnected = false;
+  bool _isConnected = true;
 
   @override
   bool get isConnected => _isConnected;
