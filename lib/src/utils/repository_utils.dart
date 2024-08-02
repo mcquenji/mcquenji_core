@@ -16,7 +16,7 @@ import 'package:mcquenji_core/mcquenji_core.dart';
 ///   }
 /// }
 /// ```
-@Deprecated('Use [repoConfig] instead.')
+@Deprecated('Use `repositoryConfig` instead.')
 BindConfig<T> cubitConfig<T extends Cubit>() {
   return BindConfig(
     notifier: (cubit) => cubit.stream,
