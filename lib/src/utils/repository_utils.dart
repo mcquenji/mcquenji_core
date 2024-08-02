@@ -31,11 +31,11 @@ BindConfig<T> cubitConfig<T extends Cubit>() {
 /// class AppModule extends Module {
 ///   @override
 ///   void binds(i){
-///     i.addLazySingleton(MyCubit.new, config: cubitConfig());
+///     i.addLazySingleton<MyRepo>(MyRepo.new, config: cubitConfig());
 ///   }
 /// }
 /// ```
-BindConfig<R> repositoryConfig<T, R extends Repository<T>>() {
+BindConfig<R> repositoryConfig<R extends Repository>() {
   return BindConfig<R>(
     notifier: (repo) => repo.stream,
     onDispose: (repo) => repo.dispose(),
@@ -46,14 +46,14 @@ BindConfig<R> repositoryConfig<T, R extends Repository<T>>() {
 extension RepositoryInjectorExt on Injector {
   /// Registers a [Repository] with the [Injector].
   ///
-  /// This is a shorthand for `addLazySingleton(MyRepo.new, config: repoConfig())`.
-  void addRepository<T, R extends Repository<T>>(
+  /// This is a shorthand for `addLazySingleton<MyRepo>(MyRepo.new, config: repoConfig())`.
+  void addRepository<R extends Repository>(
     Function constructor, {
     BindConfig<R>? config,
   }) {
     addLazySingleton<R>(
       constructor,
-      config: config ?? repositoryConfig<T, R>(),
+      config: config ?? repositoryConfig<R>(),
     );
   }
 }
