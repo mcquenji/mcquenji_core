@@ -1,5 +1,6 @@
 import 'package:logging/logging.dart';
 import 'package:mcquenji_core/mcquenji_core.dart';
+import 'package:modular_core/modular_core.dart';
 
 export 'datasources/datasources.dart';
 export 'models/models.dart';
@@ -74,6 +75,12 @@ abstract class IGenericSerializer<Deserialized, Serialized> {
   /// Deserializes the given [data] into a [Deserialized] object.
   Deserialized deserialize(Serialized data);
 }
+
+/// A generic serializer for JSON objects.
+///
+/// Used as a workaround for [AutoInjector] not supporting dynamic types in the generic typedef.
+abstract class IGenericJsonSerializer<T>
+    implements IGenericSerializer<T, JSON> {}
 
 /// Type alias for JSON objects used to make the code more readable.
 typedef JSON = Map<String, dynamic>;
