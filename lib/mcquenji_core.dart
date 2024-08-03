@@ -24,16 +24,15 @@ class CoreModule extends Module {
   @override
   void exportedBinds(Injector i) {
     i
+      ..add<BaseOptions>(BaseOptions.new)
       ..add<Dio>(Dio.new)
       ..addLazySingleton<ConnectivityService>(
         kIsWeb ? WebConnectivitiyService.new : DnsLookupConnectivityService.new,
       )
-      ..add<NetworkService>(() {
-        final connecteivityService = i.get<ConnectivityService>();
+      ..add<NetworkService>((ConnectivityService conn, Dio dio) {
+        if (!conn.isConnected) return OfflineNetworkService();
 
-        if (!connecteivityService.isConnected) return OfflineNetworkService();
-
-        return DioNetworkService(i.get<Dio>());
+        return DioNetworkService(dio);
       });
   }
 }
