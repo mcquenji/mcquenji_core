@@ -25,7 +25,12 @@ class CoreModule extends Module {
   void exportedBinds(Injector i) {
     i
       ..add<BaseOptions>(BaseOptions.new)
-      ..add<Dio>(Dio.new)
+      // modular has a bug where the type of parameters in brackets is
+      // not inferred correctly. In this instance, the type of `BaseOptions` is
+      // inferred as `[BaseOptions]` which is incorrect. So we have to use the
+      // the lambda to force the correct type.
+      // ignore: unnecessary_lambdas
+      ..add<Dio>((BaseOptions o) => Dio(o))
       ..addLazySingleton<ConnectivityService>(
         kIsWeb ? WebConnectivitiyService.new : DnsLookupConnectivityService.new,
       )
