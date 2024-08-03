@@ -36,6 +36,23 @@ abstract class ILoggable {
   }
 }
 
+/// Debug log handler that prints log messages to the console.
+///
+/// To use this see [Logger.onRecord].
+///
+/// ```dart
+/// Logger.root.onRecord.listen(debugLogHandler);
+/// ```
+void debugLogHandler(LogRecord record) {
+  final error = record.error;
+  final stackTrace = record.stackTrace;
+  // print is only called when configured as a log handler
+  // ignore: avoid_print
+  print(
+    '${record.time.toIso8601String()}: $record${error != null ? "\n\t$error" : ""}${stackTrace != null ? "\n\t$stackTrace" : ""}',
+  );
+}
+
 /// A versatile serializer interface for converting objects between different formats.
 ///
 /// Primarily used in [Datasource]s to transform objects from one representation to another,
