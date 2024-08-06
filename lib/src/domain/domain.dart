@@ -1,3 +1,4 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:logging/logging.dart';
 import 'package:mcquenji_core/mcquenji_core.dart';
 import 'package:modular_core/modular_core.dart';
@@ -54,6 +55,7 @@ void debugLogHandler(LogRecord record) {
   );
 }
 
+/// {@template generic_serializer}
 /// A versatile serializer interface for converting objects between different formats.
 ///
 /// Primarily used in [Datasource]s to transform objects from one representation to another,
@@ -62,25 +64,49 @@ void debugLogHandler(LogRecord record) {
 /// - [Deserialized]: The original type of the object before serialization (e.g., a Dart object).
 /// - [Serialized]: The transformed type of the object after serialization (e.g., a JSON object).
 ///
+/// Additionally, this interface implements [JsonConverter] so you can use it as a converter when working with freezed models.
+///
+///
 /// ---
 ///
 /// Consider a scenario where you need to save and retrieve data from a data store, such as a database or a cloud service.
 /// The serializer facilitates:
 /// - Converting model objects into a format suitable for storage (serialization).
 /// - Restoring stored data back into model objects (deserialization).
-abstract class IGenericSerializer<Deserialized, Serialized> {
+///
+/// ---
+///
+/// **Usage**
+///
+/// ```dart
+/// class MyJsonConverter extends JsonConverter<Value, JSON> {
+///   // TODO
+/// }
+///
+/// @JsonSerializable()
+/// class Example {
+///   @MyJsonConverter()
+///   final Value property;
+/// }
+/// ```
+/// {@endtemplate}
+abstract class IGenericSerializer<Deserialized, Serialized>
+    implements JsonConverter<Deserialized, Serialized> {
+  /// {@macro generic_serializer}
+  const IGenericSerializer();
+
   /// Serializes the given [data] into a [Serialized] object.
   Serialized serialize(Deserialized data);
 
   /// Deserializes the given [data] into a [Deserialized] object.
   Deserialized deserialize(Serialized data);
-}
 
-/// A generic serializer for JSON objects.
-///
-/// Used as a workaround for [AutoInjector] not supporting dynamic types in the generic typedef.
-abstract class IGenericJsonSerializer<T>
-    implements IGenericSerializer<T, JSON> {}
+  @override
+  Deserialized fromJson(Serialized json) => deserialize(json);
+
+  @override
+  Serialized toJson(Deserialized object) => serialize(object);
+}
 
 /// Type alias for JSON objects used to make the code more readable.
 typedef JSON = Map<String, dynamic>;
