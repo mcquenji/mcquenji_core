@@ -79,13 +79,13 @@ void debugLogHandler(LogRecord record) {
 /// **Usage**
 ///
 /// ```dart
-/// class MyJsonConverter extends JsonConverter<Value, JSON> {
+/// class MySerializer extends IGenericSerializer<Value, JSON> {
 ///   // TODO
 /// }
 ///
 /// @JsonSerializable()
 /// class Example {
-///   @MyJsonConverter()
+///   @MySerializer()
 ///   final Value property;
 /// }
 /// ```
