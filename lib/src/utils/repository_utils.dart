@@ -56,6 +56,16 @@ extension RepositoryInjectorExt on Injector {
       config: config ?? repositoryConfig<R>(),
     );
   }
+
+  /// Registers a [TickRepository] with the given [interval].
+  void addTickRepository(
+    TickInterval interval, {
+    bool paused = false,
+  }) {
+    addRepository<TickRepository>(
+      () => TickRepository(interval, paused: paused),
+    );
+  }
 }
 
 /// Utility extension on repositories with an asynchronous state.
