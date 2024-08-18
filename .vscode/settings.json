@@ -5,6 +5,7 @@
   "conventionalCommits.scopes": [
     "services",
     "repositories",
-    "presentation"
+    "presentation",
+    "utils"
   ]
 }

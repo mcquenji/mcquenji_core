@@ -129,3 +129,24 @@ extension WidgetExt on Widget {
   /// This is equivalent to wrapping this widget with an [Align] widget with [Alignment.bottomCenter].
   Widget bottom() => Align(alignment: Alignment.bottomCenter, child: this);
 }
+
+/// Extension to add functionality for inserting an element between each pair of elements in an `Iterable`.
+extension InsertExt<T> on Iterable<T> {
+  /// Inserts the specified [element] between each element of the iterable.
+  ///
+  /// If the iterable has only one element, or is empty, it will return the iterable unchanged.
+  ///
+  /// Example:
+  /// ```dart
+  /// final list = [1, 2, 3];
+  /// final result = list.insertBetween(0); // [1, 0, 2, 0, 3]
+  /// ```
+  Iterable<T> insertBetween(T element) sync* {
+    if (!iterator.moveNext()) return;
+    yield iterator.current;
+    while (iterator.moveNext()) {
+      yield element;
+      yield iterator.current;
+    }
+  }
+}
