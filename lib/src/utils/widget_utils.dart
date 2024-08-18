@@ -150,3 +150,45 @@ extension InsertExt<T> on Iterable<T> {
     }
   }
 }
+
+/// Extension to add spacing functionality for a list of widgets.
+extension SpaceExt on List<Widget> {
+  /// Inserts horizontal and vertical spacing between each widget in the list.
+  ///
+  /// The [space] parameter defines the amount of space to insert.
+  ///
+  /// Example:
+  /// ```dart
+  /// final widgets = [Text('A'), Text('B'), Text('C')];
+  /// final spacedWidgets = widgets.spaced(10.0);
+  /// ```
+  List<Widget> spaced(double space) {
+    return insertBetween(space.spacing).toList();
+  }
+
+  /// Inserts horizontal spacing between each widget in the list.
+  ///
+  /// The [space] parameter defines the amount of horizontal space to insert.
+  ///
+  /// Example:
+  /// ```dart
+  /// final widgets = [Text('A'), Text('B'), Text('C')];
+  /// final hSpacedWidgets = widgets.hSpaced(10.0);
+  /// ```
+  List<Widget> hSpaced(double space) {
+    return insertBetween(space.hSpacing).toList();
+  }
+
+  /// Inserts vertical spacing between each widget in the list.
+  ///
+  /// The [space] parameter defines the amount of vertical space to insert.
+  ///
+  /// Example:
+  /// ```dart
+  /// final widgets = [Text('A'), Text('B'), Text('C')];
+  /// final vSpacedWidgets = widgets.vSpaced(10.0);
+  /// ```
+  List<Widget> vSpaced(double space) {
+    return insertBetween(space.vSpacing).toList();
+  }
+}
