@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:logging/logging.dart';
 import 'package:mcquenji_core/mcquenji_core.dart';
 
 /// {@template tick_repository}
@@ -48,6 +49,9 @@ class TickRepository extends Repository<Tick> {
     _timer = Timer.periodic(_interval, _tick);
     _paused = paused;
   }
+
+  @override
+  Level get level => Level.FINEST;
 
   void _tick(Timer timer) {
     if (_paused) {
