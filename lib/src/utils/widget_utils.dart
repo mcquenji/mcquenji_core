@@ -82,8 +82,7 @@ extension TextExt on Text {
   /// Applies the provided [style] to this [Text].
   ///
   /// If [merge] is set to `true`, the provided [style] will be merged with the existing style.
-  Text styled(TextStyle style, {bool merge = false}) =>
-      copyWith(style: merge ? style.merge(this.style) : style);
+  Text styled(TextStyle style, {bool merge = false}) => copyWith(style: merge ? style.merge(this.style) : style);
 
   /// Applies the provided [key] to this [Text].
   Text key(Key key) => copyWith(key: key);
@@ -142,8 +141,12 @@ extension InsertExt<T> on Iterable<T> {
   /// final result = list.insertBetween(0); // [1, 0, 2, 0, 3]
   /// ```
   Iterable<T> insertBetween(T element) sync* {
+    final iterator = this.iterator;
+
     if (!iterator.moveNext()) return;
+
     yield iterator.current;
+
     while (iterator.moveNext()) {
       yield element;
       yield iterator.current;

@@ -55,7 +55,7 @@ class TickRepository extends Repository<Tick> {
       return;
     }
 
-    emit(Tick(_interval));
+    emit(Tick());
 
     log('New tick emitted, next tick in $_interval');
   }
@@ -88,6 +88,7 @@ class TickRepository extends Repository<Tick> {
 }
 
 /// An interval at which [TickRepository] should emit ticks.
+@immutable
 class TickInterval extends Duration {
   /// An interval at which [TickRepository] should emit ticks.
   const TickInterval({
@@ -110,9 +111,6 @@ class TickInterval extends Duration {
 /// A tick emitted by the [TickRepository].
 @immutable
 class Tick {
-  /// The interval at which the tick was emitted.
-  final TickInterval interval;
-
   /// If `true`, this is the first tick emitted by the [TickRepository].
   final bool isFirst;
 
@@ -120,21 +118,24 @@ class Tick {
   final DateTime timestamp = DateTime.now();
 
   /// A tick emitted by the [TickRepository].
-  Tick(this.interval) : isFirst = false;
+  Tick() : isFirst = false;
 
   /// A tick emitted by the [TickRepository].
   ///
   /// This is the first tick emitted by the repository.
-  Tick.first()
-      : interval = const TickInterval(),
-        isFirst = true;
+  Tick.first() : isFirst = true;
 
   /// This will always return `false` unless [other] is identical to this instance.
   @override
-  bool operator ==(Object other) => identical(this, other);
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Tick && other.timestamp == timestamp && other.isFirst == isFirst;
 
   @override
-  int get hashCode => interval.hashCode ^ isFirst.hashCode;
+  int get hashCode => timestamp.hashCode ^ isFirst.hashCode;
+
+  @override
+  String toString() => 'Tick(isFirst: $isFirst, timestamp: $timestamp)';
 }
 
 /// Type alias for [TickRepository].

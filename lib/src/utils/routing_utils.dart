@@ -43,3 +43,11 @@ class InitialRouterOutlet extends StatelessWidget {
     return const RouterOutlet();
   }
 }
+
+/// Extension to add a method to check if a route is active.
+extension ActiveExt on IModularNavigator {
+  /// Returns `true` if [path] starts with the given [route].
+  bool isActive(String route) {
+    return path.startsWith(route);
+  }
+}

@@ -84,7 +84,10 @@ abstract class Repository<State> extends Cubit<State>
   }
 
   Future<void> _build<T>(T value, Repository<T> repository) async {
-    log('Received new $T state from ${repository.runtimeType}: $value');
+    Logger('$namespace.$runtimeType').log(
+      Level.FINE,
+      'Received new $T from ${repository.runtimeType}: $value',
+    );
 
     await build(repository.runtimeType);
   }
