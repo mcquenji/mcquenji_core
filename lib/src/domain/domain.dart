@@ -106,10 +106,12 @@ void debugLogHandler(LogRecord r) {
     ..white()
     ..rgb(r: 0.6, g: 0.6, b: 0.6);
 
+  final msg = r.toString().replaceAll('\n', '');
+
   // print is only called when configured as a log handler
   // ignore: avoid_print
   print(
-    recordPen.write('${r.time.toIso8601String()}: $r $error') +
+    recordPen.write('${r.time.toIso8601String()}: $msg $error') +
         (stackTrace.isEmpty ? '' : '\n') +
         stackTracePen.write(stackTrace),
   );
