@@ -3,13 +3,14 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:mcquenji_core/mcquenji_core.dart';
 import 'package:mcquenji_core/src/infra/infra.dart';
+import 'package:rxdart/subjects.dart';
 
 /// Implementation of [ConnectivityService] that pings a server to check connectivity.
 ///
 /// This implementation should only be used on web platforms. Use [DnsLookupConnectivityService] for other platforms.
 class WebConnectivitiyService extends ConnectivityService {
   late final Timer _updateLoop;
-  late final StreamController<bool> _controller;
+  late final BehaviorSubject<bool> _controller;
 
   final Dio _dio;
 
@@ -24,7 +25,7 @@ class WebConnectivitiyService extends ConnectivityService {
   /// Conneciivity is determined by checking if the DNS lookup of [pingAddress] returns any results.
   /// The connection status is re-evaluated at [updateInterval].
   WebConnectivitiyService(this._dio) {
-    _controller = StreamController<bool>.broadcast();
+    _controller = BehaviorSubject();
     _updateLoop = Timer.periodic(updateInterval, _update);
 
     _init();

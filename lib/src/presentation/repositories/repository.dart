@@ -136,7 +136,7 @@ abstract class Repository<State> extends Cubit<State>
   Stream<State> get stream => _subject.stream;
 
   @override
-  @nonVirtual
+  @mustCallSuper
   void emit(State state) {
     if (state == this.state) return;
 

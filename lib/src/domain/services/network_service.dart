@@ -2,6 +2,11 @@ import 'package:mcquenji_core/mcquenji_core.dart';
 
 /// Base class for all network services.
 abstract class NetworkService extends Service {
+  /// The duration after which a request will be considered as timed out (default is 15 seconds).
+  ///
+  /// Please not that this is a static field and will affect all instances of [NetworkService].
+  static Duration timeout = const Duration(seconds: 15);
+
   @override
   String get name => 'Network';
 

@@ -17,11 +17,13 @@ class DioNetworkService extends NetworkService {
   }) async {
     _logRequest('DELETE', url, null, headers, queryParameters);
 
-    final response = await dio.delete(
-      url,
-      queryParameters: queryParameters,
-      options: Options(headers: headers),
-    );
+    final response = await dio
+        .delete(
+          url,
+          queryParameters: queryParameters,
+          options: Options(headers: headers),
+        )
+        .timeout(NetworkService.timeout);
 
     _logResponse(response);
 
@@ -41,11 +43,13 @@ class DioNetworkService extends NetworkService {
   }) async {
     _logRequest('GET', url, null, headers, queryParameters);
 
-    final response = await dio.get(
-      url,
-      queryParameters: queryParameters,
-      options: Options(headers: headers),
-    );
+    final response = await dio
+        .get(
+          url,
+          queryParameters: queryParameters,
+          options: Options(headers: headers),
+        )
+        .timeout(NetworkService.timeout);
 
     _logResponse(response);
 
@@ -66,12 +70,14 @@ class DioNetworkService extends NetworkService {
   }) async {
     _logRequest('PATCH', url, body, headers, queryParameters);
 
-    final response = await dio.patch(
-      url,
-      data: body,
-      queryParameters: queryParameters,
-      options: Options(headers: headers),
-    );
+    final response = await dio
+        .patch(
+          url,
+          data: body,
+          queryParameters: queryParameters,
+          options: Options(headers: headers),
+        )
+        .timeout(NetworkService.timeout);
 
     _logResponse(response);
 
@@ -92,12 +98,14 @@ class DioNetworkService extends NetworkService {
   }) async {
     _logRequest('POST', url, body, headers, queryParameters);
 
-    final response = await dio.post(
-      url,
-      data: body,
-      queryParameters: queryParameters,
-      options: Options(headers: headers),
-    );
+    final response = await dio
+        .post(
+          url,
+          data: body,
+          queryParameters: queryParameters,
+          options: Options(headers: headers),
+        )
+        .timeout(NetworkService.timeout);
 
     _logResponse(response);
 
@@ -118,12 +126,14 @@ class DioNetworkService extends NetworkService {
   }) async {
     _logRequest('PUT', url, body, headers, queryParameters);
 
-    final response = await dio.put(
-      url,
-      data: body,
-      queryParameters: queryParameters,
-      options: Options(headers: headers),
-    );
+    final response = await dio
+        .put(
+          url,
+          data: body,
+          queryParameters: queryParameters,
+          options: Options(headers: headers),
+        )
+        .timeout(NetworkService.timeout);
 
     _logResponse(response);
 
@@ -138,10 +148,10 @@ class DioNetworkService extends NetworkService {
   void _logResponse(Response response) {
     log('''
 ${response.requestOptions.method} request received response
-    Response: ${response.data}
-    Status code: ${response.statusCode}
-    Headers: ${response.headers}
-    Request URI: ${response.requestOptions.uri}
+Response: ${response.data}
+Status code: ${response.statusCode}
+Headers: ${response.headers.map}
+Request URI: ${response.requestOptions.uri}
     ''');
   }
 

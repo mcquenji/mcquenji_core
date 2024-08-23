@@ -1,4 +1,3 @@
-import 'package:ansicolor/ansicolor.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:logging/logging.dart';
 import 'package:mcquenji_core/mcquenji_core.dart';
@@ -46,75 +45,9 @@ abstract class ILoggable {
 /// Logger.root.onRecord.listen(debugLogHandler);
 /// ```
 void debugLogHandler(LogRecord r) {
-  final error = r.error != null ? r.error.toString().replaceAll('\n', '') : '';
-  final stackTrace =
-      r.stackTrace != null ? r.stackTrace.toString().replaceAll('\n', '') : '';
-
-  final recordPen = AnsiPen();
-  ansiColorDisabled = false;
-
-  switch (r.level) {
-    case Level.OFF:
-      recordPen.black();
-      break;
-    case Level.FINEST:
-      recordPen
-        ..white()
-        ..rgb(r: 0.5, g: 0.5, b: 0.5);
-      break;
-    case Level.FINER:
-      recordPen
-        ..white()
-        ..rgb(r: 0.6, g: 0.6, b: 0.6);
-      break;
-    case Level.FINE:
-      recordPen
-        ..white()
-        ..rgb(r: 0.7, g: 0.7, b: 0.7);
-      break;
-    case Level.CONFIG:
-      recordPen
-        ..white()
-        ..rgb(r: 0.8, g: 0.8, b: 0.5);
-      break;
-    case Level.INFO:
-      recordPen
-        ..white()
-        ..rgb(r: 0.2, g: 0.8, b: 0.2);
-      break;
-    case Level.WARNING:
-      recordPen
-        ..white()
-        ..rgb(g: 0.8, b: 0.0);
-      break;
-    case Level.SEVERE:
-      recordPen
-        ..white()
-        ..rgb(g: 0.0, b: 0.0);
-      break;
-    case Level.SHOUT:
-      recordPen
-        ..white()
-        ..rgb(g: 0.0, b: 0.5);
-      break;
-    default:
-      recordPen.white();
-      break;
-  }
-
-  final stackTracePen = AnsiPen()
-    ..white()
-    ..rgb(r: 0.6, g: 0.6, b: 0.6);
-
-  final msg = r.toString().replaceAll('\n', '');
-
   // print is only called when configured as a log handler
   // ignore: avoid_print
-  print(
-    recordPen.write('${r.time.toIso8601String()}: $msg $error') +
-        (stackTrace.isEmpty ? '' : '\n') +
-        stackTracePen.write(stackTrace),
-  );
+  print(r.formatColored());
 }
 
 /// {@template generic_serializer}

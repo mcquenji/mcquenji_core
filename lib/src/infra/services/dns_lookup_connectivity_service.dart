@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:mcquenji_core/mcquenji_core.dart';
+import 'package:rxdart/subjects.dart';
 
 /// Implementation of [ConnectivityService] that uses DNS lookups to check connectivity.
 ///
@@ -9,7 +10,7 @@ import 'package:mcquenji_core/mcquenji_core.dart';
 /// The connection status is re-evaluated at [updateInterval].
 class DnsLookupConnectivityService extends ConnectivityService {
   late final Timer _updateLoop;
-  late final StreamController<bool> _controller;
+  late final BehaviorSubject<bool> _controller;
 
   /// The address to lookup to check connectivity.
   static const String lookupAddress = 'google.com';
@@ -22,7 +23,7 @@ class DnsLookupConnectivityService extends ConnectivityService {
   /// Conneciivity is determined by checking if the DNS lookup of [lookupAddress] returns any results.
   /// The connection status is re-evaluated at [updateInterval].
   DnsLookupConnectivityService() {
-    _controller = StreamController<bool>.broadcast();
+    _controller = BehaviorSubject();
     _updateLoop = Timer.periodic(updateInterval, _update);
 
     _init();
