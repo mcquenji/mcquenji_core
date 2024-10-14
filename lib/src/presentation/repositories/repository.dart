@@ -1,10 +1,10 @@
 import 'dart:async';
 
+import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:logging/logging.dart';
 import 'package:mcquenji_core/mcquenji_core.dart';
+import 'package:modular_core/modular_core.dart';
 import 'package:rxdart/subjects.dart';
 
 /// Base class for all repositories.
@@ -75,7 +75,7 @@ abstract class Repository<State> extends Cubit<State>
 
     _subscriptions.add(
       repository.stream.listen(
-        (value) => _build(
+        (value) => _build<T>(
           value,
           repository,
         ),
@@ -83,7 +83,7 @@ abstract class Repository<State> extends Cubit<State>
     );
   }
 
-  Future<void> _build<T>(T value, Repository<T> repository) async {
+  Future<void> _build<T>(dynamic value, Repository<T> repository) async {
     Logger('$namespace.$runtimeType').log(
       Level.FINEST,
       'Received new $T from ${repository.runtimeType}: $value',
@@ -138,7 +138,14 @@ abstract class Repository<State> extends Cubit<State>
   @override
   @mustCallSuper
   void emit(State state) {
-    if (state == this.state) return;
+    final logger = Logger('$namespace.$runtimeType');
+
+    if (state == this.state) {
+      logger.finest('State is the same as current state, skipping emit');
+      return;
+    }
+
+    logger.finest('Emitted new state: $state');
 
     _subject.add(state);
     super.emit(state);
@@ -194,7 +201,7 @@ extension RepoWatchExt<State> on Repository<AsyncValue<State>> {
     _subscriptions.add(
       repository.stream.listen(
         (value) => value.when(
-          data: (data) => _build(
+          data: (data) => _build<AsyncValue<T>>(
             data,
             repository,
           ).catchError(error),

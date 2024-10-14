@@ -1,7 +1,7 @@
 name: mcquenji_core
-description: "A new Flutter package project."
+description: "Core module for all my flutter apps."
 version: 1.1.0
-homepage: "Core module for all my flutter apps."
+repository: https://github.com/mcquenji/mcquenji_core.git
 
 environment:
   sdk: ">=3.3.4 <4.0.0"
@@ -9,13 +9,11 @@ environment:
 
 dependencies:
   ansicolor: ^2.0.3
+  bloc: ^8.1.4
   dio: ^5.4.3+1
-  flutter:
-    sdk: flutter
-  flutter_bloc: ^8.1.4
-  flutter_modular: ^6.3.3
   freezed_annotation: ^2.4.1
   logging: ^1.2.0
+  modular_core: ^3.3.3
   rxdart: ^0.28.0
 
 dev_dependencies:
@@ -25,5 +23,3 @@ dev_dependencies:
     sdk: flutter
   flutterando_analysis: ^0.0.2
   freezed: ^2.5.2
-
-flutter: null

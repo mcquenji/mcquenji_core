@@ -2,9 +2,9 @@
 
 import 'dart:async';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:bloc/bloc.dart';
 import 'package:mcquenji_core/mcquenji_core.dart';
+import 'package:modular_core/modular_core.dart';
 
 /// This function is to be used when binding a [Cubit] to a [Module].
 ///

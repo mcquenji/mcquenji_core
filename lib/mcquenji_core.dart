@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mcquenji_core/mcquenji_core.dart';
 import 'package:mcquenji_core/src/infra/infra.dart';
+import 'package:modular_core/modular_core.dart';
 
 export 'src/domain/domain.dart';
 export 'src/presentation/presentation.dart';

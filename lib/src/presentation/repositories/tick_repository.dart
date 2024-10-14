@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:logging/logging.dart';
 import 'package:mcquenji_core/mcquenji_core.dart';
+import 'package:modular_core/modular_core.dart';
 
 /// {@template tick_repository}
 /// A repository that emits ticks at a specified interval.
