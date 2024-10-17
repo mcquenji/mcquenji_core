@@ -6,10 +6,15 @@ export 'datasources/datasources.dart';
 export 'models/models.dart';
 export 'services/services.dart';
 
+/// {@template loggable}
 /// A class that provides logging functionality.
 ///
 /// Each class that extends this class should have a unique [namespace].
+/// {@endtemplate}
 abstract class ILoggable {
+  /// {@macro loggable}
+  const ILoggable();
+
   /// The namespace to log messages under.
   /// e.g. 'Service.Auth'
   ///
