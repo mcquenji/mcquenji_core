@@ -36,7 +36,7 @@ class HttpResponse<T> with _$HttpResponse<T> {
   void raiseForStatusCode() {
     if (isNotOk) {
       throw HttpException(
-        'Request failed with status code $statusCode',
+        'Request failed with status code $statusCode and body: $body',
         uri: requestUri,
       );
     }
