@@ -43,7 +43,7 @@ class CoreModule extends Module {
   @override
   void exportedBinds(Injector i) {
     i
-      ..add<BaseOptions>(() => BaseOptions(validateStatus: (_) => true)
+      ..add<BaseOptions>(() => BaseOptions(validateStatus: (_) => true))
       // modular has a bug where the type of parameters in brackets is
       // not inferred correctly. In this instance, the type of `BaseOptions` is
       // inferred as `[BaseOptions]` which is incorrect. So we have to use the
