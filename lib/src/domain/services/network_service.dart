@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:mcquenji_core/mcquenji_core.dart';
 
 /// Base class for all network services.
@@ -47,4 +48,9 @@ abstract class NetworkService extends Service {
     Map<String, String>? headers,
     Map<String, String>? queryParameters,
   });
+
+  /// Adds an interceptor to the network service.
+  ///
+  /// Currently only supports [Interceptor]s from the [Dio] package.
+  void addInterceptor(Interceptor interceptor);
 }

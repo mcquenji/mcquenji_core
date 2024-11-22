@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:mcquenji_core/mcquenji_core.dart';
 
 /// Implementation of [NetworkService] that throws an [OfflineException] for every request.
@@ -54,4 +55,7 @@ class OfflineNetworkService extends NetworkService {
 
   @override
   void dispose() {}
+
+  @override
+  void addInterceptor(Interceptor interceptor) {}
 }

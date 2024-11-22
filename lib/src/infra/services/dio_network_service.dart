@@ -169,4 +169,9 @@ Request URI: ${response.requestOptions.uri}
   void dispose() {
     dio.close();
   }
+
+  @override
+  void addInterceptor(Interceptor interceptor) {
+    dio.interceptors.add(interceptor);
+  }
 }
