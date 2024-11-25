@@ -3,4 +3,4 @@ dartdoc:
     - "*.g.dart"
     - "*.freezed.dart"
   linkTo:
-    url: https://necodeit.github.io/%n%/
+    url: https://mcquenji.github.io/%n%/
