@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the emit method from the Repository class, for the Dart programming language.">
+  <title>emit method - Repository class - mcquenji_core library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">mcquenji_core</a></li>
+    <li><a href="../../mcquenji_core/mcquenji_core-library.html">mcquenji_core.dart</a></li>
+    <li><a href="../../mcquenji_core/Repository-class.html">Repository<span class="signature">&lt;<wbr><span class="type-parameter">State</span>&gt;</span></a></li>
+    <li class="self-crumb">emit method</li>
+  </ol>
+  <div class="self-name">emit</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <div class="toggle" id="theme-button" title="Toggle brightness">
+    <label for="theme">
+      <input type="checkbox" id="theme" value="light-theme">
+      <span id="dark-theme-button" class="material-symbols-outlined">
+        dark_mode
+      </span>
+      <span id="light-theme-button" class="material-symbols-outlined">
+        light_mode
+      </span>
+    </label>
+  </div>
+</header>
+<main>
+
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="mcquenji_core&#47;Repository-class-sidebar.html"
+    data-below-sidebar="">
+    <div>
+<h1><span class="kind-method">emit</span> method 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+  <div>
+    <ol class="annotation-list">
+        <li>@<a href="https://api.dart.dev/stable/3.5.4/dart-core/override-constant.html">override</a></li>
+        <li>@<a href="https://pub.dev/documentation/meta/1.16.0/meta/mustCallSuper-constant.html">mustCallSuper</a></li>
+    </ol>
+  </div>
+
+<span class="returntype">void</span>
+<span class="name ">emit</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="emit-param-state"><span class="type-annotation">State</span> <span class="parameter-name">state</span></span></li>
+</ol>)
+
+      <div class="features"><span class="feature">override</span></div>
+
+    </section>
+    
+<section class="desc markdown">
+  <p>Updates the <code>state</code> to the provided <code>state</code>.
+<a href="../../mcquenji_core/Repository/emit.html">emit</a> does nothing if the <code>state</code> being emitted
+is equal to the current <code>state</code>.</p>
+<p>To allow for the possibility of notifying listeners of the initial state,
+emitting a state which is equal to the initial state is allowed as long
+as it is the first thing emitted by the instance.</p>
+<ul>
+<li>Throws a <a href="https://api.dart.dev/stable/3.5.4/dart-core/StateError-class.html">StateError</a> if the bloc is closed.</li>
+</ul>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">@override
+@mustCallSuper
+void emit(State state) {
+  final logger = Logger(&#39;$namespace.$runtimeType&#39;);
+
+  if (state == this.state) {
+    logger.finest(&#39;State is the same as current state, skipping emit&#39;);
+    return;
+  }
+
+  logger.finest(&#39;Emitted new state: $state&#39;);
+
+  _subject.add(state);
+  super.emit(state);
+}</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">mcquenji_core</a></li>
+    <li><a href="../../mcquenji_core/mcquenji_core-library.html">mcquenji_core</a></li>
+    <li><a href="../../mcquenji_core/Repository-class.html">Repository<span class="signature">&lt;<wbr><span class="type-parameter">State</span>&gt;</span></a></li>
+    <li class="self-crumb">emit method</li>
+</ol>
+
+
+    <h5>Repository class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-->
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+</div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    mcquenji_core
+      1.1.0
+  </span>
+
+  
+</footer>
+
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+
+
+</body>
+
+</html>
+

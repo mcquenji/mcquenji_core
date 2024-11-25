@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the watchAsync method from the RepoWatchExt extension, for the Dart programming language.">
+  <title>watchAsync method - RepoWatchExt extension - mcquenji_core library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">mcquenji_core</a></li>
+    <li><a href="../../mcquenji_core/mcquenji_core-library.html">mcquenji_core.dart</a></li>
+    <li><a href="../../mcquenji_core/RepoWatchExt.html">RepoWatchExt<span class="signature">&lt;<wbr><span class="type-parameter">State</span>&gt;</span></a></li>
+    <li class="self-crumb">watchAsync&lt;<wbr><span class="type-parameter">T</span>&gt; method</li>
+  </ol>
+  <div class="self-name">watchAsync</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <div class="toggle" id="theme-button" title="Toggle brightness">
+    <label for="theme">
+      <input type="checkbox" id="theme" value="light-theme">
+      <span id="dark-theme-button" class="material-symbols-outlined">
+        dark_mode
+      </span>
+      <span id="light-theme-button" class="material-symbols-outlined">
+        light_mode
+      </span>
+    </label>
+  </div>
+</header>
+<main>
+
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="mcquenji_core&#47;RepoWatchExt-extension-sidebar.html"
+    data-below-sidebar="">
+    <div>
+<h1><span class="kind-method">watchAsync&lt;<wbr><span class="type-parameter">T</span>&gt;</span> method 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+
+<span class="returntype">void</span>
+<span class="name ">watchAsync</span>&lt;<wbr><span class="type-parameter">T</span>&gt;(<wbr><ol class="parameter-list"> <li><span class="parameter" id="watchAsync-param-repository"><span class="type-annotation"><a href="../../mcquenji_core/Repository-class.html">Repository</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../mcquenji_core/AsyncValue-class.html">AsyncValue</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>&gt;</span></span> <span class="parameter-name">repository</span>, {</span></li>
+<li><span class="parameter" id="watchAsync-param-setLoading"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.4/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">setLoading</span> = <span class="default-value">true</span>, </span></li>
+<li><span class="parameter" id="watchAsync-param-setError"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.4/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">setError</span> = <span class="default-value">true</span>, </span></li>
+</ol>})
+
+      
+
+    </section>
+    
+<section class="desc markdown">
+  <p>Does the same as <a href="../../mcquenji_core/Repository/watch.html">watch</a> but for repositories that return an <a href="../../mcquenji_core/AsyncValue-class.html">AsyncValue</a>.</p>
+<ul>
+<li>If <code>setLoading</code> is true, this repository will emit a new state with the loading state of the watched repository.</li>
+<li>If <code>setError</code> is true, this repository will emit a new state with the error state of the watched repository.</li>
+</ul>
+<p><a href="../../mcquenji_core/Repository/build.html">build</a> will only be called if the emmited state resolves to <a href="../../mcquenji_core/AsyncValue/data.html">AsyncValue.data</a> so it's safe to use <a href="../../mcquenji_core/AsyncValue/requireData.html">AsyncValue.requireData</a>.</p>
+<p>In the event of <a href="../../mcquenji_core/Repository/build.html">build</a> throwing an error, this repository will emit an error state.</p>
+<hr>
+<p><strong>Example:</strong></p>
+<pre class="language-dart"><code class="language-dart">class MyRepository extends Repository&lt;AsyncValue&lt;MyState&gt;&gt; {
+  final OtherRepository _otherRepository;
+
+  MyRepository(this._otherRepository) : super(MyState.new) {
+    watchAsync(_otherRepository);
+  }
+
+  @override
+  FutureOr&lt;void&gt; build() async {
+    final otherState = _otherRepository.state.requireData;
+
+    // Do something with otherState
+  }
+}
+</code></pre>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">void watchAsync&lt;T&gt;(
+  Repository&lt;AsyncValue&lt;T&gt;&gt; repository, {
+  bool setLoading = true,
+  bool setError = true,
+}) {
+  assert(repository != this, &#39;Cannot watch self&#39;);
+
+  void onError(Object e, StackTrace? s) {
+    setError ? error(e, s) : log(&#39;Error in ${repository.runtimeType}&#39;, e, s);
+  }
+
+  void onLoading() {
+    setLoading ? loading() : log(&#39;${repository.runtimeType} is loading&#39;);
+  }
+
+  _subscriptions.add(
+    repository.stream.listen(
+      (value) =&gt; value.when(
+        data: (data) =&gt; _build&lt;AsyncValue&lt;T&gt;&gt;(
+          data,
+          repository,
+        ).catchError(error),
+        loading: onLoading,
+        error: onError,
+      ),
+    ),
+  );
+}</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">mcquenji_core</a></li>
+    <li><a href="../../mcquenji_core/mcquenji_core-library.html">mcquenji_core</a></li>
+    <li><a href="../../mcquenji_core/RepoWatchExt.html">RepoWatchExt<span class="signature">&lt;<wbr><span class="type-parameter">State</span>&gt;</span></a></li>
+    <li class="self-crumb">watchAsync&lt;<wbr><span class="type-parameter">T</span>&gt; method</li>
+</ol>
+
+
+    <h5>RepoWatchExt extension on <a href="../../mcquenji_core/Repository-class.html">Repository</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../mcquenji_core/AsyncValue-class.html">AsyncValue</a><span class="signature">&lt;<wbr><span class="type-parameter">State</span>&gt;</span></span>&gt;</span></h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-->
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+</div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    mcquenji_core
+      1.1.0
+  </span>
+
+  
+</footer>
+
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+
+
+</body>
+
+</html>
+

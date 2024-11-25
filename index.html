@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="mcquenji_core API docs, for the Dart programming language.">
+  <title>mcquenji_core - Dart API docs</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="static-assets/github.css?v1">
+  <link rel="stylesheet" href="static-assets/styles.css?v1">
+  <link rel="icon" href="static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="" data-using-base-href="false" class="light-theme">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li class="self-crumb">mcquenji_core package</li>
+  </ol>
+  <div class="self-name">mcquenji_core</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <div class="toggle" id="theme-button" title="Toggle brightness">
+    <label for="theme">
+      <input type="checkbox" id="theme" value="light-theme">
+      <span id="dark-theme-button" class="material-symbols-outlined">
+        dark_mode
+      </span>
+      <span id="light-theme-button" class="material-symbols-outlined">
+        light_mode
+      </span>
+    </label>
+  </div>
+</header>
+<main>
+
+  <div id="dartdoc-main-content" class="main-content">
+      
+<section class="desc markdown">
+  <h1 id="mcquenjis-core-module">McQuenji's Core Module</h1>
+<p>This is the core module for all my flutter projects. It contains all the basic functionalities that I use in all my projects. It is a work in progress and I will keep updating it as I go along.</p>
+<h2 id="usage">Usage</h2>
+<p>To use this module in your project, add the following to your <code>pubspec.yaml</code> file:</p>
+<pre class="language-yaml"><code class="language-yaml">dependencies:
+  mcquenji_core:
+    git:
+      url: https://github.com/mcquenji/mcquenji_core.git
+</code></pre>
+<p>Then run <code>flutter pub get</code> to install the package.</p>
+<p>After that, import the module in your app's main module this:</p>
+<pre class="language-dart"><code class="language-dart">import 'package:mcquenji_core/mcquenji_core.dart';
+
+class AppModule extends Module {
+    @override
+    List&lt;Module&gt; get imports =&gt; [CoreModule()];
+}
+</code></pre>
+<p>Now you can use all services and utilities provided by the module in your app.</p>
+<pre class="language-dart"><code class="language-dart">final networkService = Modular.get&lt;NetworkService&gt;();
+
+networkService.get('https://api.example.com').then((response) {
+    print(response.body);
+});
+</code></pre>
+<h2 id="services">Services</h2>
+<p>Services are classes that complete the most low-level tasks in the app. They are the only classes that can interact with the outside world. All other classes should depend on services to get their work done.</p>
+<h3 id="defining-a-new-service">Defining a new service</h3>
+<p>To define a new service, create a new abstract class that extends the <code>Service</code> class.</p>
+<pre class="language-dart"><code class="language-dart">abstract class MyService extends Service {
+    @override
+    String get name =&gt; 'MyService';
+
+    // Your service implementation here
+}
+</code></pre>
+<p>After that, create a new class that extends the abstract class and implements the required methods.</p>
+<pre class="language-dart"><code class="language-dart">class MyServiceImpl extends MyService {
+    @override
+    Future&lt;void&gt; init() async {
+        // Initialize your service here
+    }
+
+    // Implement other methods here
+}
+</code></pre>
+<p>Finally, register the service in the module the service is used in. If the service is also used in other modules, export it.</p>
+<pre class="language-dart"><code class="language-dart">class MyModule extends Module {
+    @override
+    List&lt;Module&gt; get imports =&gt; [McQuenjiCore()];
+
+    @override
+    void binds(i){
+        i.add&lt;MyService&gt;(MyServiceImpl.new);
+    }
+
+    @override
+    exportBinds(i) {
+        i.add&lt;MyService&gt;(MyServiceImpl.new);
+    }
+}
+</code></pre>
+<h2 id="datasources">Datasources</h2>
+<p>Datasources are classes that interact with the data layer of the app. They are responsible for fetching and storing data from and to the data layer.</p>
+<h3 id="defining-a-new-datasource">Defining a new datasource</h3>
+<p>To define a new datasource, create a new abstract class that extends the <code>Datasource</code> class.</p>
+<pre class="language-dart"><code class="language-dart">abstract class MyDatasource extends Datasource {
+    @override
+    String get name =&gt; 'MyDatasource';
+
+    MyDatasource(MyService service);
+
+    // Your datasource implementation here
+}
+</code></pre>
+<p>After that, the steps are the same as defining a new service.</p>
+<h2 id="repositories">Repositories</h2>
+<p>Repositories are classes that provide tailored methods for a specific UI screen or feature. They are also responsible for state management and as extend <code>Cubit</code>.</p>
+<h3 id="defining-a-new-repository">Defining a new repository</h3>
+<p>To define a new repository, create a new class that extends the <code>Repository</code> class.</p>
+<pre class="language-dart"><code class="language-dart">class MyRepository&lt;MyState&gt; extends Repository&lt;MyState&gt; {
+    MyRepository(MyService service, MyDatasource datasource) : super(myIntialState);
+
+    // Your repository implementation here
+}
+</code></pre>
+</section>
+
+
+      <section class="summary">
+          <h2>Libraries</h2>
+        <dl>
+          <dt id="mcquenji_core">
+  <span class="name"><a href="mcquenji_core/mcquenji_core-library.html">mcquenji_core</a></span> 
+
+</dt>
+<dd>McQuenji's Core Module
+</dd>
+
+        </dl>
+      </section>
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li class="self-crumb">mcquenji_core package</li>
+</ol>
+
+
+    <h5 class="hidden-xs"><span class="package-name">mcquenji_core</span> <span class="package-kind">package</span></h5>
+    <ol>
+      <li class="section-title">Libraries</li>
+      <li><a href="mcquenji_core/mcquenji_core-library.html">mcquenji_core</a></li>
+</ol>
+
+  </div>
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div>
+
+</main>
+
+<footer>
+  <span class="no-break">
+    mcquenji_core
+      1.1.0
+  </span>
+
+  
+</footer>
+
+
+
+<script src="static-assets/highlight.pack.js?v1"></script>
+<script src="static-assets/docs.dart.js"></script>
+
+
+
+</body>
+
+</html>
+
