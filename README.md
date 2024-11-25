@@ -112,14 +112,12 @@ Repositories are classes that provide tailored methods for a specific UI screen 
 
 ### Defining a new repository
 
-To define a new repository, create a new abstract class that extends the `Repository` class.
+To define a new repository, create a new class that extends the `Repository` class.
 
 ```dart
-abstract class MyRepository<MyState> extends Repository<MyState> {
+class MyRepository<MyState> extends Repository<MyState> {
     MyRepository(MyService service, MyDatasource datasource) : super(myIntialState);
 
     // Your repository implementation here
 }
 ```
-
-After that, the steps are the same as defining a new service.
