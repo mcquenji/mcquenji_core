@@ -15,10 +15,7 @@ class WebConnectivitiyService extends ConnectivityService {
   final Dio _dio;
 
   /// The address to lookup to check connectivity.
-  static const String pingAddress = 'google.com';
-
-  /// The interval at which to check connectivity.
-  static const Duration updateInterval = Duration(seconds: 1);
+  static const String pingAddress = 'https://google.com';
 
   /// Implementation of [ConnectivityService] that uses DNS lookups to check connectivity.
   ///
@@ -26,7 +23,7 @@ class WebConnectivitiyService extends ConnectivityService {
   /// The connection status is re-evaluated at [updateInterval].
   WebConnectivitiyService(this._dio) {
     _controller = BehaviorSubject();
-    _updateLoop = Timer.periodic(updateInterval, _update);
+    _updateLoop = Timer.periodic(ConnectivityService.updateInterval, _update);
 
     _init();
   }
@@ -49,7 +46,7 @@ class WebConnectivitiyService extends ConnectivityService {
 
     log('initialized');
     log("The device is ${_isConnected ? "online" : "offline"}");
-    log('Checking connectivity every ${updateInterval.inSeconds} seconds on $pingAddress...');
+    log('Checking connectivity every ${ConnectivityService.updateInterval.inSeconds} seconds on $pingAddress...');
   }
 
   Future<void> _update(Timer timer) async {

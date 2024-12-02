@@ -7,7 +7,7 @@ import 'package:rxdart/subjects.dart';
 /// Implementation of [ConnectivityService] that uses DNS lookups to check connectivity.
 ///
 /// Conneciivity is determined by checking if the DNS lookup of [lookupAddress] returns any results.
-/// The connection status is re-evaluated at [updateInterval].
+/// The connection status is re-evaluated at [ConnectivityService.updateInterval].
 class DnsLookupConnectivityService extends ConnectivityService {
   late final Timer _updateLoop;
   late final BehaviorSubject<bool> _controller;
@@ -15,16 +15,13 @@ class DnsLookupConnectivityService extends ConnectivityService {
   /// The address to lookup to check connectivity.
   static const String lookupAddress = 'google.com';
 
-  /// The interval at which to check connectivity.
-  static const Duration updateInterval = Duration(seconds: 1);
-
   /// Implementation of [ConnectivityService] that uses DNS lookups to check connectivity.
   ///
   /// Conneciivity is determined by checking if the DNS lookup of [lookupAddress] returns any results.
-  /// The connection status is re-evaluated at [updateInterval].
+  /// The connection status is re-evaluated at [ConnectivityService.updateInterval].
   DnsLookupConnectivityService() {
     _controller = BehaviorSubject();
-    _updateLoop = Timer.periodic(updateInterval, _update);
+    _updateLoop = Timer.periodic(ConnectivityService.updateInterval, _update);
 
     _init();
   }
@@ -41,7 +38,7 @@ class DnsLookupConnectivityService extends ConnectivityService {
 
     log('initialized');
     log("The device is ${_isConnected ? "online" : "offline"}");
-    log('Checking connectivity every ${updateInterval.inSeconds} seconds on $lookupAddress...');
+    log('Checking connectivity every ${ConnectivityService.updateInterval.inSeconds} seconds on $lookupAddress...');
   }
 
   Future<void> _update(Timer timer) async {
