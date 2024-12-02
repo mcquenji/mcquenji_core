@@ -15,7 +15,7 @@ class WebConnectivitiyService extends ConnectivityService {
   final Dio _dio;
 
   /// The address to lookup to check connectivity.
-  static const String pingAddress = 'https://google.com';
+  static const String pingAddress = '/';
 
   /// Implementation of [ConnectivityService] that uses DNS lookups to check connectivity.
   ///
