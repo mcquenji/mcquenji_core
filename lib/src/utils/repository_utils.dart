@@ -58,6 +58,7 @@ extension RepositoryInjectorExt on Injector {
   }
 
   /// Registers a [TickRepository] with the given [interval].
+  @Deprecated('Use Repository.updateInterval instead')
   void addTickRepository(
     TickInterval interval, {
     bool paused = false,

@@ -38,22 +38,26 @@ import 'package:modular_core/modular_core.dart';
 /// }
 /// ```
 /// {@endtemplate}
+@Deprecated('Use Repository.updateInterval instead')
 class TickRepository extends Repository<Tick> {
   final TickInterval _interval;
-  late final Timer _timer;
 
   bool _paused = false;
 
   /// {@macro tick_repository}
+  @Deprecated('Use Repository.updateInterval instead')
   TickRepository(this._interval, {bool paused = false}) : super(Tick.first()) {
-    _timer = Timer.periodic(_interval, _tick);
     _paused = paused;
   }
 
   @override
+  Duration get updateInterval => _interval;
+
+  @override
   Level get level => Level.FINEST;
 
-  void _tick(Timer timer) {
+  @override
+  FutureOr<void> build(Type trigger) async {
     if (_paused) {
       log('Currently paused, skipping tick');
       return;
@@ -65,6 +69,7 @@ class TickRepository extends Repository<Tick> {
   }
 
   /// Pauses the tick emission.
+  @Deprecated('Use Repository.updateInterval instead')
   void pause() {
     if (_paused) return;
 
@@ -76,6 +81,7 @@ class TickRepository extends Repository<Tick> {
   /// Resumes the tick emission.
   ///
   /// This will not emit a tick immediately, but will resume the emission of ticks at the next interval.
+  @Deprecated('Use Repository.updateInterval instead')
   void resume() {
     if (!_paused) return;
 
@@ -83,18 +89,14 @@ class TickRepository extends Repository<Tick> {
 
     log('Resumed tick emission');
   }
-
-  @override
-  void dispose() {
-    _timer.cancel();
-    super.dispose();
-  }
 }
 
 /// An interval at which [TickRepository] should emit ticks.
 @immutable
+@Deprecated('Use Repository.updateInterval instead')
 class TickInterval extends Duration {
   /// An interval at which [TickRepository] should emit ticks.
+  @Deprecated('Use Repository.updateInterval instead')
   const TickInterval({
     int days = 0,
     int hours = 0,
@@ -114,6 +116,7 @@ class TickInterval extends Duration {
 
 /// A tick emitted by the [TickRepository].
 @immutable
+@Deprecated('Use Repository.updateInterval instead')
 class Tick {
   /// If `true`, this is the first tick emitted by the [TickRepository].
   final bool isFirst;
@@ -122,11 +125,13 @@ class Tick {
   final DateTime timestamp = DateTime.now();
 
   /// A tick emitted by the [TickRepository].
+  @Deprecated('Use Repository.updateInterval instead')
   Tick() : isFirst = false;
 
   /// A tick emitted by the [TickRepository].
   ///
   /// This is the first tick emitted by the repository.
+  @Deprecated('Use Repository.updateInterval instead')
   Tick.first() : isFirst = true;
 
   /// This will always return `false` unless [other] is identical to this instance.
@@ -143,4 +148,5 @@ class Tick {
 }
 
 /// Type alias for [TickRepository].
+@Deprecated('Use Repository.updateInterval instead')
 typedef Ticks = TickRepository;
