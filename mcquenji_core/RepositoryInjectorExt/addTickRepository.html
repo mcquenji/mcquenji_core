@@ -16,22 +16,18 @@
   <link rel="stylesheet" href="../../static-assets/github.css?v1">
   <link rel="stylesheet" href="../../static-assets/styles.css?v1">
   <link rel="icon" href="../../static-assets/favicon.png?v1">
-
   
 </head>
 
-
 <body data-base-href="../../" data-using-base-href="false" class="light-theme">
-
 <div id="overlay-under-drawer"></div>
-
 <header id="title">
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">mcquenji_core</a></li>
     <li><a href="../../mcquenji_core/mcquenji_core-library.html">mcquenji_core.dart</a></li>
     <li><a href="../../mcquenji_core/RepositoryInjectorExt.html">RepositoryInjectorExt</a></li>
-    <li class="self-crumb">addTickRepository method</li>
+    <li class="self-crumb"><span class="deprecated">addTickRepository</span> method</li>
   </ol>
   <div class="self-name">addTickRepository</div>
   <form class="search navbar-right" role="search">
@@ -50,7 +46,6 @@
   </div>
 </header>
 <main>
-
 <div
     id="dartdoc-main-content"
     class="main-content"
@@ -62,10 +57,14 @@
 
     <section class="multi-line-signature">
       
-
+  <div>
+    <ol class="annotation-list">
+        <li>@<a href="https://api.dart.dev/stable/3.6.0/dart-core/Deprecated-class.html">Deprecated</a>(&#39;Use Repository.updateInterval instead&#39;)</li>
+    </ol>
+  </div>
 <span class="returntype">void</span>
-<span class="name ">addTickRepository</span>(<wbr><ol class="parameter-list"> <li><span class="parameter" id="addTickRepository-param-interval"><span class="type-annotation"><a href="../../mcquenji_core/TickInterval-class.html">TickInterval</a></span> <span class="parameter-name">interval</span>, {</span></li>
-<li><span class="parameter" id="addTickRepository-param-paused"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.5.4/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">paused</span> = <span class="default-value">false</span>, </span></li>
+<span class="name deprecated">addTickRepository</span>(<wbr><ol class="parameter-list"> <li><span class="parameter" id="addTickRepository-param-interval"><span class="type-annotation"><a class="deprecated" href="../../mcquenji_core/TickInterval-class.html">TickInterval</a></span> <span class="parameter-name">interval</span>, {</span></li>
+<li><span class="parameter" id="addTickRepository-param-paused"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.6.0/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">paused</span> = <span class="default-value">false</span>, </span></li>
 </ol>})
 
       
@@ -73,14 +72,15 @@
     </section>
     
 <section class="desc markdown">
-  <p>Registers a <a href="../../mcquenji_core/TickRepository-class.html">TickRepository</a> with the given <code>interval</code>.</p>
+  <p>Registers a <a class="deprecated" href="../../mcquenji_core/TickRepository-class.html">TickRepository</a> with the given <code>interval</code>.</p>
 </section>
 
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">void addTickRepository(
+  <pre class="language-dart"><code class="language-dart">@Deprecated(&#39;Use Repository.updateInterval instead&#39;)
+void addTickRepository(
   TickInterval interval, {
   bool paused = false,
 }) {
@@ -92,7 +92,6 @@
 
 
   </div> <!-- /.main-content -->
-
   <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
     <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
 <header id="header-search-sidebar" class="hidden-l">
@@ -100,41 +99,31 @@
     <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
 </header>
-
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">mcquenji_core</a></li>
     <li><a href="../../mcquenji_core/mcquenji_core-library.html">mcquenji_core</a></li>
     <li><a href="../../mcquenji_core/RepositoryInjectorExt.html">RepositoryInjectorExt</a></li>
-    <li class="self-crumb">addTickRepository method</li>
+    <li class="self-crumb"><span class="deprecated">addTickRepository</span> method</li>
 </ol>
-
 
     <h5>RepositoryInjectorExt extension on <a href="https://pub.dev/documentation/auto_injector/2.0.5/auto_injector/Injector-class.html">Injector</a></h5>
     <div id="dartdoc-sidebar-left-content"></div>
   </div><!--/.sidebar-offcanvas-->
-
   <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
 </div><!--/.sidebar-offcanvas-->
-
 </main>
-
 <footer>
   <span class="no-break">
     mcquenji_core
       1.1.0
   </span>
-
   
 </footer>
-
 
 
 <script src="../../static-assets/highlight.pack.js?v1"></script>
 <script src="../../static-assets/docs.dart.js"></script>
 
-
-
 </body>
-
 </html>
 

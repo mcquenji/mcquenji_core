@@ -16,15 +16,11 @@
   <link rel="stylesheet" href="../static-assets/github.css?v1">
   <link rel="stylesheet" href="../static-assets/styles.css?v1">
   <link rel="icon" href="../static-assets/favicon.png?v1">
-
   
 </head>
 
-
 <body data-base-href="../" data-using-base-href="false" class="light-theme">
-
 <div id="overlay-under-drawer"></div>
-
 <header id="title">
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
@@ -48,7 +44,6 @@
   </div>
 </header>
 <main>
-
 <div
     id="dartdoc-main-content"
     class="main-content"
@@ -159,7 +154,6 @@ networkService.get('https://api.example.com').then((response) {
 
     <section class="summary offset-anchor" id="classes">
       <h2>Classes</h2>
-
       <dl>
           <dt id="AsyncValue">
   <span class="name "><a href="../mcquenji_core/AsyncValue-class.html">AsyncValue</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> 
@@ -217,6 +211,14 @@ networkService.get('https://api.example.com').then((response) {
   A class that provides logging functionality.
 </dd>
 
+          <dt id="InitialBuildTrigger">
+  <span class="name "><a href="../mcquenji_core/InitialBuildTrigger-class.html">InitialBuildTrigger</a></span> 
+
+</dt>
+<dd>
+  Passed as trigger in <a href="../mcquenji_core/Repository/build.html">Repository.build</a> when called the first time.
+</dd>
+
           <dt id="NetworkService">
   <span class="name "><a href="../mcquenji_core/NetworkService-class.html">NetworkService</a></span> 
 
@@ -242,28 +244,36 @@ networkService.get('https://api.example.com').then((response) {
 </dd>
 
           <dt id="Tick">
-  <span class="name "><a href="../mcquenji_core/Tick-class.html">Tick</a></span> 
+  <span class="name deprecated"><a class="deprecated" href="../mcquenji_core/Tick-class.html">Tick</a></span> 
 
 </dt>
 <dd>
-  A tick emitted by the <a href="../mcquenji_core/TickRepository-class.html">TickRepository</a>.
+  A tick emitted by the <a class="deprecated" href="../mcquenji_core/TickRepository-class.html">TickRepository</a>.
 </dd>
 
           <dt id="TickInterval">
-  <span class="name "><a href="../mcquenji_core/TickInterval-class.html">TickInterval</a></span> 
+  <span class="name deprecated"><a class="deprecated" href="../mcquenji_core/TickInterval-class.html">TickInterval</a></span> 
 
 </dt>
 <dd>
-  An interval at which <a href="../mcquenji_core/TickRepository-class.html">TickRepository</a> should emit ticks.
+  An interval at which <a class="deprecated" href="../mcquenji_core/TickRepository-class.html">TickRepository</a> should emit ticks.
 </dd>
 
           <dt id="TickRepository">
-  <span class="name "><a href="../mcquenji_core/TickRepository-class.html">TickRepository</a></span> 
+  <span class="name deprecated"><a class="deprecated" href="../mcquenji_core/TickRepository-class.html">TickRepository</a></span> 
 
 </dt>
 <dd>
   A repository that emits ticks at a specified interval.
 The emitted ticks can be used to trigger periodic updates in the application.
+</dd>
+
+          <dt id="UpdateTrigger">
+  <span class="name "><a href="../mcquenji_core/UpdateTrigger-class.html">UpdateTrigger</a></span> 
+
+</dt>
+<dd>
+  Passed as trigger in <a href="../mcquenji_core/Repository/build.html">Repository.build</a> when called in the <a href="../mcquenji_core/Repository/updateInterval.html">Repository.updateInterval</a>.
 </dd>
 
       </dl>
@@ -274,7 +284,6 @@ The emitted ticks can be used to trigger periodic updates in the application.
 
     <section class="summary offset-anchor" id="extensions">
       <h2>Extensions</h2>
-
       <dl>
           <dt id="AsyncRepoExt">
   <span class="name "><a href="../mcquenji_core/AsyncRepoExt.html">AsyncRepoExt</a></span>
@@ -286,7 +295,6 @@ The emitted ticks can be used to trigger periodic updates in the application.
   Utility extension on repositories with an asynchronous state.
 </dd>
 
-
           <dt id="LogRecordX">
   <span class="name "><a href="../mcquenji_core/LogRecordX.html">LogRecordX</a></span>
   on <a href="https://pub.dev/documentation/logging/1.3.0/logging/LogRecord-class.html">LogRecord</a>
@@ -296,7 +304,6 @@ The emitted ticks can be used to trigger periodic updates in the application.
 <dd>
   Formatting extension for log records.
 </dd>
-
 
           <dt id="RepositoryInjectorExt">
   <span class="name "><a href="../mcquenji_core/RepositoryInjectorExt.html">RepositoryInjectorExt</a></span>
@@ -308,7 +315,6 @@ The emitted ticks can be used to trigger periodic updates in the application.
   Utility extension on <a href="https://pub.dev/documentation/auto_injector/2.0.5/auto_injector/Injector-class.html">Injector</a>.
 </dd>
 
-
           <dt id="RepoWatchExt">
   <span class="name "><a href="../mcquenji_core/RepoWatchExt.html">RepoWatchExt</a></span>
   on <a href="../mcquenji_core/Repository-class.html">Repository</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../mcquenji_core/AsyncValue-class.html">AsyncValue</a><span class="signature">&lt;<wbr><span class="type-parameter">State</span>&gt;</span></span>&gt;</span>
@@ -319,17 +325,15 @@ The emitted ticks can be used to trigger periodic updates in the application.
   Extension for watching asynchronous repositories in asynchronous repositories.
 </dd>
 
-
           <dt id="StringX">
   <span class="name "><a href="../mcquenji_core/StringX.html">StringX</a></span>
-  on <a href="https://api.dart.dev/stable/3.5.4/dart-core/String-class.html">String</a>
+  on <a href="https://api.dart.dev/stable/3.6.0/dart-core/String-class.html">String</a>
   
 
 </dt>
 <dd>
   String utilities.
 </dd>
-
 
       </dl>
     </section>
@@ -338,7 +342,6 @@ The emitted ticks can be used to trigger periodic updates in the application.
 
     <section class="summary offset-anchor" id="functions">
       <h2>Functions</h2>
-
       <dl class="callables">
           <dt id="cubitConfig" class="callable">
   <span class="name deprecated"><a class="deprecated" href="../mcquenji_core/cubitConfig.html">cubitConfig</a></span><span class="signature">&lt;<wbr><span class="type-parameter">T extends <a href="https://pub.dev/documentation/bloc/8.1.4/bloc/Cubit-class.html">Cubit</a></span>&gt;</span><span class="signature">(<wbr>)
@@ -385,12 +388,11 @@ Use <a href="../mcquenji_core/RepositoryInjectorExt/addRepository.html">Reposito
 
     <section class="summary offset-anchor" id="typedefs">
       <h2>Typedefs</h2>
-
       <dl>
           
   <dt id="JSON" class="">
   <span class="name"><a href="../mcquenji_core/JSON.html">JSON</a></span>
-    = <a href="https://api.dart.dev/stable/3.5.4/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.5.4/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span>
+    = <a href="https://api.dart.dev/stable/3.6.0/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.6.0/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span>
   </span>
   
 
@@ -404,14 +406,14 @@ Use <a href="../mcquenji_core/RepositoryInjectorExt/addRepository.html">Reposito
 
           
   <dt id="Ticks" class="">
-  <span class="name"><a href="../mcquenji_core/Ticks.html">Ticks</a></span>
-    = <a href="../mcquenji_core/TickRepository-class.html">TickRepository</a>
+  <span class="name deprecated"><a class="deprecated" href="../mcquenji_core/Ticks.html">Ticks</a></span>
+    = <a class="deprecated" href="../mcquenji_core/TickRepository-class.html">TickRepository</a>
   </span>
   
 
 </dt>
 <dd>
-  Type alias for <a href="../mcquenji_core/TickRepository-class.html">TickRepository</a>.
+  Type alias for <a class="deprecated" href="../mcquenji_core/TickRepository-class.html">TickRepository</a>.
   
 
 </dd>
@@ -422,7 +424,6 @@ Use <a href="../mcquenji_core/RepositoryInjectorExt/addRepository.html">Reposito
 
     <section class="summary offset-anchor" id="exceptions">
       <h2>Exceptions / Errors</h2>
-
       <dl>
           <dt id="OfflineException">
   <span class="name "><a href="../mcquenji_core/OfflineException-class.html">OfflineException</a></span> 
@@ -432,11 +433,17 @@ Use <a href="../mcquenji_core/RepositoryInjectorExt/addRepository.html">Reposito
   Exception thrown when the device is offline.
 </dd>
 
+          <dt id="WaitForDataException">
+  <span class="name "><a href="../mcquenji_core/WaitForDataException-class.html">WaitForDataException</a></span> 
+
+</dt>
+<dd>
+  Thrown when <a href="../mcquenji_core/RepoWatchExt/waitForData.html">RepoWatchExt.waitForData</a> is called on a repository that does not have data yet.
+</dd>
+
       </dl>
     </section>
-
   </div> <!-- /.main-content -->
-
   <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
     <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
 <header id="header-search-sidebar" class="hidden-l">
@@ -444,12 +451,10 @@ Use <a href="../mcquenji_core/RepositoryInjectorExt/addRepository.html">Reposito
     <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
 </header>
-
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../index.html">mcquenji_core</a></li>
     <li class="self-crumb">mcquenji_core.dart</li>
 </ol>
-
 
     <h5><span class="package-name">mcquenji_core</span> <span class="package-kind">package</span></h5>
     <ol>
@@ -458,30 +463,22 @@ Use <a href="../mcquenji_core/RepositoryInjectorExt/addRepository.html">Reposito
 </ol>
 
   </div>
-
   <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
     <h5>mcquenji_core library</h5>
   </div><!--/sidebar-offcanvas-right-->
-
 </main>
-
 <footer>
   <span class="no-break">
     mcquenji_core
       1.1.0
   </span>
-
   
 </footer>
-
 
 
 <script src="../static-assets/highlight.pack.js?v1"></script>
 <script src="../static-assets/docs.dart.js"></script>
 
-
-
 </body>
-
 </html>
 
