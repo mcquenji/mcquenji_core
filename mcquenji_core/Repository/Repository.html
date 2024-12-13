@@ -79,7 +79,7 @@
       log(&#39;Automatic update triggered&#39;);
       await build(UpdateTrigger);
     });
-    log(&#39;Automatic updates enabled at $updateInterval&#39;);
+    log(&#39;Automatic updates enabled at ${updateInterval.inMilliseconds} ms&#39;);
   } else {
     _updateLoop = null;
     log(&#39;Automatic updates disabled&#39;);
