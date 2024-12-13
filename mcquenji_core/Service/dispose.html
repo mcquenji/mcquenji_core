@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the dispose method from the Repository class, for the Dart programming language.">
-  <title>dispose method - Repository class - mcquenji_core library - Dart API</title>
+  <meta name="description" content="API docs for the dispose method from the Service class, for the Dart programming language.">
+  <title>dispose method - Service class - mcquenji_core library - Dart API</title>
 
 
   
@@ -26,7 +26,7 @@
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">mcquenji_core</a></li>
     <li><a href="../../mcquenji_core/mcquenji_core-library.html">mcquenji_core.dart</a></li>
-    <li><a href="../../mcquenji_core/Repository-class.html">Repository<span class="signature">&lt;<wbr><span class="type-parameter">State</span>&gt;</span></a></li>
+    <li><a href="../../mcquenji_core/Service-class.html">Service</a></li>
     <li class="self-crumb">dispose method</li>
   </ol>
   <div class="self-name">dispose</div>
@@ -49,7 +49,7 @@
 <div
     id="dartdoc-main-content"
     class="main-content"
-    data-above-sidebar="mcquenji_core&#47;Repository-class-sidebar.html"
+    data-above-sidebar="mcquenji_core&#47;Service-class-sidebar.html"
     data-below-sidebar="">
     <div>
 <h1><span class="kind-method">dispose</span> method 
@@ -81,15 +81,7 @@
   <pre class="language-dart"><code class="language-dart">@override
 @mustCallSuper
 void dispose() {
-  close();
-  _subject.close();
-  _updateLoop?.cancel();
-
-  for (final subscription in _subscriptions) {
-    subscription.cancel();
-  }
-
-  log(&#39;Disposed&#39;);
+  log(&#39;Disposing&#39;);
 }</code></pre>
 </section>
 
@@ -105,11 +97,11 @@ void dispose() {
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">mcquenji_core</a></li>
     <li><a href="../../mcquenji_core/mcquenji_core-library.html">mcquenji_core</a></li>
-    <li><a href="../../mcquenji_core/Repository-class.html">Repository<span class="signature">&lt;<wbr><span class="type-parameter">State</span>&gt;</span></a></li>
+    <li><a href="../../mcquenji_core/Service-class.html">Service</a></li>
     <li class="self-crumb">dispose method</li>
 </ol>
 
-    <h5>Repository class</h5>
+    <h5>Service class</h5>
     <div id="dartdoc-sidebar-left-content"></div>
   </div><!--/.sidebar-offcanvas-->
   <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
