@@ -75,9 +75,14 @@
   build(InitialBuildTrigger);
 
   if (updateInterval != Duration.zero) {
-    _updateLoop = Timer.periodic(updateInterval, (_) =&gt; build(UpdateTrigger));
+    _updateLoop = Timer.periodic(updateInterval, (_) async {
+      log(&#39;Automatic update triggered&#39;);
+      await build(UpdateTrigger);
+    });
+    log(&#39;Automatic updates enabled at $updateInterval&#39;);
   } else {
     _updateLoop = null;
+    log(&#39;Automatic updates disabled&#39;);
   }
 }</code></pre>
 </section>
