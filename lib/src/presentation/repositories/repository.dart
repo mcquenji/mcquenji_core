@@ -28,7 +28,7 @@ abstract class Repository<State> extends Cubit<State>
         log('Automatic update triggered');
         await build(UpdateTrigger);
       });
-      log('Automatic updates enabled at $updateInterval');
+      log('Automatic updates enabled at ${updateInterval.inMilliseconds} ms');
     } else {
       _updateLoop = null;
       log('Automatic updates disabled');
