@@ -135,6 +135,8 @@ abstract class Repository<State> extends Cubit<State>
     for (final subscription in _subscriptions) {
       subscription.cancel();
     }
+
+    log('Disposed');
   }
 
   /// Shortcut for [Stream.listen].

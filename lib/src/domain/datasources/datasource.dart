@@ -1,3 +1,4 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:logging/logging.dart';
 import 'package:mcquenji_core/src/domain/domain.dart';
 import 'package:modular_core/modular_core.dart';
@@ -15,4 +16,10 @@ abstract class Datasource extends ILoggable implements Disposable {
 
   @override
   String get namespace => 'Datasources.$name';
+
+  @override
+  @mustCallSuper
+  void dispose() {
+    log('Disposing');
+  }
 }

@@ -167,6 +167,7 @@ Request URI: ${response.requestOptions.uri}
 
   @override
   void dispose() {
+    super.dispose();
     dio.close();
   }
 

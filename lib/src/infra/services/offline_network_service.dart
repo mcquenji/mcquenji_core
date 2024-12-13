@@ -54,8 +54,5 @@ class OfflineNetworkService extends NetworkService {
   }
 
   @override
-  void dispose() {}
-
-  @override
   void addInterceptor(Interceptor interceptor) {}
 }

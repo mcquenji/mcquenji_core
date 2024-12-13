@@ -62,6 +62,7 @@ class DnsLookupConnectivityService extends ConnectivityService {
 
   @override
   Future<void> dispose() async {
+    super.dispose();
     _updateLoop.cancel();
     await _controller.close();
   }
