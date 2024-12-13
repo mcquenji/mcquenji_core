@@ -24,9 +24,14 @@ abstract class Repository<State> extends Cubit<State>
     build(InitialBuildTrigger);
 
     if (updateInterval != Duration.zero) {
-      _updateLoop = Timer.periodic(updateInterval, (_) => build(UpdateTrigger));
+      _updateLoop = Timer.periodic(updateInterval, (_) async {
+        log('Automatic update triggered');
+        await build(UpdateTrigger);
+      });
+      log('Automatic updates enabled at $updateInterval');
     } else {
       _updateLoop = null;
+      log('Automatic updates disabled');
     }
   }
 
