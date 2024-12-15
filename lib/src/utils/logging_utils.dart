@@ -47,17 +47,15 @@ extension LogRecordX on LogRecord {
       case Level.INFO:
         recordPen
           ..white()
-          ..rgb(r: 0.2, g: 0.8, b: 0.2);
+          ..rgb(r: 0.2, g: 0.2, b: 0.8);
         break;
       case Level.WARNING:
-        recordPen
-          ..white()
-          ..rgb(g: 0.8, b: 0.0);
+        recordPen.yellow();
         break;
       case Level.SEVERE:
         recordPen
           ..white()
-          ..rgb(g: 0.0, b: 0.0);
+          ..rgb(g: 0.0, r: 0.8, b: 0.0);
         break;
       case Level.SHOUT:
         recordPen
