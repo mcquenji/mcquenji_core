@@ -109,7 +109,13 @@ abstract class Repository<State> extends Cubit<State>
       'Received new $T from ${repository.runtimeType}: $value',
     );
 
-    await build(repository.runtimeType);
+    try {
+      await build(repository.runtimeType);
+    } on WaitForDataException catch (e) {
+      log('Aborting build: $e');
+    } catch (e) {
+      rethrow;
+    }
   }
 
   /// Gets called when a repository watched via [watch] emits a new state or when the repository is initialized (in witch case [trigger] is [InitialBuildTrigger]).
