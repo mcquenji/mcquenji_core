@@ -45,9 +45,7 @@ extension LogRecordX on LogRecord {
           ..rgb(r: 0.8, g: 0.8, b: 0.5);
         break;
       case Level.INFO:
-        recordPen
-          ..white()
-          ..rgb(r: 0.2, g: 0.2, b: 0.8);
+        recordPen.cyan();
         break;
       case Level.WARNING:
         recordPen.yellow();
@@ -59,7 +57,7 @@ extension LogRecordX on LogRecord {
         break;
       case Level.SHOUT:
         recordPen
-          ..white()
+          ..white(bold: true)
           ..rgb(g: 0.0, b: 0.5);
         break;
       default:
