@@ -42,19 +42,6 @@ abstract class ILoggable {
   }
 }
 
-/// Debug log handler that prints log messages to the console.
-///
-/// To use this see [Logger.onRecord].
-///
-/// ```dart
-/// Logger.root.onRecord.listen(debugLogHandler);
-/// ```
-void debugLogHandler(LogRecord r) {
-  // print is only called when configured as a log handler
-  // ignore: avoid_print
-  print(r.formatColored());
-}
-
 /// {@template generic_serializer}
 /// A versatile serializer interface for converting objects between different formats.
 ///

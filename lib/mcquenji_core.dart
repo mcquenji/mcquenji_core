@@ -36,6 +36,19 @@
 /// });
 /// ```
 ///
+/// ## Logging
+///
+/// All enteties (i.e. services, datasources, repositories) have a logger that can be used to log messages. The logger is a `Logger` instance from the `logging` package. The logger is named after the entity's runtime type.
+///
+/// To process the logs you can either use the `LogHandlerService` or create your own log handler.
+///
+/// ```dart
+/// void main() {
+///    // Call this AFTER modular is initialized
+///    final handler = Modular.get<LogHandlerService>();
+///    Logger.root.onRecord.listen(handler);
+/// }
+///
 /// ## Services
 ///
 /// Services are classes that complete the most low-level tasks in the app. They are the only classes that can interact with the outside world. All other classes should depend on services to get their work done.
@@ -165,6 +178,17 @@ class CoreModule extends Module {
   /// If you are writing server-side code, you can ignore this step.
   static bool isWeb = false;
 
+  /// Whether the application is running in debug mode.
+  ///
+  /// It is recommended to set this value in the main method of your application to enable or disable debug mode.
+  ///
+  /// ```dart
+  /// void main() {
+  ///   CoreModule.debugMode = kDebugMode;
+  ///   runApp(ModularApp(module: AppModule()));
+  /// }
+  static bool debugMode = false;
+
   @override
   void exportedBinds(Injector i) {
     i
@@ -177,6 +201,9 @@ class CoreModule extends Module {
       ..add<Dio>((BaseOptions o) => Dio(o))
       ..addLazySingleton<ConnectivityService>(
         isWeb ? WebConnectivitiyService.new : DnsLookupConnectivityService.new,
+      )
+      ..addLazySingleton<LogHandlerService>(
+        debugMode ? DebugLogHandlerService.new : ReleaseLogHandlerService.new,
       )
       ..add<NetworkService>((ConnectivityService conn, Dio dio) {
         if (!conn.isConnected) return OfflineNetworkService();
