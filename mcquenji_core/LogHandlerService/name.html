@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the exportedBinds method from the CoreModule class, for the Dart programming language.">
-  <title>exportedBinds method - CoreModule class - mcquenji_core library - Dart API</title>
+  <meta name="description" content="API docs for the name property from the LogHandlerService class, for the Dart programming language.">
+  <title>name property - LogHandlerService class - mcquenji_core library - Dart API</title>
 
 
   
@@ -26,10 +26,10 @@
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">mcquenji_core</a></li>
     <li><a href="../../mcquenji_core/mcquenji_core-library.html">mcquenji_core.dart</a></li>
-    <li><a href="../../mcquenji_core/CoreModule-class.html">CoreModule</a></li>
-    <li class="self-crumb">exportedBinds method</li>
+    <li><a href="../../mcquenji_core/LogHandlerService-class.html">LogHandlerService</a></li>
+    <li class="self-crumb">name property</li>
   </ol>
-  <div class="self-name">exportedBinds</div>
+  <div class="self-name">name</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -49,12 +49,17 @@
 <div
     id="dartdoc-main-content"
     class="main-content"
-    data-above-sidebar="mcquenji_core&#47;CoreModule-class-sidebar.html"
+    data-above-sidebar="mcquenji_core&#47;LogHandlerService-class-sidebar.html"
     data-below-sidebar="">
     <div>
-<h1><span class="kind-method">exportedBinds</span> method 
+<h1><span class="kind-property">name</span> property 
 </h1></div>
 
+    
+
+    
+        
+  <section id="getter">
     <section class="multi-line-signature">
       
   <div>
@@ -62,47 +67,30 @@
         <li>@<a href="https://api.dart.dev/stable/3.6.0/dart-core/override-constant.html">override</a></li>
     </ol>
   </div>
-<span class="returntype">void</span>
-<span class="name ">exportedBinds</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="exportedBinds-param-i"><span class="type-annotation"><a href="https://pub.dev/documentation/auto_injector/2.0.5/auto_injector/Injector-class.html">Injector</a></span> <span class="parameter-name">i</span></span></li>
-</ol>)
-
+      <span class="returntype"><a href="https://api.dart.dev/stable/3.6.0/dart-core/String-class.html">String</a></span>
+      get
+      <span class="name ">name</span>
       <div class="features"><span class="feature">override</span></div>
 
     </section>
     
-
+<section class="desc markdown">
+  <p>The name of the service.</p>
+</section>
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">@override
-void exportedBinds(Injector i) {
-  i
-    ..add&lt;BaseOptions&gt;(() =&gt; BaseOptions(validateStatus: (_) =&gt; true))
-    &#47;&#47; modular has a bug where the type of parameters in brackets is
-    &#47;&#47; not inferred correctly. In this instance, the type of `BaseOptions` is
-    &#47;&#47; inferred as `[BaseOptions]` which is incorrect. So we have to use the
-    &#47;&#47; the lambda to force the correct type.
-    &#47;&#47; ignore: unnecessary_lambdas
-    ..add&lt;Dio&gt;((BaseOptions o) =&gt; Dio(o))
-    ..addLazySingleton&lt;ConnectivityService&gt;(
-      isWeb ? WebConnectivitiyService.new : DnsLookupConnectivityService.new,
-    )
-    ..addLazySingleton&lt;LogHandlerService&gt;(
-      debugMode ? DebugLogHandlerService.new : ReleaseLogHandlerService.new,
-    )
-    ..add&lt;NetworkService&gt;((ConnectivityService conn, Dio dio) {
-      if (!conn.isConnected) return OfflineNetworkService();
-
-      return DioNetworkService(dio);
-    });
-}</code></pre>
+String get name =&gt; &#39;LogHandler&#39;;</code></pre>
 </section>
 
+  </section>
 
-  </div> <!-- /.main-content -->
-  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
-    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+
+</div> <!-- /.main-content -->
+<div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+  <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
 <header id="header-search-sidebar" class="hidden-l">
   <form class="search-sidebar" role="search">
     <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
@@ -111,14 +99,14 @@ void exportedBinds(Injector i) {
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">mcquenji_core</a></li>
     <li><a href="../../mcquenji_core/mcquenji_core-library.html">mcquenji_core</a></li>
-    <li><a href="../../mcquenji_core/CoreModule-class.html">CoreModule</a></li>
-    <li class="self-crumb">exportedBinds method</li>
+    <li><a href="../../mcquenji_core/LogHandlerService-class.html">LogHandlerService</a></li>
+    <li class="self-crumb">name property</li>
 </ol>
 
-    <h5>CoreModule class</h5>
-    <div id="dartdoc-sidebar-left-content"></div>
-  </div><!--/.sidebar-offcanvas-->
-  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  <h5>LogHandlerService class</h5>
+  <div id="dartdoc-sidebar-left-content"></div>
+</div><!--/.sidebar-offcanvas-->
+<div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
 </div><!--/.sidebar-offcanvas-->
 </main>
 <footer>

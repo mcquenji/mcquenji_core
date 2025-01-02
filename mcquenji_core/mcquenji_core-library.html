@@ -88,11 +88,25 @@ networkService.get('https://api.example.com').then((response) {
     print(response.body);
 });
 </code></pre>
-<h2 id="services">Services</h2>
-<p>Services are classes that complete the most low-level tasks in the app. They are the only classes that can interact with the outside world. All other classes should depend on services to get their work done.</p>
-<h3 id="defining-a-new-service">Defining a new service</h3>
-<p>To define a new service, create a new abstract class that extends the <code>Service</code> class.</p>
-<pre class="language-dart"><code class="language-dart">abstract class MyService extends Service {
+<h2 id="logging">Logging</h2>
+<p>All enteties (i.e. services, datasources, repositories) have a logger that can be used to log messages. The logger is a <code>Logger</code> instance from the <code>logging</code> package. The logger is named after the entity's runtime type.</p>
+<p>To process the logs you can either use the <code>LogHandlerService</code> or create your own log handler.</p>
+<pre class="language-dart"><code class="language-dart">void main() {
+   // Call this AFTER modular is initialized
+   final handler = Modular.get&lt;LogHandlerService&gt;();
+   Logger.root.onRecord.listen(handler);
+}
+
+## Services
+
+Services are classes that complete the most low-level tasks in the app. They are the only classes that can interact with the outside world. All other classes should depend on services to get their work done.
+
+### Defining a new service
+
+To define a new service, create a new abstract class that extends the `Service` class.
+
+```dart
+abstract class MyService extends Service {
     @override
     String get name =&gt; 'MyService';
 
@@ -217,6 +231,14 @@ networkService.get('https://api.example.com').then((response) {
 </dt>
 <dd>
   Passed as trigger in <a href="../mcquenji_core/Repository/build.html">Repository.build</a> when called the first time.
+</dd>
+
+          <dt id="LogHandlerService">
+  <span class="name "><a href="../mcquenji_core/LogHandlerService-class.html">LogHandlerService</a></span> 
+
+</dt>
+<dd>
+  A service that handles logging.
 </dd>
 
           <dt id="NetworkService">
@@ -352,19 +374,6 @@ The emitted ticks can be used to trigger periodic updates in the application.
 </dt>
 <dd>
   This function is to be used when binding a <a href="https://pub.dev/documentation/bloc/8.1.4/bloc/Cubit-class.html">Cubit</a> to a <a href="https://pub.dev/documentation/modular_core/3.3.3/modular_core/Module-class.html">Module</a>.
-  
-
-</dd>
-
-          <dt id="debugLogHandler" class="callable">
-  <span class="name"><a href="../mcquenji_core/debugLogHandler.html">debugLogHandler</a></span><span class="signature">(<wbr><span class="parameter" id="debugLogHandler-param-r"><span class="type-annotation"><a href="https://pub.dev/documentation/logging/1.3.0/logging/LogRecord-class.html">LogRecord</a></span> <span class="parameter-name">r</span></span>)
-    <span class="returntype parameter">&#8594; void</span>
-  </span>
-  
-
-</dt>
-<dd>
-  Debug log handler that prints log messages to the console.
   
 
 </dd>
