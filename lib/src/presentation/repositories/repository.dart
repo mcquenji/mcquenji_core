@@ -11,28 +11,47 @@ import 'package:rxdart/subjects.dart';
 ///
 /// As repositories are responsible for managing the state of the application, they extend [Cubit].
 abstract class Repository<State> extends Cubit<State>
-    implements ILoggable, Disposable {
+    implements ILoggable, Disposable, BuildTrigger {
   final List<StreamSubscription> _subscriptions = [];
   late final BehaviorSubject<State> _subject;
   late final Timer? _updateLoop;
+
+  final _completer = Completer<void>();
+
+  /// Future that completes when the repository has finished initializing.
+  Future<void> get ready => _completer.future;
+
+  DateTime? _lastUpdate;
 
   /// Base class for all repositories.
   ///
   /// As repositories are responsible for managing the state of the application, they extend [Cubit].
   Repository(State initialState) : super(initialState) {
     _subject = BehaviorSubject.seeded(initialState);
-    build(InitialBuildTrigger);
+
+    __build(const InitialBuildTrigger()).whenComplete(_completer.complete);
 
     if (updateInterval != Duration.zero) {
-      _updateLoop = Timer.periodic(updateInterval, (_) async {
-        log('Automatic update triggered');
-        await build(UpdateTrigger);
-      });
+      _updateLoop = Timer.periodic(updateInterval, _update);
       log('Automatic updates enabled at ${updateInterval.inMilliseconds} ms');
     } else {
       _updateLoop = null;
       log('Automatic updates disabled');
     }
+  }
+
+  Future<void> _update(Timer timer) async {
+    log('Automatic update triggered');
+
+    await __build(const UpdateTrigger());
+  }
+
+  @override
+  @mustCallSuper
+  void onChange(Change<State> change) {
+    super.onChange(change);
+
+    _lastUpdate = DateTime.now();
   }
 
   /// The interval at which the repository should update.
@@ -86,7 +105,7 @@ abstract class Repository<State> extends Cubit<State>
   /// ```
   ///
   /// For watching repositories that return an [AsyncValue], use [RepoWatchExt.watchAsync].
-  /// **Note:** This repository must also return an [AsyncValue] to use [RepoWatchExt.watchAsync].
+  /// **Note:** The repository watching must also return an [AsyncValue] to use [RepoWatchExt.watchAsync].
   /// {@endtemplate}
   @protected
   @nonVirtual
@@ -109,8 +128,12 @@ abstract class Repository<State> extends Cubit<State>
       'Received new $T from ${repository.runtimeType}: $value',
     );
 
+    await __build(repository);
+  }
+
+  Future<void> __build(BuildTrigger trigger) async {
     try {
-      await build(repository.runtimeType);
+      await build(trigger);
     } on WaitForDataException catch (e) {
       log('Aborting build: $e');
     } catch (e) {
@@ -118,18 +141,46 @@ abstract class Repository<State> extends Cubit<State>
     }
   }
 
-  /// Gets called when a repository watched via [watch] emits a new state or when the repository is initialized (in witch case [trigger] is [InitialBuildTrigger]).
-  /// Also gets called when the repository is updated (if [updateInterval] is not [Duration.zero]).
+  /// Recalculates the state of the repository.
   ///
-  /// [trigger] is the type of the repository that triggered the rebuild.
+  /// This method is called when:
+  ///
+  /// - The repository is first initialized.
+  /// - A repository watched via [watch] emits a new state.
+  /// - This repository is updated (if [updateInterval] is not [Duration.zero]).
   ///
   /// Override this method to handle changes from said repositories.
   ///
   /// ---
   ///
-  ///{@macro repository_watch_example}
+  /// **Example:**
+  ///
+  /// ```dart
+  /// class MyRepository extends Repository<MyState> {
+  ///   final OtherRepository _otherRepository;
+  ///
+  ///   MyRepository(this._otherRepository) : super(MyState.new) {
+  ///     watch(_otherRepository);
+  ///   }
+  ///
+  ///   @override
+  ///   FutureOr<void> build(BuildTrigger trigger) async {
+  ///     if(trigger is InitialBuildTrigger) {
+  ///       // Do something when the repository is first initialized
+  ///     }
+  ///
+  ///     if(trigger is UpdateTrigger) {
+  ///       // Do something when the repository is updated
+  ///     }
+  ///
+  ///     if(trigger is OtherRepository) {
+  ///       // Do something when the other repository emits a new state
+  ///     }
+  ///   }
+  /// }
+  /// ```
   @protected
-  FutureOr<void> build(Type trigger) {}
+  FutureOr<void> build(BuildTrigger trigger) {}
 
   @override
   @mustCallSuper
@@ -177,8 +228,8 @@ abstract class Repository<State> extends Cubit<State>
 
     logger.finest('Emitted new state: $state');
 
-    _subject.add(state);
     super.emit(state);
+    _subject.add(state);
   }
 }
 
@@ -261,10 +312,16 @@ extension RepoWatchExt<State> on Repository<AsyncValue<State>> {
 }
 
 /// Passed as trigger in [Repository.build] when called the first time.
-class InitialBuildTrigger {}
+class InitialBuildTrigger implements BuildTrigger {
+  /// Passed as trigger in [Repository.build] when called the first time.
+  const InitialBuildTrigger();
+}
 
 /// Passed as trigger in [Repository.build] when called in the [Repository.updateInterval].
-class UpdateTrigger {}
+class UpdateTrigger implements BuildTrigger {
+  /// Passed as trigger in [Repository.build] when called in the [Repository.updateInterval].
+  const UpdateTrigger();
+}
 
 /// Thrown when [RepoWatchExt.waitForData] is called on a repository that does not have data yet.
 class WaitForDataException implements Exception {
@@ -277,3 +334,6 @@ class WaitForDataException implements Exception {
   @override
   String toString() => 'Repository of type $type does not have data yet.';
 }
+
+/// Base class for all triggers that can be passed to [Repository.build].
+abstract class BuildTrigger {}
