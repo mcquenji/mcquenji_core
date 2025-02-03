@@ -72,13 +72,11 @@
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">Repository(State initialState) : super(initialState) {
   _subject = BehaviorSubject.seeded(initialState);
-  build(InitialBuildTrigger);
+
+  __build(const InitialBuildTrigger()).whenComplete(_completer.complete);
 
   if (updateInterval != Duration.zero) {
-    _updateLoop = Timer.periodic(updateInterval, (_) async {
-      log(&#39;Automatic update triggered&#39;);
-      await build(UpdateTrigger);
-    });
+    _updateLoop = Timer.periodic(updateInterval, _update);
     log(&#39;Automatic updates enabled at ${updateInterval.inMilliseconds} ms&#39;);
   } else {
     _updateLoop = null;

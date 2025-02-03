@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the isConnected property from the ConnectivityService class, for the Dart programming language.">
-  <title>isConnected property - ConnectivityService class - mcquenji_core library - Dart API</title>
+  <meta name="description" content="API docs for the ready property from the Repository class, for the Dart programming language.">
+  <title>ready property - Repository class - mcquenji_core library - Dart API</title>
 
 
   
@@ -26,10 +26,10 @@
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">mcquenji_core</a></li>
     <li><a href="../../mcquenji_core/mcquenji_core-library.html">mcquenji_core.dart</a></li>
-    <li><a href="../../mcquenji_core/ConnectivityService-class.html">ConnectivityService</a></li>
-    <li class="self-crumb">isConnected property</li>
+    <li><a href="../../mcquenji_core/Repository-class.html">Repository<span class="signature">&lt;<wbr><span class="type-parameter">State</span>&gt;</span></a></li>
+    <li class="self-crumb">ready property</li>
   </ol>
-  <div class="self-name">isConnected</div>
+  <div class="self-name">ready</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -49,10 +49,10 @@
 <div
     id="dartdoc-main-content"
     class="main-content"
-    data-above-sidebar="mcquenji_core&#47;ConnectivityService-class-sidebar.html"
+    data-above-sidebar="mcquenji_core&#47;Repository-class-sidebar.html"
     data-below-sidebar="">
     <div>
-<h1><span class="kind-property">isConnected</span> property 
+<h1><span class="kind-property">ready</span> property 
 </h1></div>
 
     
@@ -62,22 +62,21 @@
   <section id="getter">
     <section class="multi-line-signature">
       
-      <span class="returntype"><a href="https://api.dart.dev/stable/3.6.2/dart-core/bool-class.html">bool</a></span>
+      <span class="returntype"><a href="https://api.dart.dev/stable/3.6.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
       get
-      <span class="name ">isConnected</span>
+      <span class="name ">ready</span>
       
 
     </section>
     
 <section class="desc markdown">
-  <p><code>true</code> if the device is connected to the internet, <code>false</code> otherwise.</p>
-<p>This is always the last value emitted by <a href="../../mcquenji_core/ConnectivityService/onConnectivityChanged.html">onConnectivityChanged</a>.</p>
+  <p>Future that completes when the repository has finished initializing.</p>
 </section>
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">bool get isConnected;</code></pre>
+  <pre class="language-dart"><code class="language-dart">Future&lt;void&gt; get ready =&gt; _completer.future;</code></pre>
 </section>
 
   </section>
@@ -94,11 +93,11 @@
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">mcquenji_core</a></li>
     <li><a href="../../mcquenji_core/mcquenji_core-library.html">mcquenji_core</a></li>
-    <li><a href="../../mcquenji_core/ConnectivityService-class.html">ConnectivityService</a></li>
-    <li class="self-crumb">isConnected property</li>
+    <li><a href="../../mcquenji_core/Repository-class.html">Repository<span class="signature">&lt;<wbr><span class="type-parameter">State</span>&gt;</span></a></li>
+    <li class="self-crumb">ready property</li>
 </ol>
 
-  <h5>ConnectivityService class</h5>
+  <h5>Repository class</h5>
   <div id="dartdoc-sidebar-left-content"></div>
 </div><!--/.sidebar-offcanvas-->
 <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">

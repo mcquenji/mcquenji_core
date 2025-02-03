@@ -59,7 +59,7 @@
       
   <div>
     <ol class="annotation-list">
-        <li>@<a href="https://api.dart.dev/stable/3.6.0/dart-core/override-constant.html">override</a></li>
+        <li>@<a href="https://api.dart.dev/stable/3.6.2/dart-core/override-constant.html">override</a></li>
         <li>@<a href="https://pub.dev/documentation/meta/1.16.0/meta/mustCallSuper-constant.html">mustCallSuper</a></li>
     </ol>
   </div>
@@ -79,7 +79,7 @@ is equal to the current <code>state</code>.</p>
 emitting a state which is equal to the initial state is allowed as long
 as it is the first thing emitted by the instance.</p>
 <ul>
-<li>Throws a <a href="https://api.dart.dev/stable/3.6.0/dart-core/StateError-class.html">StateError</a> if the bloc is closed.</li>
+<li>Throws a <a href="https://api.dart.dev/stable/3.6.2/dart-core/StateError-class.html">StateError</a> if the bloc is closed.</li>
 </ul>
 </section>
 
@@ -99,8 +99,8 @@ void emit(State state) {
 
   logger.finest(&#39;Emitted new state: $state&#39;);
 
-  _subject.add(state);
   super.emit(state);
+  _subject.add(state);
 }</code></pre>
 </section>
 

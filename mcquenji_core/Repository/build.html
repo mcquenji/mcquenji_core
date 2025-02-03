@@ -62,8 +62,8 @@
         <li>@<a href="https://pub.dev/documentation/meta/1.16.0/meta/protected-constant.html">protected</a></li>
     </ol>
   </div>
-<span class="returntype"><a href="https://api.dart.dev/stable/3.6.0/dart-async/FutureOr-class.html">FutureOr</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
-<span class="name ">build</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="build-param-trigger"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.6.0/dart-core/Type-class.html">Type</a></span> <span class="parameter-name">trigger</span></span></li>
+<span class="returntype"><a href="https://api.dart.dev/stable/3.6.2/dart-async/FutureOr-class.html">FutureOr</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+<span class="name ">build</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="build-param-trigger"><span class="type-annotation"><a href="../../mcquenji_core/BuildTrigger-class.html">BuildTrigger</a></span> <span class="parameter-name">trigger</span></span></li>
 </ol>)
 
       
@@ -71,9 +71,13 @@
     </section>
     
 <section class="desc markdown">
-  <p>Gets called when a repository watched via <a href="../../mcquenji_core/Repository/watch.html">watch</a> emits a new state or when the repository is initialized (in witch case <code>trigger</code> is <a href="../../mcquenji_core/InitialBuildTrigger-class.html">InitialBuildTrigger</a>).
-Also gets called when the repository is updated (if <a href="../../mcquenji_core/Repository/updateInterval.html">updateInterval</a> is not <a href="https://api.dart.dev/stable/3.6.0/dart-core/Duration/zero-constant.html">Duration.zero</a>).</p>
-<p><code>trigger</code> is the type of the repository that triggered the rebuild.</p>
+  <p>Recalculates the state of the repository.</p>
+<p>This method is called when:</p>
+<ul>
+<li>The repository is first initialized.</li>
+<li>A repository watched via <a href="../../mcquenji_core/Repository/watch.html">watch</a> emits a new state.</li>
+<li>This repository is updated (if <a href="../../mcquenji_core/Repository/updateInterval.html">updateInterval</a> is not <a href="https://api.dart.dev/stable/3.6.2/dart-core/Duration/zero-constant.html">Duration.zero</a>).</li>
+</ul>
 <p>Override this method to handle changes from said repositories.</p>
 <hr>
 <p><strong>Example:</strong></p>
@@ -85,15 +89,21 @@ Also gets called when the repository is updated (if <a href="../../mcquenji_core
   }
 
   @override
-  FutureOr&lt;void&gt; build(Type trigger) async {
-    final otherState = _otherRepository.state;
+  FutureOr&lt;void&gt; build(BuildTrigger trigger) async {
+    if(trigger is InitialBuildTrigger) {
+      // Do something when the repository is first initialized
+    }
 
-    // Do something with otherState
+    if(trigger is UpdateTrigger) {
+      // Do something when the repository is updated
+    }
+
+    if(trigger is OtherRepository) {
+      // Do something when the other repository emits a new state
+    }
   }
 }
 </code></pre>
-<p>For watching repositories that return an <a href="../../mcquenji_core/AsyncValue-class.html">AsyncValue</a>, use <a href="../../mcquenji_core/RepoWatchExt/watchAsync.html">RepoWatchExt.watchAsync</a>.
-<strong>Note:</strong> This repository must also return an <a href="../../mcquenji_core/AsyncValue-class.html">AsyncValue</a> to use <a href="../../mcquenji_core/RepoWatchExt/watchAsync.html">RepoWatchExt.watchAsync</a>.</p>
 </section>
 
 
@@ -101,7 +111,7 @@ Also gets called when the repository is updated (if <a href="../../mcquenji_core
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">@protected
-FutureOr&lt;void&gt; build(Type trigger) {}</code></pre>
+FutureOr&lt;void&gt; build(BuildTrigger trigger) {}</code></pre>
 </section>
 
 
