@@ -7,14 +7,17 @@ import 'package:mcquenji_core/mcquenji_core.dart';
 import 'package:modular_core/modular_core.dart';
 import 'package:rxdart/subjects.dart';
 
+/// {@template repository}
 /// Base class for all repositories.
 ///
 /// As repositories are responsible for managing the state of the application, they extend [Cubit].
+/// {@endtemplate}
 abstract class Repository<State> extends Cubit<State>
     implements ILoggable, Disposable, BuildTrigger {
   final List<StreamSubscription> _subscriptions = [];
   late final BehaviorSubject<State> _subject;
-  late final Timer? _updateLoop;
+
+  Timer? _updateSchedule;
 
   final _completer = Completer<void>();
 
@@ -23,34 +26,64 @@ abstract class Repository<State> extends Cubit<State>
 
   DateTime? _lastUpdate;
 
-  /// Base class for all repositories.
-  ///
-  /// As repositories are responsible for managing the state of the application, they extend [Cubit].
+  late Duration _currentInterval;
+  Duration get _maxInterval => updateInterval * 10;
+
+  /// {@macro repository}
   Repository(State initialState) : super(initialState) {
     _subject = BehaviorSubject.seeded(initialState);
 
     __build(const InitialBuildTrigger()).whenComplete(_completer.complete);
 
     if (updateInterval != Duration.zero) {
-      _updateLoop = Timer.periodic(updateInterval, _update);
+      _currentInterval = updateInterval;
+      _scheduleNextUpdate();
       log('Automatic updates enabled at ${updateInterval.inMilliseconds} ms');
     } else {
-      _updateLoop = null;
       log('Automatic updates disabled');
     }
   }
 
-  Future<void> _update(Timer timer) async {
+  void _scheduleNextUpdate() {
+    _updateSchedule?.cancel();
+    _updateSchedule = Timer(_currentInterval, _update);
+  }
+
+  Future<void> _update() async {
+    // Remember the state before updating.
+    final previousState = state;
     final now = DateTime.now();
 
-    if (_lastUpdate != null && now.difference(_lastUpdate!) < updateInterval) {
-      log('Automatic update skipped due to last update being too recent');
+    if (_lastUpdate != null &&
+        now.difference(_lastUpdate!) < _currentInterval) {
+      log('Update skipped: last update was too recent');
+      _scheduleNextUpdate();
       return;
     }
 
     log('Automatic update triggered');
-
     await __build(const UpdateTrigger());
+
+    // Adjust the interval based on whether state changed.
+    if (const DeepCollectionEquality.unordered().equals(state, previousState)) {
+      // No change? Increase the interval, up to a max.
+      _currentInterval += updateInterval;
+      if (_currentInterval > _maxInterval) _currentInterval = _maxInterval;
+      log('No state change. Increasing update interval to '
+          '${_currentInterval.inMilliseconds} ms');
+    } else {
+      // Change occurred? Decrease interval toward the base.
+      if (_currentInterval > updateInterval) {
+        _currentInterval -= updateInterval;
+        if (_currentInterval < updateInterval) {
+          _currentInterval = updateInterval;
+        }
+        log('State changed. Decreasing update interval to '
+            '${_currentInterval.inMilliseconds} ms');
+      }
+    }
+
+    _scheduleNextUpdate();
   }
 
   @override
@@ -194,7 +227,7 @@ abstract class Repository<State> extends Cubit<State>
   void dispose() {
     close();
     _subject.close();
-    _updateLoop?.cancel();
+    _updateSchedule?.cancel();
 
     for (final subscription in _subscriptions) {
       subscription.cancel();
