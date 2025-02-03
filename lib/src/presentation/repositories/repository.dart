@@ -41,6 +41,13 @@ abstract class Repository<State> extends Cubit<State>
   }
 
   Future<void> _update(Timer timer) async {
+    final now = DateTime.now();
+
+    if (_lastUpdate != null && now.difference(_lastUpdate!) < updateInterval) {
+      log('Automatic update skipped due to last update being too recent');
+      return;
+    }
+
     log('Automatic update triggered');
 
     await __build(const UpdateTrigger());
