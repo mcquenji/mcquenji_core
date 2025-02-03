@@ -83,7 +83,7 @@
 void dispose() {
   close();
   _subject.close();
-  _updateLoop?.cancel();
+  _updateSchedule?.cancel();
 
   for (final subscription in _subscriptions) {
     subscription.cancel();

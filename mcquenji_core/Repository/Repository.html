@@ -76,10 +76,10 @@
   __build(const InitialBuildTrigger()).whenComplete(_completer.complete);
 
   if (updateInterval != Duration.zero) {
-    _updateLoop = Timer.periodic(updateInterval, _update);
+    _currentInterval = updateInterval;
+    _scheduleNextUpdate();
     log(&#39;Automatic updates enabled at ${updateInterval.inMilliseconds} ms&#39;);
   } else {
-    _updateLoop = null;
     log(&#39;Automatic updates disabled&#39;);
   }
 }</code></pre>
