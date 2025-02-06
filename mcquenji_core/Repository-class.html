@@ -195,6 +195,18 @@ e.g. 'Service.Auth'
 
 </dd>
 
+        <dt id="refreshOptimization" class="property">
+  <span class="name"><a href="../mcquenji_core/Repository/refreshOptimization.html">refreshOptimization</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.6.2/dart-core/bool-class.html">bool</a></span>
+  
+
+</dt>
+<dd>
+  Determines whether refresh optimization is enabled.
+  <div class="features"><span class="feature">no setter</span></div>
+
+</dd>
+
         <dt id="runtimeType" class="property inherited">
   <span class="name"><a href="https://api.dart.dev/stable/3.6.2/dart-core/Object/runtimeType.html">runtimeType</a></span>
   <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.6.2/dart-core/Type-class.html">Type</a></span>
@@ -430,19 +442,19 @@ is equal to the current <code>state</code>.
 
 </dd>
 
-        <dt id="onChange" class="callable">
-  <span class="name"><a href="../mcquenji_core/Repository/onChange.html">onChange</a></span><span class="signature">(<wbr><span class="parameter" id="onChange-param-change"><span class="type-annotation"><a href="https://pub.dev/documentation/bloc/8.1.4/bloc/Change-class.html">Change</a><span class="signature">&lt;<wbr><span class="type-parameter">State</span>&gt;</span></span> <span class="parameter-name">change</span></span>)
+        <dt id="onChange" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/bloc/8.1.4/bloc/BlocBase/onChange.html">onChange</a></span><span class="signature">(<wbr><span class="parameter" id="onChange-param-change"><span class="type-annotation"><a href="https://pub.dev/documentation/bloc/8.1.4/bloc/Change-class.html">Change</a><span class="signature">&lt;<wbr><span class="type-parameter">State</span>&gt;</span></span> <span class="parameter-name">change</span></span>)
     <span class="returntype parameter">&#8594; void</span>
   </span>
   
 
 </dt>
-<dd>
+<dd class="inherited">
   Called whenever a <code>change</code> occurs with the given <code>change</code>.
 A <code>change</code> occurs when a new <code>state</code> is emitted.
-<a href="../mcquenji_core/Repository/onChange.html">onChange</a> is called before the <code>state</code> of the <code>cubit</code> is updated.
-<a href="../mcquenji_core/Repository/onChange.html">onChange</a> is a great spot to add logging/analytics for a specific <code>cubit</code>.
-  <div class="features"><span class="feature">override</span></div>
+<a href="https://pub.dev/documentation/bloc/8.1.4/bloc/BlocBase/onChange.html">onChange</a> is called before the <code>state</code> of the <code>cubit</code> is updated.
+<a href="https://pub.dev/documentation/bloc/8.1.4/bloc/BlocBase/onChange.html">onChange</a> is a great spot to add logging/analytics for a specific <code>cubit</code>.
+  <div class="features"><span class="feature">inherited</span></div>
 
 </dd>
 

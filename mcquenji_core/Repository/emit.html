@@ -99,6 +99,8 @@ void emit(State state) {
 
   logger.finest(&#39;Emitted new state: $state&#39;);
 
+  _lastUpdate = DateTime.now();
+
   super.emit(state);
   _subject.add(state);
 }</code></pre>
