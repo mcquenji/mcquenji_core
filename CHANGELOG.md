@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [2.0.0](https://github.com/mcquenji/mcquenji_core/compare/v1.2.0...v2.0.0) (2025-02-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* use a dedicated class as build trigger
+
+### Features
+
+* **repository:** refine refresh optimization algorithm and make it opt in ([2b44bae](https://github.com/mcquenji/mcquenji_core/commit/2b44baeb64364f1c7c33655a5b8c985b2db79453))
+* use a dedicated class as build trigger ([21221e7](https://github.com/mcquenji/mcquenji_core/commit/21221e723619f2774650d852cb29a1b5b2217f31))
+
+
+### Bug Fixes
+
+* prevent automatic updates if the last update was too recent ([d76a86b](https://github.com/mcquenji/mcquenji_core/commit/d76a86b3d8b94270d3b7581f1132977ca8d8ae1f))
+
 ## [1.2.0](https://github.com/mcquenji/mcquenji_core/compare/v1.1.0...v1.2.0) (2025-01-02)
 
 
