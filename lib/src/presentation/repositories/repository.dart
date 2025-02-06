@@ -164,7 +164,7 @@ abstract class Repository<State> extends Cubit<State>
   }
 
   void _logRefreshOptimization(Object message,
-      [Object? error, StackTrace? stackTrace]) {
+      [Object? error, StackTrace? stackTrace,]) {
     Logger('$namespace.$runtimeType.RefreshOptimization').log(
       error != null ? errorLevel : Level.FINEST,
       message,
