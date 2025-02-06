@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math' as math;
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -29,6 +30,23 @@ abstract class Repository<State> extends Cubit<State>
   late Duration _currentInterval;
   Duration get _maxInterval => updateInterval * 10;
 
+  /// Determines whether refresh optimization is enabled.
+  ///
+  /// When set to true, the repository dynamically adjusts its update interval based on whether
+  /// the most recent update actually changed the state:
+  /// - **No state change:** The update interval increases exponentially (using a 1.5 growth factor)
+  ///   up to a maximum of 10× the base [updateInterval]. This minimizes redundant updates.
+  /// - **State change detected:** The update interval resets to the base [updateInterval] for more
+  ///   frequent updates.
+  ///
+  /// Additionally, if an update is triggered outside of the regular loop while refresh optimization
+  /// is enabled, the interval resets to [updateInterval].
+  ///
+  /// Override this getter to return `true` if you want your repository to use this dynamic behavior.
+  ///
+  /// *Will be turned on in the future by default as the optimization algorithm is improved.*
+  bool get refreshOptimization => false;
+
   /// {@macro repository}
   Repository(State initialState) : super(initialState) {
     _subject = BehaviorSubject.seeded(initialState);
@@ -49,49 +67,60 @@ abstract class Repository<State> extends Cubit<State>
     _updateSchedule = Timer(_currentInterval, _update);
   }
 
+  int _noChangeStreak = 0;
+
   Future<void> _update() async {
-    // Remember the state before updating.
-    final previousState = state;
+    final lastUpdateBefore = _lastUpdate;
     final now = DateTime.now();
 
     if (_lastUpdate != null &&
         now.difference(_lastUpdate!) < _currentInterval) {
       log('Update skipped: last update was too recent');
+
+      if (refreshOptimization) {
+        log('Update outside of update loop detected. Resetting update interval to ${updateInterval.inMilliseconds} ms');
+
+        _noChangeStreak = 0;
+        _currentInterval = updateInterval;
+      }
+
       _scheduleNextUpdate();
       return;
     }
 
     log('Automatic update triggered');
-    await __build(const UpdateTrigger());
 
-    // Adjust the interval based on whether state changed.
-    if (const DeepCollectionEquality.unordered().equals(state, previousState)) {
-      // No change? Increase the interval, up to a max.
-      _currentInterval += updateInterval;
-      if (_currentInterval > _maxInterval) _currentInterval = _maxInterval;
-      log('No state change. Increasing update interval to '
-          '${_currentInterval.inMilliseconds} ms');
+    try {
+      await __build(const UpdateTrigger());
+    } catch (e, s) {
+      log('Error during automatic update', e, s);
+    }
+
+    if (!refreshOptimization) {
+      _scheduleNextUpdate();
+      return;
+    }
+
+    // If _lastUpdate hasn't changed, no state change occurred.
+    if (lastUpdateBefore == _lastUpdate) {
+      _noChangeStreak++;
+      // Use exponential backoff with a growth factor
+      final newIntervalMs =
+          updateInterval.inMilliseconds * math.pow(1.5, _noChangeStreak);
+      _currentInterval = Duration(
+        milliseconds:
+            math.min(newIntervalMs, _maxInterval.inMilliseconds).toInt(),
+      );
+      log('No state change detected. Streak: $_noChangeStreak. '
+          'Increasing update interval to ${_currentInterval.inMilliseconds} ms');
     } else {
-      // Change occurred? Decrease interval toward the base.
-      if (_currentInterval > updateInterval) {
-        _currentInterval -= updateInterval;
-        if (_currentInterval < updateInterval) {
-          _currentInterval = updateInterval;
-        }
-        log('State changed. Decreasing update interval to '
-            '${_currentInterval.inMilliseconds} ms');
-      }
+      // A state change occurred, so reset the no-change streak.
+      _noChangeStreak = 0;
+      _currentInterval = updateInterval;
+      log('State changed. Resetting update interval to ${_currentInterval.inMilliseconds} ms');
     }
 
     _scheduleNextUpdate();
-  }
-
-  @override
-  @mustCallSuper
-  void onChange(Change<State> change) {
-    super.onChange(change);
-
-    _lastUpdate = DateTime.now();
   }
 
   /// The interval at which the repository should update.
@@ -267,6 +296,8 @@ abstract class Repository<State> extends Cubit<State>
     }
 
     logger.finest('Emitted new state: $state');
+
+    _lastUpdate = DateTime.now();
 
     super.emit(state);
     _subject.add(state);
