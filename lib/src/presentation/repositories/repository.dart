@@ -78,7 +78,9 @@ abstract class Repository<State> extends Cubit<State>
       log('Update skipped: last update was too recent');
 
       if (refreshOptimization) {
-        log('Update outside of update loop detected. Resetting update interval to ${updateInterval.inMilliseconds} ms');
+        _logRefreshOptimization(
+          'Update outside of update loop detected. Resetting update interval to ${updateInterval.inMilliseconds} ms',
+        );
 
         _noChangeStreak = 0;
         _currentInterval = updateInterval;
@@ -105,19 +107,31 @@ abstract class Repository<State> extends Cubit<State>
     if (lastUpdateBefore == _lastUpdate) {
       _noChangeStreak++;
       // Use exponential backoff with a growth factor
-      final newIntervalMs =
-          updateInterval.inMilliseconds * math.pow(1.5, _noChangeStreak);
+      final newIntervalMs = updateInterval.inMilliseconds *
+          math.pow(
+            1.5,
+            _noChangeStreak,
+          );
+
       _currentInterval = Duration(
-        milliseconds:
-            math.min(newIntervalMs, _maxInterval.inMilliseconds).toInt(),
+        milliseconds: math
+            .min(
+              newIntervalMs,
+              _maxInterval.inMilliseconds,
+            )
+            .toInt(),
       );
-      log('No state change detected. Streak: $_noChangeStreak. '
-          'Increasing update interval to ${_currentInterval.inMilliseconds} ms');
+
+      _logRefreshOptimization(
+        'No state change detected. Streak: $_noChangeStreak. Increasing update interval to ${_currentInterval.inMilliseconds} ms',
+      );
     } else {
       // A state change occurred, so reset the no-change streak.
       _noChangeStreak = 0;
       _currentInterval = updateInterval;
-      log('State changed. Resetting update interval to ${_currentInterval.inMilliseconds} ms');
+      _logRefreshOptimization(
+        'State changed. Resetting update interval to ${_currentInterval.inMilliseconds} ms',
+      );
     }
 
     _scheduleNextUpdate();
@@ -143,6 +157,16 @@ abstract class Repository<State> extends Cubit<State>
   void log(Object message, [Object? error, StackTrace? stackTrace]) {
     Logger('$namespace.$runtimeType').log(
       error != null ? errorLevel : level,
+      message,
+      error,
+      stackTrace,
+    );
+  }
+
+  void _logRefreshOptimization(Object message,
+      [Object? error, StackTrace? stackTrace]) {
+    Logger('$namespace.$runtimeType.RefreshOptimization').log(
+      error != null ? errorLevel : Level.FINEST,
       message,
       error,
       stackTrace,
