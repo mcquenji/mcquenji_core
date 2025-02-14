@@ -189,6 +189,12 @@ class CoreModule extends Module {
   /// }
   static bool debugMode = false;
 
+  /// Callback function that is called when the [Dio] instance is initialized.
+  /// You can use this function to configure the [Dio] instance before it is used.
+  ///
+  /// For example, you can add sentry tracing to the [Dio] instance if you are using sentry.
+  static void Function(Dio dio) onInitDio = (_) {};
+
   @override
   void exportedBinds(Injector i) {
     i
@@ -198,7 +204,13 @@ class CoreModule extends Module {
       // inferred as `[BaseOptions]` which is incorrect. So we have to use the
       // the lambda to force the correct type.
       // ignore: unnecessary_lambdas
-      ..add<Dio>((BaseOptions o) => Dio(o))
+      ..add<Dio>((BaseOptions o) {
+        final dio = Dio(o);
+
+        onInitDio(dio);
+
+        return dio;
+      })
       ..addLazySingleton<ConnectivityService>(
         isWeb ? WebConnectivitiyService.new : DnsLookupConnectivityService.new,
       )
