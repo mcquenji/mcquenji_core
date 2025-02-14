@@ -25,7 +25,7 @@
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">mcquenji_core</a></li>
-    <li><a href="../../mcquenji_core/mcquenji_core-library.html">mcquenji_core.dart</a></li>
+    <li><a href="../../mcquenji_core">mcquenji_core.dart</a></li>
     <li><a href="../../mcquenji_core/CoreModule-class.html">CoreModule</a></li>
     <li class="self-crumb">exportedBinds method</li>
   </ol>
@@ -59,7 +59,7 @@
       
   <div>
     <ol class="annotation-list">
-        <li>@<a href="https://api.dart.dev/stable/3.6.2/dart-core/override-constant.html">override</a></li>
+        <li>@<a href="https://api.dart.dev/stable/3.7.0/dart-core/override-constant.html">override</a></li>
     </ol>
   </div>
 <span class="returntype">void</span>
@@ -84,7 +84,13 @@ void exportedBinds(Injector i) {
     &#47;&#47; inferred as `[BaseOptions]` which is incorrect. So we have to use the
     &#47;&#47; the lambda to force the correct type.
     &#47;&#47; ignore: unnecessary_lambdas
-    ..add&lt;Dio&gt;((BaseOptions o) =&gt; Dio(o))
+    ..add&lt;Dio&gt;((BaseOptions o) {
+      final dio = Dio(o);
+
+      onInitDio(dio);
+
+      return dio;
+    })
     ..addLazySingleton&lt;ConnectivityService&gt;(
       isWeb ? WebConnectivitiyService.new : DnsLookupConnectivityService.new,
     )
@@ -110,7 +116,7 @@ void exportedBinds(Injector i) {
 </header>
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">mcquenji_core</a></li>
-    <li><a href="../../mcquenji_core/mcquenji_core-library.html">mcquenji_core</a></li>
+    <li><a href="../../mcquenji_core">mcquenji_core</a></li>
     <li><a href="../../mcquenji_core/CoreModule-class.html">CoreModule</a></li>
     <li class="self-crumb">exportedBinds method</li>
 </ol>

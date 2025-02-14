@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the stream property from the Repository class, for the Dart programming language.">
-  <title>stream property - Repository class - mcquenji_core library - Dart API</title>
+  <meta name="description" content="API docs for the onInitDio property from the CoreModule class, for the Dart programming language.">
+  <title>onInitDio property - CoreModule class - mcquenji_core library - Dart API</title>
 
 
   
@@ -26,10 +26,10 @@
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">mcquenji_core</a></li>
     <li><a href="../../mcquenji_core">mcquenji_core.dart</a></li>
-    <li><a href="../../mcquenji_core/Repository-class.html">Repository<span class="signature">&lt;<wbr><span class="type-parameter">State</span>&gt;</span></a></li>
-    <li class="self-crumb">stream property</li>
+    <li><a href="../../mcquenji_core/CoreModule-class.html">CoreModule</a></li>
+    <li class="self-crumb">onInitDio property</li>
   </ol>
-  <div class="self-name">stream</div>
+  <div class="self-name">onInitDio</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -49,47 +49,35 @@
 <div
     id="dartdoc-main-content"
     class="main-content"
-    data-above-sidebar="mcquenji_core&#47;Repository-class-sidebar.html"
+    data-above-sidebar="mcquenji_core&#47;CoreModule-class-sidebar.html"
     data-below-sidebar="">
     <div>
-<h1><span class="kind-property">stream</span> property 
+<h1><span class="kind-property">onInitDio</span> property 
 </h1></div>
 
     
-
-    
+      <section class="multi-line-signature">
         
-  <section id="getter">
-    <section class="multi-line-signature">
-      
-  <div>
-    <ol class="annotation-list">
-        <li>@<a href="https://api.dart.dev/stable/3.7.0/dart-core/override-constant.html">override</a></li>
-        <li>@<a href="https://pub.dev/documentation/meta/1.16.0/meta/nonVirtual-constant.html">nonVirtual</a></li>
-    </ol>
-  </div>
-      <span class="returntype"><a href="https://api.dart.dev/stable/3.7.0/dart-core/Stream-class.html">Stream</a><span class="signature">&lt;<wbr><span class="type-parameter">State</span>&gt;</span></span>
-      get
-      <span class="name ">stream</span>
-      <div class="features"><span class="feature">override</span></div>
+        void Function<span class="signature">(<span class="parameter" id="param-dio"><span class="type-annotation"><a href="https://pub.dev/documentation/dio/5.8.0+1/dio/Dio-class.html">Dio</a></span> <span class="parameter-name">dio</span></span>)</span>
+        <span class="name ">onInitDio</span>
+        <div class="features"><span class="feature">getter/setter pair</span></div>
 
-    </section>
-    
+      </section>
+      
 <section class="desc markdown">
-  <p>The current <a href="../../mcquenji_core/Repository/stream.html">stream</a> of states.</p>
+  <p>Callback function that is called when the <a href="https://pub.dev/documentation/dio/5.8.0+1/dio/Dio-class.html">Dio</a> instance is initialized.
+You can use this function to configure the <a href="https://pub.dev/documentation/dio/5.8.0+1/dio/Dio-class.html">Dio</a> instance before it is used.</p>
+<p>For example, you can add sentry tracing to the <a href="https://pub.dev/documentation/dio/5.8.0+1/dio/Dio-class.html">Dio</a> instance if you are using sentry.</p>
 </section>
 
-    
+      
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">@override
-@nonVirtual
-Stream&lt;State&gt; get stream =&gt; _subject.stream;</code></pre>
+  <pre class="language-dart"><code class="language-dart">static void Function(Dio dio) onInitDio = (_) {};</code></pre>
 </section>
 
-  </section>
 
-
+    
 </div> <!-- /.main-content -->
 <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
   <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
@@ -101,11 +89,11 @@ Stream&lt;State&gt; get stream =&gt; _subject.stream;</code></pre>
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">mcquenji_core</a></li>
     <li><a href="../../mcquenji_core">mcquenji_core</a></li>
-    <li><a href="../../mcquenji_core/Repository-class.html">Repository<span class="signature">&lt;<wbr><span class="type-parameter">State</span>&gt;</span></a></li>
-    <li class="self-crumb">stream property</li>
+    <li><a href="../../mcquenji_core/CoreModule-class.html">CoreModule</a></li>
+    <li class="self-crumb">onInitDio property</li>
 </ol>
 
-  <h5>Repository class</h5>
+  <h5>CoreModule class</h5>
   <div id="dartdoc-sidebar-left-content"></div>
 </div><!--/.sidebar-offcanvas-->
 <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
