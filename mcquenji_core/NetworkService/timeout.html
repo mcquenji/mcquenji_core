@@ -27,7 +27,7 @@
     <li><a href="../../index.html">mcquenji_core</a></li>
     <li><a href="../../mcquenji_core">mcquenji_core.dart</a></li>
     <li><a href="../../mcquenji_core/NetworkService-class.html">NetworkService</a></li>
-    <li class="self-crumb">timeout property</li>
+    <li class="self-crumb"><span class="deprecated">timeout</span> property</li>
   </ol>
   <div class="self-name">timeout</div>
   <form class="search navbar-right" role="search">
@@ -58,21 +58,29 @@
     
       <section class="multi-line-signature">
         
+  <div>
+    <ol class="annotation-list">
+        <li>@<a href="https://api.dart.dev/stable/3.7.0/dart-core/Deprecated-class.html">Deprecated</a>(&#39;Set the timeout CoreModule.onInitDio() instead by using the dio options property.&#39;)</li>
+    </ol>
+  </div>
         <a href="https://api.dart.dev/stable/3.7.0/dart-core/Duration-class.html">Duration</a>
-        <span class="name ">timeout</span>
+        <span class="name deprecated">timeout</span>
         <div class="features"><span class="feature">getter/setter pair</span></div>
 
       </section>
       
 <section class="desc markdown">
   <p>The duration after which a request will be considered as timed out (default is 15 seconds).</p>
-<p>Please not that this is a static field and will affect all instances of <a href="../../mcquenji_core/NetworkService-class.html">NetworkService</a>.</p>
+<p>Please note that this is a static field and will affect all instances of <a href="../../mcquenji_core/NetworkService-class.html">NetworkService</a>.</p>
 </section>
 
       
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">static Duration timeout = const Duration(seconds: 15);</code></pre>
+  <pre class="language-dart"><code class="language-dart">@Deprecated(
+  &#39;Set the timeout CoreModule.onInitDio() instead by using the dio options property.&#39;,
+)
+static Duration timeout = const Duration(seconds: 15);</code></pre>
 </section>
 
 
@@ -89,7 +97,7 @@
     <li><a href="../../index.html">mcquenji_core</a></li>
     <li><a href="../../mcquenji_core">mcquenji_core</a></li>
     <li><a href="../../mcquenji_core/NetworkService-class.html">NetworkService</a></li>
-    <li class="self-crumb">timeout property</li>
+    <li class="self-crumb"><span class="deprecated">timeout</span> property</li>
 </ol>
 
   <h5>NetworkService class</h5>

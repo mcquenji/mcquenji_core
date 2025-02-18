@@ -78,15 +78,13 @@
   <pre class="language-dart"><code class="language-dart">@override
 void exportedBinds(Injector i) {
   i
-    ..add&lt;BaseOptions&gt;(() =&gt; BaseOptions(validateStatus: (_) =&gt; true))
     &#47;&#47; modular has a bug where the type of parameters in brackets is
     &#47;&#47; not inferred correctly. In this instance, the type of `BaseOptions` is
     &#47;&#47; inferred as `[BaseOptions]` which is incorrect. So we have to use the
     &#47;&#47; the lambda to force the correct type.
     &#47;&#47; ignore: unnecessary_lambdas
-    ..add&lt;Dio&gt;((BaseOptions o) {
-      final dio = Dio(o);
-
+    ..add&lt;Dio&gt;(() {
+      final dio = Dio();
       onInitDio(dio);
 
       return dio;

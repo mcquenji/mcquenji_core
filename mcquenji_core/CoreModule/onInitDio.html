@@ -68,12 +68,15 @@
   <p>Callback function that is called when the <a href="https://pub.dev/documentation/dio/5.8.0+1/dio/Dio-class.html">Dio</a> instance is initialized.
 You can use this function to configure the <a href="https://pub.dev/documentation/dio/5.8.0+1/dio/Dio-class.html">Dio</a> instance before it is used.</p>
 <p>For example, you can add sentry tracing to the <a href="https://pub.dev/documentation/dio/5.8.0+1/dio/Dio-class.html">Dio</a> instance if you are using sentry.</p>
+<p>By default, this function sets the <code>BaseOptions.validateStatus</code> to <code>(_) =&gt; true</code>.</p>
 </section>
 
       
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">static void Function(Dio dio) onInitDio = (_) {};</code></pre>
+  <pre class="language-dart"><code class="language-dart">static void Function(Dio dio) onInitDio = (dio) {
+  dio.options.validateStatus = (_) =&gt; true;
+};</code></pre>
 </section>
 
 
