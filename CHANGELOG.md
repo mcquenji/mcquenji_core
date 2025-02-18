@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [3.0.0](https://github.com/mcquenji/mcquenji_core/compare/v2.0.0...v3.0.0) (2025-02-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* deprecate NwtkService.timout
+
+### Features
+
+* **core:** add initialization callback for Dio instance configuration ([1f9fa85](https://github.com/mcquenji/mcquenji_core/commit/1f9fa85b9722c7cac7809fa7931c26e48671672d))
+
+
+### Bug Fixes
+
+* deprecate NwtkService.timout ([411818b](https://github.com/mcquenji/mcquenji_core/commit/411818bdf84f51a989eb685b29042f053353cb32))
+
 ## [2.0.0](https://github.com/mcquenji/mcquenji_core/compare/v1.2.0...v2.0.0) (2025-02-06)
 
 
