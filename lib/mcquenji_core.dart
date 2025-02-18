@@ -193,20 +193,22 @@ class CoreModule extends Module {
   /// You can use this function to configure the [Dio] instance before it is used.
   ///
   /// For example, you can add sentry tracing to the [Dio] instance if you are using sentry.
-  static void Function(Dio dio) onInitDio = (_) {};
+  ///
+  /// By default, this function sets the [BaseOptions.validateStatus] to `(_) => true`.
+  static void Function(Dio dio) onInitDio = (dio) {
+    dio.options.validateStatus = (_) => true;
+  };
 
   @override
   void exportedBinds(Injector i) {
     i
-      ..add<BaseOptions>(() => BaseOptions(validateStatus: (_) => true))
       // modular has a bug where the type of parameters in brackets is
       // not inferred correctly. In this instance, the type of `BaseOptions` is
       // inferred as `[BaseOptions]` which is incorrect. So we have to use the
       // the lambda to force the correct type.
       // ignore: unnecessary_lambdas
-      ..add<Dio>((BaseOptions o) {
-        final dio = Dio(o);
-
+      ..add<Dio>(() {
+        final dio = Dio();
         onInitDio(dio);
 
         return dio;
