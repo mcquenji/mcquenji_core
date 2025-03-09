@@ -22,6 +22,13 @@ abstract class Repository<State> extends Cubit<State>
 
   final _completer = Completer<void>();
 
+  var _dataCompleter = Completer<void>();
+  var _errorCompleter = Completer<void>();
+  var _loadingCompleter = Completer<void>();
+
+  /// `true` if the repository emits [AsyncValue]s.
+  late final bool isAsync;
+
   /// Future that completes when the repository has finished initializing.
   Future<void> get ready => _completer.future;
 
@@ -52,6 +59,10 @@ abstract class Repository<State> extends Cubit<State>
     _subject = BehaviorSubject.seeded(initialState);
 
     __build(const InitialBuildTrigger()).whenComplete(_completer.complete);
+
+    if (initialState is AsyncValue) {
+      isAsync = true;
+    }
 
     if (updateInterval != Duration.zero) {
       _currentInterval = updateInterval;
@@ -328,6 +339,27 @@ abstract class Repository<State> extends Cubit<State>
 
     super.emit(state);
     _subject.add(state);
+
+    if (isAsync) {
+      final asyncValue = state as AsyncValue;
+
+      if (asyncValue.hasData) {
+        _dataCompleter.complete();
+
+        _errorCompleter = Completer();
+        _loadingCompleter = Completer();
+      } else if (asyncValue.hasError) {
+        _errorCompleter.complete();
+
+        _dataCompleter = Completer();
+        _loadingCompleter = Completer();
+      } else if (asyncValue.isLoading) {
+        _loadingCompleter.complete();
+
+        _dataCompleter = Completer();
+        _errorCompleter = Completer();
+      }
+    }
   }
 }
 
@@ -435,3 +467,53 @@ class WaitForDataException implements Exception {
 
 /// Base class for all triggers that can be passed to [Repository.build].
 abstract class BuildTrigger {}
+
+/// Utility extension on repositories with an asynchronous state.
+extension AsyncRepoExt<State> on Repository<AsyncValue<State>> {
+  /// Emits [AsyncValue.error] with the given [error] and [stackTrace].
+  void error(Object error, [StackTrace? stackTrace]) {
+    emit(AsyncValue.error(error, stackTrace));
+  }
+
+  /// Emits [AsyncValue.loading].
+  void loading() {
+    emit(AsyncValue.loading());
+  }
+
+  /// Emits [AsyncValue.data] with the given [data].
+  void data(State data) {
+    emit(AsyncValue.data(data));
+  }
+
+  /// Guards the given [future] and emits the result.
+  ///
+  /// See [AsyncValue.guard] for more information.
+  Future<void> guard(
+    Future<State> Function() future, {
+    void Function(State)? onData,
+    void Function(Object, StackTrace?)? onError,
+  }) async {
+    emit(
+      await AsyncValue.guard(
+        future,
+        onData: onData,
+        onError: onError,
+      ),
+    );
+  }
+
+  /// A future that completes when this repository has data.
+  ///
+  /// ⚠️ Experimental API. Use with caution.
+  Future<void> get hasData => _dataCompleter.future;
+
+  /// A future that completes when this repository has an error.
+  ///
+  /// ⚠️ Experimental API. Use with caution.
+  Future<void> get hasError => _errorCompleter.future;
+
+  /// A future that completes when this repository is loading.
+  ///
+  /// ⚠️ Experimental API. Use with caution.
+  Future<void> get isLoading => _loadingCompleter.future;
+}

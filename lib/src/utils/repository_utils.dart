@@ -1,7 +1,5 @@
 // ignore_for_file: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
 
-import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:mcquenji_core/mcquenji_core.dart';
 import 'package:modular_core/modular_core.dart';
@@ -65,41 +63,6 @@ extension RepositoryInjectorExt on Injector {
   }) {
     addRepository<TickRepository>(
       () => TickRepository(interval, paused: paused),
-    );
-  }
-}
-
-/// Utility extension on repositories with an asynchronous state.
-extension AsyncRepoExt<State> on Repository<AsyncValue<State>> {
-  /// Emits [AsyncValue.error] with the given [error] and [stackTrace].
-  void error(Object error, [StackTrace? stackTrace]) {
-    emit(AsyncValue.error(error, stackTrace));
-  }
-
-  /// Emits [AsyncValue.loading].
-  void loading() {
-    emit(AsyncValue.loading());
-  }
-
-  /// Emits [AsyncValue.data] with the given [data].
-  void data(State data) {
-    emit(AsyncValue.data(data));
-  }
-
-  /// Guards the given [future] and emits the result.
-  ///
-  /// See [AsyncValue.guard] for more information.
-  Future<void> guard(
-    Future<State> Function() future, {
-    void Function(State)? onData,
-    void Function(Object, StackTrace?)? onError,
-  }) async {
-    emit(
-      await AsyncValue.guard(
-        future,
-        onData: onData,
-        onError: onError,
-      ),
     );
   }
 }
