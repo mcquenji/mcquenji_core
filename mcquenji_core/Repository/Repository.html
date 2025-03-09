@@ -75,6 +75,10 @@
 
   __build(const InitialBuildTrigger()).whenComplete(_completer.complete);
 
+  if (initialState is AsyncValue) {
+    isAsync = true;
+  }
+
   if (updateInterval != Duration.zero) {
     _currentInterval = updateInterval;
     _scheduleNextUpdate();
