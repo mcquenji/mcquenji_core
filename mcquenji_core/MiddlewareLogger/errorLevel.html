@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the hasError property from the AsyncRepoExt extension, for the Dart programming language.">
-  <title>hasError property - AsyncRepoExt extension - mcquenji_core library - Dart API</title>
+  <meta name="description" content="API docs for the errorLevel property from the MiddlewareLogger mixin, for the Dart programming language.">
+  <title>errorLevel property - MiddlewareLogger mixin - mcquenji_core library - Dart API</title>
 
 
   
@@ -26,10 +26,10 @@
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">mcquenji_core</a></li>
     <li><a href="../../mcquenji_core">mcquenji_core.dart</a></li>
-    <li><a href="../../mcquenji_core/AsyncRepoExt.html">AsyncRepoExt<span class="signature">&lt;<wbr><span class="type-parameter">State</span>&gt;</span></a></li>
-    <li class="self-crumb">hasError property</li>
+    <li><a href="../../mcquenji_core/MiddlewareLogger-mixin.html">MiddlewareLogger<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+    <li class="self-crumb">errorLevel property</li>
   </ol>
-  <div class="self-name">hasError</div>
+  <div class="self-name">errorLevel</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -49,10 +49,10 @@
 <div
     id="dartdoc-main-content"
     class="main-content"
-    data-above-sidebar="mcquenji_core&#47;AsyncRepoExt-extension-sidebar.html"
+    data-above-sidebar="mcquenji_core&#47;MiddlewareLogger-mixin-sidebar.html"
     data-below-sidebar="">
     <div>
-<h1><span class="kind-property">hasError</span> property 
+<h1><span class="kind-property">errorLevel</span> property 
 </h1></div>
 
     
@@ -62,22 +62,28 @@
   <section id="getter">
     <section class="multi-line-signature">
       
-      <span class="returntype"><a href="https://api.dart.dev/stable/3.7.1/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  <div>
+    <ol class="annotation-list">
+        <li>@<a href="https://api.dart.dev/stable/3.7.1/dart-core/override-constant.html">override</a></li>
+    </ol>
+  </div>
+      <span class="returntype"><a href="https://pub.dev/documentation/logging/1.3.0/logging/Level-class.html">Level</a></span>
       get
-      <span class="name ">hasError</span>
-      
+      <span class="name ">errorLevel</span>
+      <div class="features"><span class="feature">override</span></div>
 
     </section>
     
 <section class="desc markdown">
-  <p>A future that completes when this repository has an error.</p>
-<p>⚠️ Experimental API. Use with caution.</p>
+  <p>The level to log error messages at.</p>
+<p>Defaults to <a href="https://pub.dev/documentation/logging/1.3.0/logging/Level/SEVERE-constant.html">Level.SEVERE</a>.</p>
 </section>
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">Future&lt;void&gt; get hasError =&gt; _errorCompleter.future;</code></pre>
+  <pre class="language-dart"><code class="language-dart">@override
+Level get errorLevel =&gt; Level.SEVERE;</code></pre>
 </section>
 
   </section>
@@ -94,11 +100,11 @@
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">mcquenji_core</a></li>
     <li><a href="../../mcquenji_core">mcquenji_core</a></li>
-    <li><a href="../../mcquenji_core/AsyncRepoExt.html">AsyncRepoExt<span class="signature">&lt;<wbr><span class="type-parameter">State</span>&gt;</span></a></li>
-    <li class="self-crumb">hasError property</li>
+    <li><a href="../../mcquenji_core/MiddlewareLogger-mixin.html">MiddlewareLogger<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+    <li class="self-crumb">errorLevel property</li>
 </ol>
 
-  <h5>AsyncRepoExt extension on <a href="../../mcquenji_core/Repository-class.html">Repository</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../mcquenji_core/AsyncValue-class.html">AsyncValue</a><span class="signature">&lt;<wbr><span class="type-parameter">State</span>&gt;</span></span>&gt;</span></h5>
+  <h5>MiddlewareLogger mixin</h5>
   <div id="dartdoc-sidebar-left-content"></div>
 </div><!--/.sidebar-offcanvas-->
 <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">

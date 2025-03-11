@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the ILoggable class from the mcquenji_core library, for the Dart programming language.">
-  <title>ILoggable class - mcquenji_core library - Dart API</title>
+  <meta name="description" content="API docs for the MiddlewareLogger mixin from the mcquenji_core library, for the Dart programming language.">
+  <title>MiddlewareLogger mixin - mcquenji_core library - Dart API</title>
 
 
   
@@ -26,9 +26,9 @@
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../index.html">mcquenji_core</a></li>
     <li><a href="../mcquenji_core">mcquenji_core.dart</a></li>
-    <li class="self-crumb">ILoggable class</li>
+    <li class="self-crumb">MiddlewareLogger<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span> mixin</li>
   </ol>
-  <div class="self-name">ILoggable</div>
+  <div class="self-name">MiddlewareLogger</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -49,55 +49,41 @@
     id="dartdoc-main-content"
     class="main-content"
     data-above-sidebar="mcquenji_core&#47;mcquenji_core-library-sidebar.html"
-    data-below-sidebar="mcquenji_core&#47;ILoggable-class-sidebar.html">
+    data-below-sidebar="mcquenji_core&#47;MiddlewareLogger-mixin-sidebar.html">
     <div>
-<h1><span class="kind-class">ILoggable</span> class 
-    <a href="https://dart.dev/language/class-modifiers#abstract" class="feature feature-abstract" title="This type can not be directly constructed.">abstract</a>
+<h1><span class="kind-mixin">MiddlewareLogger&lt;<wbr><span class="type-parameter">T</span>&gt;</span> mixin 
  
 </h1></div>
 
     
 <section class="desc markdown">
-  <p>A class that provides logging functionality.</p>
-<p>Each class that extends this class should have a unique <a href="../mcquenji_core/ILoggable/namespace.html">namespace</a>.</p>
+  <p>A mixin that automatically logs the intercepted route and changes made to it.</p>
 </section>
 
 
-    <section>
-      <dl class="dl-horizontal">
-        
+      <section>
+        <dl class="dl-horizontal">
+            <dt>Superclass constraints</dt>
+            <dd><ul class="comma-separated dark mixin-relationships">
+                <li><a href="https://pub.dev/documentation/modular_core/3.3.3/modular_core/Middleware-class.html">Middleware</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></li>
+            </ul></dd>
 
-        
-        
+          
 
-          <dt>Implementers</dt>
-          <dd><ul class="comma-separated clazz-relationships">
-              <li><a href="../mcquenji_core/Datasource-class.html">Datasource</a></li>
-              <li><a href="../mcquenji_core/MiddlewareLogger-mixin.html">MiddlewareLogger</a></li>
-              <li><a href="../mcquenji_core/Repository-class.html">Repository</a></li>
-              <li><a href="../mcquenji_core/Service-class.html">Service</a></li>
-          </ul></dd>
+          
+  <dt>Implemented types</dt>
+  <dd>
+    <ul class="comma-separated mixin-relationships">
+        <li><a href="../mcquenji_core/ILoggable-class.html">ILoggable</a></li>
+    </ul>
+  </dd>
 
-        
-        
+          
 
+          
+        </dl>
+      </section>
 
-      </dl>
-    </section>
-
-    
-  <section class="summary offset-anchor" id="constructors">
-    <h2>Constructors</h2>
-    <dl class="constructor-summary-list">
-        <dt id="ILoggable" class="callable">
-          <span class="name"><a href="../mcquenji_core/ILoggable/ILoggable.html">ILoggable</a></span><span class="signature">()</span>
-        </dt>
-        <dd>
-          A class that provides logging functionality.
-            <div class="constructor-modifier features">const</div>
-        </dd>
-    </dl>
-  </section>
     
   <section
       class="summary offset-anchor"
@@ -105,14 +91,14 @@
     <h2>Properties</h2>
     <dl class="properties">
         <dt id="errorLevel" class="property">
-  <span class="name"><a href="../mcquenji_core/ILoggable/errorLevel.html">errorLevel</a></span>
+  <span class="name"><a href="../mcquenji_core/MiddlewareLogger/errorLevel.html">errorLevel</a></span>
   <span class="signature">&#8594; <a href="https://pub.dev/documentation/logging/1.3.0/logging/Level-class.html">Level</a></span>
   
 
 </dt>
 <dd>
   The level to log error messages at.
-  <div class="features"><span class="feature">no setter</span></div>
+  <div class="features"><span class="feature">no setter</span><span class="feature">override</span></div>
 
 </dd>
 
@@ -129,19 +115,19 @@
 </dd>
 
         <dt id="level" class="property">
-  <span class="name"><a href="../mcquenji_core/ILoggable/level.html">level</a></span>
+  <span class="name"><a href="../mcquenji_core/MiddlewareLogger/level.html">level</a></span>
   <span class="signature">&#8594; <a href="https://pub.dev/documentation/logging/1.3.0/logging/Level-class.html">Level</a></span>
   
 
 </dt>
 <dd>
   The level to log messages at.
-  <div class="features"><span class="feature">no setter</span></div>
+  <div class="features"><span class="feature">no setter</span><span class="feature">override</span></div>
 
 </dd>
 
         <dt id="namespace" class="property">
-  <span class="name"><a href="../mcquenji_core/ILoggable/namespace.html">namespace</a></span>
+  <span class="name"><a href="../mcquenji_core/MiddlewareLogger/namespace.html">namespace</a></span>
   <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.7.1/dart-core/String-class.html">String</a></span>
   
 
@@ -149,7 +135,7 @@
 <dd>
   The namespace to log messages under.
 e.g. 'Service.Auth'
-  <div class="features"><span class="feature">no setter</span></div>
+  <div class="features"><span class="feature">no setter</span><span class="feature">override</span></div>
 
 </dd>
 
@@ -175,7 +161,7 @@ e.g. 'Service.Auth'
     <h2>Methods</h2>
     <dl class="callables">
         <dt id="log" class="callable">
-  <span class="name"><a href="../mcquenji_core/ILoggable/log.html">log</a></span><span class="signature">(<wbr><span class="parameter" id="log-param-message"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.7.1/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">message</span>, [</span><span class="parameter" id="log-param-error"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.7.1/dart-core/Object-class.html">Object</a>?</span> <span class="parameter-name">error</span>, </span><span class="parameter" id="log-param-stackTrace"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.7.1/dart-core/StackTrace-class.html">StackTrace</a>?</span> <span class="parameter-name">stackTrace</span></span>])
+  <span class="name"><a href="../mcquenji_core/MiddlewareLogger/log.html">log</a></span><span class="signature">(<wbr><span class="parameter" id="log-param-message"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.7.1/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">message</span>, [</span><span class="parameter" id="log-param-error"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.7.1/dart-core/Object-class.html">Object</a>?</span> <span class="parameter-name">error</span>, </span><span class="parameter" id="log-param-stackTrace"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.7.1/dart-core/StackTrace-class.html">StackTrace</a>?</span> <span class="parameter-name">stackTrace</span></span>])
     <span class="returntype parameter">&#8594; void</span>
   </span>
   
@@ -183,7 +169,7 @@ e.g. 'Service.Auth'
 </dt>
 <dd>
   Logs a message with an optional error and stack trace.
-  
+  <div class="features"><span class="feature">override</span></div>
 
 </dd>
 
@@ -197,6 +183,32 @@ e.g. 'Service.Auth'
 <dd class="inherited">
   Invoked when a nonexistent method or property is accessed.
   <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="pos" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/modular_core/3.3.3/modular_core/Middleware/pos.html">pos</a></span><span class="signature">(<wbr><span class="parameter" id="pos-param-route"><span class="type-annotation"><a href="https://pub.dev/documentation/modular_core/3.3.3/modular_core/ModularRoute-class.html">ModularRoute</a></span> <span class="parameter-name">route</span>, </span><span class="parameter" id="pos-param-data"><span class="type-annotation">T</span> <span class="parameter-name">data</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.7.1/dart-async/FutureOr-class.html">FutureOr</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/modular_core/3.3.3/modular_core/ModularRoute-class.html">ModularRoute</a>?</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Method called as soon as route is found and after settings.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="pre" class="callable">
+  <span class="name"><a href="../mcquenji_core/MiddlewareLogger/pre.html">pre</a></span><span class="signature">(<wbr><span class="parameter" id="pre-param-route"><span class="type-annotation"><a href="https://pub.dev/documentation/modular_core/3.3.3/modular_core/ModularRoute-class.html">ModularRoute</a></span> <span class="parameter-name">route</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.7.1/dart-async/FutureOr-class.html">FutureOr</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/modular_core/3.3.3/modular_core/ModularRoute-class.html">ModularRoute</a>?</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Method called as soon as route is found and before settings.
+  <div class="features"><span class="feature">override</span></div>
 
 </dd>
 
@@ -240,9 +252,9 @@ e.g. 'Service.Auth'
     
     
 
-  </div> <!-- /.main-content -->
-  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
-    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+</div> <!-- /.main-content -->
+<div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+  <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
 <header id="header-search-sidebar" class="hidden-l">
   <form class="search-sidebar" role="search">
     <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
@@ -251,14 +263,14 @@ e.g. 'Service.Auth'
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../index.html">mcquenji_core</a></li>
     <li><a href="../mcquenji_core">mcquenji_core</a></li>
-    <li class="self-crumb">ILoggable class</li>
+    <li class="self-crumb">MiddlewareLogger<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span> mixin</li>
 </ol>
 
-    <h5>mcquenji_core library</h5>
-    <div id="dartdoc-sidebar-left-content"></div>
-  </div>
-  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
-  </div><!--/.sidebar-offcanvas-->
+  <h5>mcquenji_core library</h5>
+  <div id="dartdoc-sidebar-left-content"></div>
+</div>
+<div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+</div><!--/.sidebar-offcanvas-->
 </main>
 <footer>
   <span class="no-break">

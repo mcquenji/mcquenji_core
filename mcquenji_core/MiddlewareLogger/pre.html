@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the emit method from the Repository class, for the Dart programming language.">
-  <title>emit method - Repository class - mcquenji_core library - Dart API</title>
+  <meta name="description" content="API docs for the pre method from the MiddlewareLogger mixin, for the Dart programming language.">
+  <title>pre method - MiddlewareLogger mixin - mcquenji_core library - Dart API</title>
 
 
   
@@ -26,10 +26,10 @@
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">mcquenji_core</a></li>
     <li><a href="../../mcquenji_core">mcquenji_core.dart</a></li>
-    <li><a href="../../mcquenji_core/Repository-class.html">Repository<span class="signature">&lt;<wbr><span class="type-parameter">State</span>&gt;</span></a></li>
-    <li class="self-crumb">emit method</li>
+    <li><a href="../../mcquenji_core/MiddlewareLogger-mixin.html">MiddlewareLogger<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+    <li class="self-crumb">pre method</li>
   </ol>
-  <div class="self-name">emit</div>
+  <div class="self-name">pre</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -49,10 +49,10 @@
 <div
     id="dartdoc-main-content"
     class="main-content"
-    data-above-sidebar="mcquenji_core&#47;Repository-class-sidebar.html"
+    data-above-sidebar="mcquenji_core&#47;MiddlewareLogger-mixin-sidebar.html"
     data-below-sidebar="">
     <div>
-<h1><span class="kind-method">emit</span> method 
+<h1><span class="kind-method">pre</span> method 
 </h1></div>
 
     <section class="multi-line-signature">
@@ -60,11 +60,10 @@
   <div>
     <ol class="annotation-list">
         <li>@<a href="https://api.dart.dev/stable/3.7.1/dart-core/override-constant.html">override</a></li>
-        <li>@<a href="https://pub.dev/documentation/meta/1.16.0/meta/mustCallSuper-constant.html">mustCallSuper</a></li>
     </ol>
   </div>
-<span class="returntype">void</span>
-<span class="name ">emit</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="emit-param-state"><span class="type-annotation">State</span> <span class="parameter-name">state</span></span></li>
+<span class="returntype"><a href="https://api.dart.dev/stable/3.7.1/dart-async/FutureOr-class.html">FutureOr</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/modular_core/3.3.3/modular_core/ModularRoute-class.html">ModularRoute</a>?</span>&gt;</span></span>
+<span class="name ">pre</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="pre-param-route"><span class="type-annotation"><a href="https://pub.dev/documentation/modular_core/3.3.3/modular_core/ModularRoute-class.html">ModularRoute</a></span> <span class="parameter-name">route</span></span></li>
 </ol>)
 
       <div class="features"><span class="feature">override</span></div>
@@ -72,15 +71,7 @@
     </section>
     
 <section class="desc markdown">
-  <p>Updates the <code>state</code> to the provided <code>state</code>.
-<a href="../../mcquenji_core/Repository/emit.html">emit</a> does nothing if the <code>state</code> being emitted
-is equal to the current <code>state</code>.</p>
-<p>To allow for the possibility of notifying listeners of the initial state,
-emitting a state which is equal to the initial state is allowed as long
-as it is the first thing emitted by the instance.</p>
-<ul>
-<li>Throws a <a href="https://api.dart.dev/stable/3.7.1/dart-core/StateError-class.html">StateError</a> if the bloc is closed.</li>
-</ul>
+  <p>Method called as soon as route is found and before settings.</p>
 </section>
 
 
@@ -88,43 +79,9 @@ as it is the first thing emitted by the instance.</p>
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">@override
-@mustCallSuper
-void emit(State state) {
-  final logger = Logger(&#39;$namespace.$runtimeType&#39;);
-
-  if (state == this.state) {
-    logger.finest(&#39;State is the same as current state, skipping emit&#39;);
-    return;
-  }
-
-  logger.finest(&#39;Emitted new state: $state&#39;);
-
-  _lastUpdate = DateTime.now();
-
-  super.emit(state);
-  _subject.add(state);
-
-  &#47;&#47; TODO: find out why this causes a bad state error
-  &#47;&#47; if (isAsync) {
-  &#47;&#47;   final asyncValue = state as AsyncValue;
-
-  &#47;&#47;   if (asyncValue.hasData) {
-  &#47;&#47;     _dataCompleter.complete();
-
-  &#47;&#47;     _errorCompleter = Completer();
-  &#47;&#47;     _loadingCompleter = Completer();
-  &#47;&#47;   } else if (asyncValue.hasError) {
-  &#47;&#47;     _errorCompleter.complete();
-
-  &#47;&#47;     _dataCompleter = Completer();
-  &#47;&#47;     _loadingCompleter = Completer();
-  &#47;&#47;   } else if (asyncValue.isLoading) {
-  &#47;&#47;     _loadingCompleter.complete();
-
-  &#47;&#47;     _dataCompleter = Completer();
-  &#47;&#47;     _errorCompleter = Completer();
-  &#47;&#47;   }
-  &#47;&#47; }
+FutureOr&lt;ModularRoute?&gt; pre(ModularRoute route) {
+  log(&#39;Checking route: ${route.name}@${route.uri}&#39;);
+  return route;
 }</code></pre>
 </section>
 
@@ -140,11 +97,11 @@ void emit(State state) {
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">mcquenji_core</a></li>
     <li><a href="../../mcquenji_core">mcquenji_core</a></li>
-    <li><a href="../../mcquenji_core/Repository-class.html">Repository<span class="signature">&lt;<wbr><span class="type-parameter">State</span>&gt;</span></a></li>
-    <li class="self-crumb">emit method</li>
+    <li><a href="../../mcquenji_core/MiddlewareLogger-mixin.html">MiddlewareLogger<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+    <li class="self-crumb">pre method</li>
 </ol>
 
-    <h5>Repository class</h5>
+    <h5>MiddlewareLogger mixin</h5>
     <div id="dartdoc-sidebar-left-content"></div>
   </div><!--/.sidebar-offcanvas-->
   <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
