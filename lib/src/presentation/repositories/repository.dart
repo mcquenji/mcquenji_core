@@ -340,26 +340,27 @@ abstract class Repository<State> extends Cubit<State>
     super.emit(state);
     _subject.add(state);
 
-    if (isAsync) {
-      final asyncValue = state as AsyncValue;
+    // TODO: find out why this causes a bad state error
+    // if (isAsync) {
+    //   final asyncValue = state as AsyncValue;
 
-      if (asyncValue.hasData) {
-        _dataCompleter.complete();
+    //   if (asyncValue.hasData) {
+    //     _dataCompleter.complete();
 
-        _errorCompleter = Completer();
-        _loadingCompleter = Completer();
-      } else if (asyncValue.hasError) {
-        _errorCompleter.complete();
+    //     _errorCompleter = Completer();
+    //     _loadingCompleter = Completer();
+    //   } else if (asyncValue.hasError) {
+    //     _errorCompleter.complete();
 
-        _dataCompleter = Completer();
-        _loadingCompleter = Completer();
-      } else if (asyncValue.isLoading) {
-        _loadingCompleter.complete();
+    //     _dataCompleter = Completer();
+    //     _loadingCompleter = Completer();
+    //   } else if (asyncValue.isLoading) {
+    //     _loadingCompleter.complete();
 
-        _dataCompleter = Completer();
-        _errorCompleter = Completer();
-      }
-    }
+    //     _dataCompleter = Completer();
+    //     _errorCompleter = Completer();
+    //   }
+    // }
   }
 }
 
@@ -502,18 +503,18 @@ extension AsyncRepoExt<State> on Repository<AsyncValue<State>> {
     );
   }
 
-  /// A future that completes when this repository has data.
-  ///
-  /// ⚠️ Experimental API. Use with caution.
-  Future<void> get hasData => _dataCompleter.future;
+  // /// A future that completes when this repository has data.
+  // ///
+  // /// ⚠️ Experimental API. Use with caution.
+  // Future<void> get hasData => _dataCompleter.future;
 
-  /// A future that completes when this repository has an error.
-  ///
-  /// ⚠️ Experimental API. Use with caution.
-  Future<void> get hasError => _errorCompleter.future;
+  // /// A future that completes when this repository has an error.
+  // ///
+  // /// ⚠️ Experimental API. Use with caution.
+  // Future<void> get hasError => _errorCompleter.future;
 
-  /// A future that completes when this repository is loading.
-  ///
-  /// ⚠️ Experimental API. Use with caution.
-  Future<void> get isLoading => _loadingCompleter.future;
+  // /// A future that completes when this repository is loading.
+  // ///
+  // /// ⚠️ Experimental API. Use with caution.
+  // Future<void> get isLoading => _loadingCompleter.future;
 }

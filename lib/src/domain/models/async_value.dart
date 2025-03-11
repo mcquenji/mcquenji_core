@@ -51,7 +51,7 @@ class AsyncValue<T> with _$AsyncValue<T> {
       );
 
   /// `true` if [data] can savely be accessed. `false` otherwise.
-  bool get hasData => !isLoading && error == null;
+  bool get hasData => !isLoading && !hasError;
 
   /// `true` if an error occurred. `false` otherwise.
   bool get hasError => error != null;
