@@ -4,7 +4,7 @@ import 'package:mcquenji_core/src/domain/domain.dart';
 import 'package:modular_core/modular_core.dart';
 
 /// Base class for all services.
-abstract class Service extends ILoggable implements Disposable {
+abstract class Service extends Loggable implements Disposable {
   /// The name of the service.
   String get name;
 

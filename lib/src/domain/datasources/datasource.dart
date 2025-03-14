@@ -4,7 +4,7 @@ import 'package:mcquenji_core/src/domain/domain.dart';
 import 'package:modular_core/modular_core.dart';
 
 /// Base class for all datasources.
-abstract class Datasource extends ILoggable implements Disposable {
+abstract class Datasource extends Loggable implements Disposable {
   /// The name of the datasource.
   String get name;
 

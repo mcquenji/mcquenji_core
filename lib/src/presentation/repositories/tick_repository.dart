@@ -57,7 +57,7 @@ class TickRepository extends Repository<Tick> {
   Level get level => Level.FINEST;
 
   @override
-  FutureOr<void> build(BuildTrigger trigger) async {
+  FutureOr<void> build(Trigger trigger) async {
     if (_paused) {
       log('Currently paused, skipping tick');
       return;

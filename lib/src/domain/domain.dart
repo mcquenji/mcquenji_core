@@ -11,9 +11,9 @@ export 'services/services.dart';
 ///
 /// Each class that extends this class should have a unique [namespace].
 /// {@endtemplate}
-abstract class ILoggable {
+abstract class Loggable {
   /// {@macro loggable}
-  const ILoggable();
+  const Loggable();
 
   /// The namespace to log messages under.
   /// e.g. 'Service.Auth'

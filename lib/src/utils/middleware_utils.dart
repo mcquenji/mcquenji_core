@@ -5,7 +5,7 @@ import 'package:mcquenji_core/mcquenji_core.dart';
 import 'package:modular_core/modular_core.dart';
 
 /// A mixin that automatically logs the intercepted route and changes made to it.
-mixin MiddlewareLogger<T> on Middleware<T> implements ILoggable {
+mixin MiddlewareLogger<T> on Middleware<T> implements Loggable {
   @override
   String get namespace => 'Middleware';
 

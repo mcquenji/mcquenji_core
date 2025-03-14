@@ -8,19 +8,23 @@ import 'package:mcquenji_core/mcquenji_core.dart';
 import 'package:modular_core/modular_core.dart';
 import 'package:rxdart/subjects.dart';
 
+/// Contains information about the trigger that caused the repository to rebuild.
+@Deprecated('BuildTrigger has been renamed to Trigger')
+typedef BuildTrigger = Trigger;
+
 /// {@template repository}
 /// Base class for all repositories.
 ///
 /// As repositories are responsible for managing the state of the application, they extend [Cubit].
 /// {@endtemplate}
 abstract class Repository<State> extends Cubit<State>
-    implements ILoggable, Disposable, BuildTrigger {
+    implements Loggable, Disposable, Trigger {
   final List<StreamSubscription> _subscriptions = [];
   late final BehaviorSubject<State> _subject;
 
   Timer? _updateSchedule;
 
-  final _completer = Completer<void>();
+  var _buildCompleter = Completer<void>();
 
   var _dataCompleter = Completer<void>();
   var _errorCompleter = Completer<void>();
@@ -29,8 +33,8 @@ abstract class Repository<State> extends Cubit<State>
   /// `true` if the repository emits [AsyncValue]s.
   late final bool isAsync;
 
-  /// Future that completes when the repository has finished initializing.
-  Future<void> get ready => _completer.future;
+  /// Future that completes after any ongoing build process is finished.
+  Future<void> get ready => _buildCompleter.future;
 
   DateTime? _lastUpdate;
 
@@ -58,7 +62,7 @@ abstract class Repository<State> extends Cubit<State>
   Repository(State initialState) : super(initialState) {
     _subject = BehaviorSubject.seeded(initialState);
 
-    __build(const InitialBuildTrigger()).whenComplete(_completer.complete);
+    refresh(const InitialBuildTrigger());
 
     if (initialState is AsyncValue) {
       isAsync = true;
@@ -104,7 +108,7 @@ abstract class Repository<State> extends Cubit<State>
     log('Automatic update triggered');
 
     try {
-      await __build(const UpdateTrigger());
+      await refresh(const UpdateTrigger());
     } catch (e, s) {
       log('Error during automatic update', e, s);
     }
@@ -221,7 +225,7 @@ abstract class Repository<State> extends Cubit<State>
 
     _subscriptions.add(
       repository.stream.listen(
-        (value) => _build<T>(
+        (value) => _didChangeDependencies<T>(
           value,
           repository,
         ),
@@ -229,26 +233,41 @@ abstract class Repository<State> extends Cubit<State>
     );
   }
 
-  Future<void> _build<T>(dynamic value, Repository<T> repository) async {
+  /// Called when a watched repository emits a new state.
+  Future<void> _didChangeDependencies<T>(
+    dynamic value,
+    Repository<T> repository,
+  ) async {
     Logger('$namespace.$runtimeType').log(
       Level.FINEST,
       'Received new $T from ${repository.runtimeType}: $value',
     );
 
-    await __build(repository);
+    await refresh(repository);
   }
 
-  Future<void> __build(BuildTrigger trigger) async {
+  /// Triggers a repository refresh.
+  /// Catches all exceptions thrown during the build process.
+  ///
+  /// Call this method to manually refresh the repository.
+  Future<void> refresh(Trigger trigger) async {
+    final completer = Completer();
+
+    _buildCompleter = completer;
+
     try {
       await build(trigger);
     } on WaitForDataException catch (e) {
       log('Aborting build: $e');
-    } catch (e) {
-      rethrow;
+    } catch (e, s) {
+      log('Error during build', e, s);
+    } finally {
+      completer.complete();
     }
   }
 
   /// Recalculates the state of the repository.
+  /// Do not call this method directly, use [refresh] instead.
   ///
   /// This method is called when:
   ///
@@ -287,7 +306,7 @@ abstract class Repository<State> extends Cubit<State>
   /// }
   /// ```
   @protected
-  FutureOr<void> build(BuildTrigger trigger) {}
+  FutureOr<void> build(Trigger trigger) {}
 
   @override
   @mustCallSuper
@@ -340,27 +359,26 @@ abstract class Repository<State> extends Cubit<State>
     super.emit(state);
     _subject.add(state);
 
-    // TODO: find out why this causes a bad state error
-    // if (isAsync) {
-    //   final asyncValue = state as AsyncValue;
+    if (isAsync) {
+      final asyncValue = state as AsyncValue;
 
-    //   if (asyncValue.hasData) {
-    //     _dataCompleter.complete();
+      if (asyncValue.hasData) {
+        if (!_dataCompleter.isCompleted) _dataCompleter.complete();
 
-    //     _errorCompleter = Completer();
-    //     _loadingCompleter = Completer();
-    //   } else if (asyncValue.hasError) {
-    //     _errorCompleter.complete();
+        _errorCompleter = Completer();
+        _loadingCompleter = Completer();
+      } else if (asyncValue.hasError) {
+        if (!_errorCompleter.isCompleted) _errorCompleter.complete();
 
-    //     _dataCompleter = Completer();
-    //     _loadingCompleter = Completer();
-    //   } else if (asyncValue.isLoading) {
-    //     _loadingCompleter.complete();
+        _dataCompleter = Completer();
+        _loadingCompleter = Completer();
+      } else if (asyncValue.isLoading) {
+        if (!_loadingCompleter.isCompleted) _loadingCompleter.complete();
 
-    //     _dataCompleter = Completer();
-    //     _errorCompleter = Completer();
-    //   }
-    // }
+        _dataCompleter = Completer();
+        _errorCompleter = Completer();
+      }
+    }
   }
 }
 
@@ -415,7 +433,7 @@ extension RepoWatchExt<State> on Repository<AsyncValue<State>> {
         (value) => value.when(
           data: (data) async {
             try {
-              await _build<AsyncValue<T>>(
+              await _didChangeDependencies<AsyncValue<T>>(
                 data,
                 repository,
               );
@@ -443,13 +461,13 @@ extension RepoWatchExt<State> on Repository<AsyncValue<State>> {
 }
 
 /// Passed as trigger in [Repository.build] when called the first time.
-class InitialBuildTrigger implements BuildTrigger {
+class InitialBuildTrigger implements Trigger {
   /// Passed as trigger in [Repository.build] when called the first time.
   const InitialBuildTrigger();
 }
 
 /// Passed as trigger in [Repository.build] when called in the [Repository.updateInterval].
-class UpdateTrigger implements BuildTrigger {
+class UpdateTrigger implements Trigger {
   /// Passed as trigger in [Repository.build] when called in the [Repository.updateInterval].
   const UpdateTrigger();
 }
@@ -466,8 +484,8 @@ class WaitForDataException implements Exception {
   String toString() => 'Repository of type $type does not have data yet.';
 }
 
-/// Base class for all triggers that can be passed to [Repository.build].
-abstract class BuildTrigger {}
+/// Contains information about the trigger that caused the repository to rebuild.
+abstract class Trigger {}
 
 /// Utility extension on repositories with an asynchronous state.
 extension AsyncRepoExt<State> on Repository<AsyncValue<State>> {
@@ -503,18 +521,18 @@ extension AsyncRepoExt<State> on Repository<AsyncValue<State>> {
     );
   }
 
-  // /// A future that completes when this repository has data.
-  // ///
-  // /// ⚠️ Experimental API. Use with caution.
-  // Future<void> get hasData => _dataCompleter.future;
+  /// A future that completes when this repository has data.
+  ///
+  /// ⚠️ Experimental API. Use with caution.
+  Future<void> get hasData => _dataCompleter.future;
 
-  // /// A future that completes when this repository has an error.
-  // ///
-  // /// ⚠️ Experimental API. Use with caution.
-  // Future<void> get hasError => _errorCompleter.future;
+  /// A future that completes when this repository has an error.
+  ///
+  /// ⚠️ Experimental API. Use with caution.
+  Future<void> get hasError => _errorCompleter.future;
 
-  // /// A future that completes when this repository is loading.
-  // ///
-  // /// ⚠️ Experimental API. Use with caution.
-  // Future<void> get isLoading => _loadingCompleter.future;
+  /// A future that completes when this repository is loading.
+  ///
+  /// ⚠️ Experimental API. Use with caution.
+  Future<void> get isLoading => _loadingCompleter.future;
 }
