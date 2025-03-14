@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [4.0.0](https://github.com/mcquenji/mcquenji_core/compare/v3.0.0...v4.0.0) (2025-03-14)
+
+
+### ⚠ BREAKING CHANGES
+
+* ILoggable has been renamed to Loggable
+* BuildTrigger has been renamed to Trigger
+
+### Features
+
+* add async repo completers ([3c10380](https://github.com/mcquenji/mcquenji_core/commit/3c10380e2a7c2c07d4eeed1ed68295843f3854a3))
+* add middleware logging ([91146d6](https://github.com/mcquenji/mcquenji_core/commit/91146d676061811f7c920c043247f79b253e9ab7))
+* implement async completers ([51467d9](https://github.com/mcquenji/mcquenji_core/commit/51467d9bb2522db0fc1a711246dcbf67a606331a))
+
 ## [3.0.0](https://github.com/mcquenji/mcquenji_core/compare/v2.0.0...v3.0.0) (2025-02-18)
 
 
