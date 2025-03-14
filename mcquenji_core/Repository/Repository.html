@@ -73,7 +73,7 @@
   <pre class="language-dart"><code class="language-dart">Repository(State initialState) : super(initialState) {
   _subject = BehaviorSubject.seeded(initialState);
 
-  __build(const InitialBuildTrigger()).whenComplete(_completer.complete);
+  refresh(const InitialBuildTrigger());
 
   if (initialState is AsyncValue) {
     isAsync = true;

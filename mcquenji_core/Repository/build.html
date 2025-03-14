@@ -62,8 +62,8 @@
         <li>@<a href="https://pub.dev/documentation/meta/1.16.0/meta/protected-constant.html">protected</a></li>
     </ol>
   </div>
-<span class="returntype"><a href="https://api.dart.dev/stable/3.7.1/dart-async/FutureOr-class.html">FutureOr</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
-<span class="name ">build</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="build-param-trigger"><span class="type-annotation"><a href="../../mcquenji_core/BuildTrigger-class.html">BuildTrigger</a></span> <span class="parameter-name">trigger</span></span></li>
+<span class="returntype"><a href="https://api.dart.dev/stable/3.7.2/dart-async/FutureOr-class.html">FutureOr</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+<span class="name ">build</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="build-param-trigger"><span class="type-annotation"><a href="../../mcquenji_core/Trigger-class.html">Trigger</a></span> <span class="parameter-name">trigger</span></span></li>
 </ol>)
 
       
@@ -71,12 +71,13 @@
     </section>
     
 <section class="desc markdown">
-  <p>Recalculates the state of the repository.</p>
+  <p>Recalculates the state of the repository.
+Do not call this method directly, use <a href="../../mcquenji_core/Repository/refresh.html">refresh</a> instead.</p>
 <p>This method is called when:</p>
 <ul>
 <li>The repository is first initialized.</li>
 <li>A repository watched via <a href="../../mcquenji_core/Repository/watch.html">watch</a> emits a new state.</li>
-<li>This repository is updated (if <a href="../../mcquenji_core/Repository/updateInterval.html">updateInterval</a> is not <a href="https://api.dart.dev/stable/3.7.1/dart-core/Duration/zero-constant.html">Duration.zero</a>).</li>
+<li>This repository is updated (if <a href="../../mcquenji_core/Repository/updateInterval.html">updateInterval</a> is not <a href="https://api.dart.dev/stable/3.7.2/dart-core/Duration/zero-constant.html">Duration.zero</a>).</li>
 </ul>
 <p>Override this method to handle changes from said repositories.</p>
 <hr>
@@ -111,7 +112,7 @@
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">@protected
-FutureOr&lt;void&gt; build(BuildTrigger trigger) {}</code></pre>
+FutureOr&lt;void&gt; build(Trigger trigger) {}</code></pre>
 </section>
 
 

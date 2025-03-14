@@ -105,7 +105,7 @@ void watch&lt;T&gt;(Repository&lt;T&gt; repository) {
 
   _subscriptions.add(
     repository.stream.listen(
-      (value) =&gt; _build&lt;T&gt;(
+      (value) =&gt; _didChangeDependencies&lt;T&gt;(
         value,
         repository,
       ),

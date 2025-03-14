@@ -59,7 +59,7 @@
       
   <div>
     <ol class="annotation-list">
-        <li>@<a href="https://api.dart.dev/stable/3.7.1/dart-core/override-constant.html">override</a></li>
+        <li>@<a href="https://api.dart.dev/stable/3.7.2/dart-core/override-constant.html">override</a></li>
         <li>@<a href="https://pub.dev/documentation/meta/1.16.0/meta/mustCallSuper-constant.html">mustCallSuper</a></li>
     </ol>
   </div>
@@ -79,7 +79,7 @@ is equal to the current <code>state</code>.</p>
 emitting a state which is equal to the initial state is allowed as long
 as it is the first thing emitted by the instance.</p>
 <ul>
-<li>Throws a <a href="https://api.dart.dev/stable/3.7.1/dart-core/StateError-class.html">StateError</a> if the bloc is closed.</li>
+<li>Throws a <a href="https://api.dart.dev/stable/3.7.2/dart-core/StateError-class.html">StateError</a> if the bloc is closed.</li>
 </ul>
 </section>
 
@@ -104,27 +104,26 @@ void emit(State state) {
   super.emit(state);
   _subject.add(state);
 
-  &#47;&#47; TODO: find out why this causes a bad state error
-  &#47;&#47; if (isAsync) {
-  &#47;&#47;   final asyncValue = state as AsyncValue;
+  if (isAsync) {
+    final asyncValue = state as AsyncValue;
 
-  &#47;&#47;   if (asyncValue.hasData) {
-  &#47;&#47;     _dataCompleter.complete();
+    if (asyncValue.hasData) {
+      if (!_dataCompleter.isCompleted) _dataCompleter.complete();
 
-  &#47;&#47;     _errorCompleter = Completer();
-  &#47;&#47;     _loadingCompleter = Completer();
-  &#47;&#47;   } else if (asyncValue.hasError) {
-  &#47;&#47;     _errorCompleter.complete();
+      _errorCompleter = Completer();
+      _loadingCompleter = Completer();
+    } else if (asyncValue.hasError) {
+      if (!_errorCompleter.isCompleted) _errorCompleter.complete();
 
-  &#47;&#47;     _dataCompleter = Completer();
-  &#47;&#47;     _loadingCompleter = Completer();
-  &#47;&#47;   } else if (asyncValue.isLoading) {
-  &#47;&#47;     _loadingCompleter.complete();
+      _dataCompleter = Completer();
+      _loadingCompleter = Completer();
+    } else if (asyncValue.isLoading) {
+      if (!_loadingCompleter.isCompleted) _loadingCompleter.complete();
 
-  &#47;&#47;     _dataCompleter = Completer();
-  &#47;&#47;     _errorCompleter = Completer();
-  &#47;&#47;   }
-  &#47;&#47; }
+      _dataCompleter = Completer();
+      _errorCompleter = Completer();
+    }
+  }
 }</code></pre>
 </section>
 
